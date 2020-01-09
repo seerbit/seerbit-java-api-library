@@ -22,7 +22,7 @@ package com.seerbit.enums;
  */
 public enum ClientConstantsEnum {
 
-    PILOT_API_BASE("https://pilot-backend.seerbitapi.com/sbt/api/"),
+    PILOT_API_BASE("https://pilot-backend.seerbitapi.com/"),
     LIVE_API_BASE("https://stg-backend.seerbitapi.com/"),
     TRANSACTION_AUTH_ENDPOINT("sbt/api/v1/auth"),
     MERCHANT_AUTH_ENDPOINT("merchants/api/v1/auth/login"),

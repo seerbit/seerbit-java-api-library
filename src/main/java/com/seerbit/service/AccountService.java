@@ -66,7 +66,6 @@ public class AccountService extends ServiceTransactionImpl {
      */
     public JsonObject doValidateTransaction(Map<String, Object> payload) {
         this.requiresToken = true;
-        // ask victor about this public key property if it should be camel case or snake case
         String endpointURL = VALIDATE_TRANS_ACCOUNT_ENDPOINT.getValue();
         response = this.postRequest(endpointURL, payload, token);
         return response;

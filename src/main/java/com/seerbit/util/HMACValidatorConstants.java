@@ -14,25 +14,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.seerbit.model.webhook;
+package com.seerbit.util;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.JsonNode;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.nio.charset.Charset;
 
 /**
  *
- * @author centricgateway
+ * @author Seerbit
  */
-@Data
-@NoArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class NotificationRequestItem {
-    private String eventType;
-    private String eventDate;
-    private String eventId;
-    private JsonNode data;
+public interface HMACValidatorConstants {
+
+    final String HMAC_SHA512_ALGORITHM = "SHA512";
+    final String HMAC_SHA256_ALGORITHM = "SHA256";
+    final Charset CHAR_UTF8 = Charset.forName("UTF8");
+    final String DATA_SEPARATOR = "|";
 }
