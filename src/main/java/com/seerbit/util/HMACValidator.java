@@ -16,10 +16,11 @@
  */
 package com.seerbit.util;
 
-//import com.google.gson.JsonParser;
-//import java.io.UnsupportedEncodingException;
-//import javax.crypto.Mac;
-//import javax.crypto.spec.SecretKeySpec;
+import com.google.gson.JsonParser;
+import java.io.UnsupportedEncodingException;
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import javax.xml.bind.DatatypeConverter;
 
 /**
  *
@@ -27,29 +28,42 @@ package com.seerbit.util;
  */
 public class HMACValidator implements HMACValidatorConstants {
 
-//    public static boolean isTokenValid512(String rawJsonRequest, String authToken, String secretKey)
-//            throws Exception {
-//        Mac mac = getMac512(secretKey);
-//        final byte[] mac_data = mac.doFinal(toBytes(rawJsonRequest));
-//
-//        String result = DatatypeConverter.printHexBinary(mac_data);
-//        return result.toLowerCase().equals(authToken);
-//    }
-//
-//    private static Mac getMac512(String secretKey) throws Exception {
-//        Mac mac = Mac.getInstance(HMAC_SHA512_ALGORITHM);
-//        mac.init(getSecretKeySpec(HMAC_SHA512_ALGORITHM, secretKey));
-//        return mac;
-//    }
-//
-//    private static SecretKeySpec getSecretKeySpec(String algorithm, String secretKey)
-//            throws Exception {
-//        byte[] byteKey = secretKey.getBytes("UTF-8");
-//        return new SecretKeySpec(byteKey, algorithm);
-//    }
-//
-//    private static byte[] toBytes(String jsonString)
-//            throws UnsupportedEncodingException {
-//        return JsonParser.parseString(jsonString).getAsString().getBytes();
-//    }
+    public static boolean isTokenValid512(String rawJsonRequest, String authToken, String secretKey)
+            throws Exception {
+        Mac mac = HMACValidator.getMac512(secretKey);
+        final byte[] macData = mac.doFinal(toBytes(rawJsonRequest));
+        String result = DatatypeConverter.printHexBinary(macData);
+        return result.toLowerCase().equals(authToken);
+    }
+    
+    public static boolean isTokenValid256(String rawJsonRequest, String authToken, String secretKey)
+            throws Exception {
+        Mac mac = HMACValidator.getMac256(secretKey);
+        final byte[] macData = mac.doFinal(toBytes(rawJsonRequest));
+        String result = DatatypeConverter.printHexBinary(macData);
+        return result.toLowerCase().equals(authToken);
+    }
+
+    private static Mac getMac512(String secretKey) throws Exception {
+        Mac mac = Mac.getInstance(HMAC_SHA512_ALGORITHM);
+        mac.init(HMACValidator.getSecretKeySpec(HMAC_SHA512_ALGORITHM, secretKey));
+        return mac;
+    }
+
+    private static Mac getMac256(String secretKey) throws Exception {
+        Mac mac = Mac.getInstance(HMAC_SHA256_ALGORITHM);
+        mac.init(HMACValidator.getSecretKeySpec(HMAC_SHA256_ALGORITHM, secretKey));
+        return mac;
+    }
+
+    private static SecretKeySpec getSecretKeySpec(String algorithm, String secretKey)
+            throws Exception {
+        byte[] byteKey = secretKey.getBytes("UTF-8");
+        return new SecretKeySpec(byteKey, algorithm);
+    }
+
+    private static byte[] toBytes(String jsonString)
+            throws UnsupportedEncodingException {
+        return JsonParser.parseString(jsonString).getAsString().getBytes();
+    }
 }
