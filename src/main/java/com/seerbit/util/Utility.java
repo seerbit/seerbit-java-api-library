@@ -25,18 +25,6 @@ import java.util.Objects;
  * @author Seerbit
  */
 public class Utility {
-
-    public static void doValidateVersionTwo(final String version) {
-        switch (version) {
-            case "1.0.1":
-                break;
-            case "1.0.0":
-                StringBuilder messageStringBuilder = new StringBuilder();
-                messageStringBuilder.append("This service is a version \"1.0.1\" service. ");
-                messageStringBuilder.append("Please set your config client version to \"1.0.1\".");
-                throw new SeerbitException(messageStringBuilder.toString());
-        }
-    }
     
     public static void doClientNonNull(final Client client) {
         if (Objects.isNull(client)) {

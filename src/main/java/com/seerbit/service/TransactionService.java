@@ -17,37 +17,12 @@
 package com.seerbit.service;
 
 import com.google.gson.JsonObject;
-import com.seerbit.Client;
-import com.seerbit.util.Utility;
-
-import static com.seerbit.enums.ClientConstantsEnum.VALIDATE_TRANS_CARD_ENDPOINT;
 
 /**
  *
  * @author Seerbit
  */
-public class TransactionService extends ServiceTransactionImpl {
+public interface TransactionService {
     
-    /**
-     * 
-     * @param client
-     * @param token 
-     */
-    public TransactionService(final Client client, final String token) {
-        super(client);
-        Utility.doClientNonNull(client);
-        this.token = token;
-    }
-    
-    /**
-     * 
-     * @param transId
-     * @return response
-     */
-    public JsonObject doValidateTransaction(final String transId) {
-        String transStatusEndpoint = VALIDATE_TRANS_CARD_ENDPOINT.getValue();
-        requiresToken = true;
-        response = this.getRequest(String.format("%s/%s", transStatusEndpoint, transId), token);
-        return response;
-    }
+    JsonObject doValidateTransaction(final String transId);
 }

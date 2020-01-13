@@ -22,12 +22,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.seerbit.Client;
 import com.seerbit.Seerbit;
-import com.seerbit.SeerbitImpl;
+import com.seerbit.impl.SeerbitImpl;
 import com.seerbit.enums.EnvironmentEnum;
 import com.seerbit.model.Evidence;
 import com.seerbit.model.Image;
 import com.seerbit.service.DisputeService;
-import com.seerbit.service.MerchantAuthentication;
+import com.seerbit.service.impl.DisputeServiceImpl;
+import com.seerbit.service.impl.MerchantAuthenticationImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,6 +47,9 @@ import static com.seerbit.enums.NumericConstantsEnum.MIN_VALUE;
 public class DisputeTest {
 
     private String token;
+    private MerchantAuthenticationImpl authService;
+    private Seerbit seerbitApp;
+    private Client client;
     private List<Evidence> evidenceList;
     private List<Image> imageList;
 
@@ -58,14 +62,14 @@ public class DisputeTest {
             token = null;
             evidenceList = new ArrayList<>(MIN_VALUE.getValue());
             imageList = new ArrayList<>(MIN_VALUE.getValue());
-            Seerbit seerbitApp = new SeerbitImpl();
-            Client client = new Client();
+            seerbitApp = new SeerbitImpl();
+            client = new Client();
             client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
             client.setUsername("victorighalo@gmail.com");
             client.setPassword("WISdom@1");
             client.setTimeout(20);
             client.setAPIBase(seerbitApp.getApiBase());
-            MerchantAuthentication authService = new MerchantAuthentication(client);
+            authService = new MerchantAuthenticationImpl(client);
             JsonObject json = authService.doAuth();
             String jsonString = String.format(
                     "auth response: %s",
@@ -79,7 +83,7 @@ public class DisputeTest {
                 token = authService.getToken();
                 if (Objects.nonNull(token)) {
                     System.out.println("================== start add dispute ==================");
-                    DisputeService disputeService = new DisputeService(client, token);
+                    DisputeService disputeService = new DisputeServiceImpl(client, token);
                     Image images = new Image();
                     images.setImage("image.png");
                     imageList.add(images);

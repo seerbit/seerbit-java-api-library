@@ -25,20 +25,6 @@ import com.seerbit.Client;
 public interface Service {
 
     Client getClient();
-
     boolean isTokenRequired();
-
-    /**
-     *
-     * @param isRequired
-     */
     void setRequiresToken(final boolean isRequired);
-
-    // boolean isSecretKeyRequired();
-
-    /**
-     *
-     * @param isRequired
-     */
-    // void setRequiresSecretKey(final boolean isRequired);
 }

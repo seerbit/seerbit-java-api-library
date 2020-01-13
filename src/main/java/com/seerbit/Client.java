@@ -17,14 +17,13 @@
 package com.seerbit;
 
 import com.seerbit.config.Config;
-import com.seerbit.config.ConfigImpl;
+import com.seerbit.config.impl.ConfigImpl;
 import com.seerbit.exception.SeerbitException;
 import java.util.Objects;
 
 import static com.seerbit.enums.ClientConstantsEnum.LIVE_API_BASE;
 import static com.seerbit.enums.ClientConstantsEnum.PILOT_API_BASE;
 import static com.seerbit.enums.ClientConstantsEnum.VERSION_ONE;
-import static com.seerbit.enums.ClientConstantsEnum.VERSION_TWO;
 import static com.seerbit.enums.EnvironmentEnum.LIVE;
 import static com.seerbit.enums.EnvironmentEnum.PILOT;
 
@@ -54,9 +53,6 @@ public class Client {
         switch (version) {
             case "1.0.0":
                 config.put("version", VERSION_ONE.getValue());
-                break;
-            case "1.0.1":
-                config.put("version", VERSION_TWO.getValue());
                 break;
             default:
                 config.put("version", VERSION_ONE.getValue());

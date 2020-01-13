@@ -22,10 +22,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.seerbit.Client;
 import com.seerbit.Seerbit;
-import com.seerbit.SeerbitImpl;
+import com.seerbit.impl.SeerbitImpl;
 import com.seerbit.enums.EnvironmentEnum;
-import com.seerbit.service.MerchantAuthentication;
 import com.seerbit.service.RefundService;
+import com.seerbit.service.impl.MerchantAuthenticationImpl;
+import com.seerbit.service.impl.RefundServiceImpl;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -43,6 +44,9 @@ import static com.seerbit.enums.RefundTypeEnum.PARTIAL_REFUND;
 public class RefundTest {
 
     private String token;
+    private Seerbit seerbitApp;
+    private Client client;
+    private MerchantAuthenticationImpl authService;
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
@@ -51,14 +55,14 @@ public class RefundTest {
         try {
             System.out.println("================== start authentication ==================");
             token = null;
-            Seerbit seerbitApp = new SeerbitImpl();
-            Client client = new Client();
+            seerbitApp = new SeerbitImpl();
+            client = new Client();
             client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
             client.setUsername("victorighalo@gmail.com");
             client.setPassword("WISdom@1");
             client.setAPIBase(seerbitApp.getApiBase());
             client.setTimeout(20);
-            MerchantAuthentication authService = new MerchantAuthentication(client);
+            authService = new MerchantAuthenticationImpl(client);
             JsonObject json = authService.doAuth();
             String jsonString = String.format(
                     "auth response: %s", 
@@ -72,7 +76,7 @@ public class RefundTest {
                 token = authService.getToken();
                 if (Objects.nonNull(token)) {
                     System.out.println("================== start do refund ==================");
-                    RefundService refundService = new RefundService(client, token);
+                    RefundService refundService = new RefundServiceImpl(client, token);
                     Map<String, Object> refundPayload = new HashMap<>(MIN_VALUE.getValue());
                     refundPayload.put("type", PARTIAL_REFUND);
                     refundPayload.put("amount", "10");

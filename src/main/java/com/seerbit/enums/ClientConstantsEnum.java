@@ -24,29 +24,23 @@ public enum ClientConstantsEnum {
 
     PILOT_API_BASE("https://pilot-backend.seerbitapi.com/"),
     LIVE_API_BASE("https://stg-backend.seerbitapi.com/"),
+    
+    // version one endpoints 
     TRANSACTION_AUTH_ENDPOINT("sbt/api/v1/auth"),
     MERCHANT_AUTH_ENDPOINT("merchants/api/v1/auth/login"),
     VALIDATE_TRANS_CARD_ENDPOINT("sbt/api/card/v1/get/transaction/status"),
     INITIATE_TRANSACTION_ENDPOINT("sbt/api/account/v1/initiate/transaction"),
-    INITIATE_TRANSACTION_ENDPOINT_V2("sbt/api/account/v2/initiate/transaction"),
     VALIDATE_TRANS_ACCOUNT_ENDPOINT("sbt/api/account/v1/validate/transaction"),
     INITIATE_CARD_ENDPOINT("sbt/api/card/v1/init/transaction"),
     VALIDATE_OTP_ENDPOINT("sbt/api/card/v1/validate/otp"),
-    CHECKOUT_STANDARD_ENDPOINT("sbt/api/v2/payments"),
-    ORDER_ENDPOINT("sbt/api/order/v2/payments/order"),
-    CREATE_SUBSCRIPTION_ENDPOINT("sbt/api/v2/recurring/subscribes"),
-    GET_SUBSCRIPTION_ENDPOINT("sbt/api/v2/recurring/%s/%s/%s"),
-    UPDATE_SUBSCRIPTION_ENDPOINT("sbt/api/v2/recurring/updates"),
-    RETRIEVE_SUBSCRIPTION_ENDPOINT("sbt/api/v2/recurring/{publicKey}"),
-    RECURRING_DEBIT_ENDPOINT("sbt/api/v2/recurring/charge"),
     GET_ALL_DISPUTE_ENDPOINT("merchants/api/v1/user/%s/disputes/?page=%d&size=%d"),
     GET_DISPUTE_ENDPOINT("merchants/api/v1/user/%s/disputes/%s"),
     ADD_DISPUTE_ENDPOINT("merchants/api/v1/user/%s/disputes"),
     CLOSE_DISPUTE_ENDPOINT("merchants/api/v1/user/%s/disputes/%s/close"),
     UPDATE_DISPUTE_ENDPOINT("merchants/api/v1/user/%s/disputes"),
-    WEBHOOK_ENDPOINT("merchants/api/v1/business/%s/webhook"),
-    VERSION_ONE("1.0.0"),
-    VERSION_TWO("1.0.1");
+    
+    // version types
+    VERSION_ONE("1.0.0");
 
     private final String value;
 

@@ -17,56 +17,14 @@
 package com.seerbit.service;
 
 import com.google.gson.JsonObject;
-import com.seerbit.Client;
-import com.seerbit.util.Utility;
 import java.util.Map;
-import lombok.extern.log4j.Log4j2;
-
-import static com.seerbit.enums.ClientConstantsEnum.INITIATE_CARD_ENDPOINT;
-import static com.seerbit.enums.ClientConstantsEnum.VALIDATE_OTP_ENDPOINT;
 
 /**
  *
  * @author Seerbit
  */
-@Log4j2
-public class CardService extends ServiceTransactionImpl {
-
-    /**
-     * 
-     * @param client
-     * @param token 
-     */
-    public CardService(final Client client, final String token) {
-        super(client);
-        this.token = token;
-        Utility.doClientNonNull(client);
-    }
-
-    /**
-     * POST /sbt/api/card/v1/init/transaction API call
-     * 
-     * @param payload
-     * @return response
-     */
-    public JsonObject doAuthorize(Map<String, Object> payload) {
-        super.setRequiresToken(true);
-        String endpointURL = INITIATE_CARD_ENDPOINT.getValue();
-        response = this.postRequest(endpointURL, payload, token);
-        return response;
-    }
-
-    /**
-     * POST /sbt/api/card/v1/validate/otp API call
-     * 
-     * @param payload
-     * @return response
-     */
-    public JsonObject doValidateOTP(Map<String, Object> payload) {
-        this.requiresToken = true;
-        String endpointURL = VALIDATE_OTP_ENDPOINT.getValue();
-        response = this.postRequest(endpointURL, payload, token);
-        return response;
-    }
-
+public interface CardService {
+    
+    JsonObject doAuthorize(Map<String, Object> payload);
+    JsonObject doValidateOTP(Map<String, Object> payload);
 }

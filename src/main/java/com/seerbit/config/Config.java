@@ -24,59 +24,60 @@ import java.util.Map;
  * @author Seerbit
  */
 public interface Config {
-    
+
     static final int NIL = 0;
-    Map<String, Object> data = new HashMap<>(1);
-    
+    static final int INITIAL_CAPACITY = 1;
+    Map<String, Object> data = new HashMap<>(INITIAL_CAPACITY);
+
     /**
-     * 
+     *
      * @param key
-     * @param value 
+     * @param value
      */
     void put(final String key, final Object value);
-    
+
     int getTimeout();
-   
+
     /**
-     * 
+     *
      * @param param
      * @return java.lang.Object
      */
     Object get(final String param);
-    
+
     /**
-     * 
+     *
      * @return publicKey
      */
     String getPublicKey();
-    
+
     /**
-     * 
+     *
      * @return privateKey
      */
     String getPrivateKey();
-    
+
     /**
-     * 
+     *
      * @return hashedString
      */
     String getHash();
-    
+
     /**
-     * 
+     *
      * @return clientSecret
      */
     String getClientSecret();
-    
+
     /**
-     * 
+     *
      * @return password
      */
     String getPassword();
-    
-    /** 
-     * 
+
+    /**
+     *
      * @return userName
      */
-    String getUsername();  
+    String getUsername();
 }

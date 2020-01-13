@@ -17,97 +17,16 @@
 package com.seerbit.service;
 
 import com.google.gson.JsonObject;
-import com.seerbit.Client;
-import com.seerbit.exception.SeerbitException;
-import com.seerbit.util.Utility;
 import java.util.Map;
 
 /**
  *
  * @author Seerbit
  */
-public class RefundService extends ServiceMerchantImpl {
-
-    /**
-     *
-     * @param client
-     * @param token
-     */
-    public RefundService(final Client client, final String token) {
-        super(client);
-        Utility.doClientNonNull(client);
-        this.token = token;
-    }
-
-    /**
-     * GET /card/v1/get/transaction/status/{transactionId} API call
-     *
-     * @param transactionId
-     * @return response
-     */
-    public JsonObject doValidate(String transactionId) {
-        requiresToken = true;
-        String endpointURL = String.format("card/v1/get/transaction/status/%s", transactionId);
-        response = this.getRequest(endpointURL, token);
-        return response;
-    }
-
-    /**
-     * GET /merchants/api/v1/user/{userId}/refunds/?page={start_page}&size={size} API call
-     *
-     * @param userId
-     * @param from
-     * @param to
-     * @return response
-     */
-    public JsonObject getAllRefund(String userId, int from, int to) {
-        this.requiresToken = true;
-        if (from > to) {
-            throw new SeerbitException("first page should not be greater than last page");
-        }
-        String endpointURL = String.format(
-                "merchants/api/v1/user/%s/refunds/?page=%d&size=%d",
-                userId,
-                from,
-                to
-        );
-        response = this.getRequest(endpointURL, token);
-        return response;
-    }
-
-    /**
-     * GET /merchants/api/v1/user/{userId}/refunds/ref/{refundId} API call
-     *
-     * @param userId
-     * @param refundId
-     * @return response
-     */
-    public JsonObject getRefund(String userId, String refundId) {
-        this.requiresToken = true;
-        String endpointURL = String.format(
-                "merchants/api/v1/user/%s/refunds/%s",
-                userId,
-                refundId
-        );
-        response = this.getRequest(endpointURL, token);
-        return response;
-    }
-
-    /**
-     * GET /merchants/api/v1/user/{userId}/refunds API call
-     * 
-     * @param userId
-     * @param payload
-     * @return response
-     */
-    public JsonObject doRefund(String userId, Map<String, Object> payload) {
-        this.requiresToken = true;
-        String endpointURL = String.format(
-                "merchants/api/v1/user/%s/refunds",
-                userId
-        );
-        response = this.postRequest(endpointURL, payload, token);
-        return response;
-    }
-
+public interface RefundService {
+    
+    JsonObject doValidate(String transactionId);
+    JsonObject getAllRefund(String userId, int from, int to);
+    JsonObject getRefund(String userId, String refundId);
+    JsonObject doRefund(String userId, Map<String, Object> payload);
 }
