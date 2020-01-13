@@ -48,10 +48,21 @@
                 <gpg.useagent>true</gpg.useagent>
                 <!-- gpg-plugin defaults to trying 'gpg' on the path, this changes that to 'gpg2' instead -->
                 <gpg.executable>gpg2</gpg.executable>
-                 <gpg.passphrase>centricgateway@</gpg.passphrase> 
+                <gpg.passphrase>centricgateway@</gpg.passphrase> 
             </properties>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.7</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
