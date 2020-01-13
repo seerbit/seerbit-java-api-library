@@ -6,7 +6,7 @@
 
 <h1 align="center">
   <img width="40" valign="bottom" src="file:///Users/centricgateway/Downloads/java.png">
-  seerbit-java-api
+  seerbit-java-api-library
 </h1>
 
 <h4 align="center">
@@ -68,7 +68,7 @@ You can contribute to this repository so that anyone can benefit from it:
 
 ## Examples
 
-You can also check the [src/main/java/com/seerbit/demo](https://github.com/seerbit/seerbit-java-api/tree/master/src/main/java/com/seerbit/demo) folder in this repository for more examples of usage.
+You can also check the [src/main/java/com/seerbit/demo](https://github.com/seerbit/seerbit-java-api-library/tree/master/src/main/java/com/seerbit/demo) folder in this repository for more examples of usage.
 
 ## Using the Library
 
