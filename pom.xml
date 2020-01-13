@@ -27,7 +27,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-<!--        <maven.test.skip>false</maven.test.skip>-->
+        <!--        <maven.test.skip>false</maven.test.skip>-->
     </properties>
     <scm>
         <connection>scm:git:git@github.com:seerbit/seerbit-java-library.git</connection>
@@ -43,6 +43,12 @@
                     <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
                 </repository>
             </distributionManagement>
+            <properties>
+                <gpg.useagent>true</gpg.useagent>
+                <!-- gpg-plugin defaults to trying 'gpg' on the path, this changes that to 'gpg2' instead -->
+                <gpg.executable>gpg2</gpg.executable>
+                 <gpg.passphrase>centricgateway@</gpg.passphrase> 
+            </properties>
             <build>
                 <plugins>
                     <plugin>
@@ -85,7 +91,7 @@
                             </execution>
                         </executions>
                     </plugin>
-<!--                    <plugin>
+                    <!--                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>3.0.0-M4</version>
