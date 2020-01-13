@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.seerbit</groupId>
     <artifactId>seerbit-java-library</artifactId>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Seerbit Java API Library</name>
     <description>Seerbit API Client Library for Java</description>
