@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.seerbit</groupId>
     <artifactId>seerbit-java-library</artifactId>
-    <version>1.0-RELEASE</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
     <name>Seerbit Java API Library</name>
     <description>Seerbit API Client Library for Java</description>
@@ -52,7 +52,7 @@
             </properties>
             <build>
                 <plugins>
-                    <!--                    <plugin>
+                    <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
                         <version>1.6.7</version>
@@ -62,7 +62,7 @@
                             <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                             <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
-                    </plugin>-->
+                    </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
