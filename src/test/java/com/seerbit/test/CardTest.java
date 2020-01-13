@@ -89,7 +89,7 @@ public class CardTest {
                     card.setNumber("5123450000000008");
                     card.setExpirymonth("05");
                     card.setExpiryyear("21");
-                    card.setPin("8319");
+                    card.setPin("1234");
                     account.setSenderDateOfBirth("04011984");
                     Map<String, Object> cardPayload = new HashMap<>(MIN_VALUE.getValue());
                     cardPayload.put("fullname", "Aminu Grod");
@@ -121,8 +121,7 @@ public class CardTest {
                     Map<String, Object> otpPayload = new HashMap<>(MIN_VALUE.getValue());
                     Transaction transaction = new Transaction();
                     transaction.setOtp("12345");
-                    //json.get("linkingreference");
-                    transaction.setLinkingReference("F576988431578659378801");
+                    transaction.setLinkingReference(String.valueOf(json.get("linkingreference")));
                     otpPayload.put("transaction", transaction);
                     json = cardService.doValidateOTP(otpPayload);
                     System.out.println("Validate OTP Request: " + GSON.toJson(otpPayload));
