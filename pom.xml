@@ -31,7 +31,7 @@
         <mavem.javadoc.skip>true</mavem.javadoc.skip>
     </properties>
     <scm>
-        <connection>scm:git:git@github.com:seerbit/seerbit-java-library.git</connection>
+        <connection>scm:git:git://bitbucket.org/centricgatewayteam/seerbit-java-library.git</connection>
         <developerConnection>scm:git:peterdiei@bitbucket.org:centricgatewayteam/seerbit-java-library.git</developerConnection>
         <url>peterdiei@gbitbucket.org:centricgatewayteam/seerbit-java-library.git</url>
     </scm>
