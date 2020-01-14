@@ -37,7 +37,7 @@
     </scm>
     <profiles>
         <profile>
-            <id>ossrh</id>
+            <id>release</id>
             <distributionManagement>
                 <snapshotRepository>
                     <id>ossrh</id>
