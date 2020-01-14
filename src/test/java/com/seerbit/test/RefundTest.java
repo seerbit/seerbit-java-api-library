@@ -97,7 +97,7 @@ public class RefundTest {
                     System.out.println();
                     System.out.println();
                     System.out.println("================== start get refund ==================");
-                    json = refundService.getRefund("00000013", "77d000d9b9f44400a6536ea03c65279d");
+                    json = refundService.getRefund("00000013", "4cdd3362c46e4e03bf9e28275c2c4f06");
                     System.out.println(json.toString());
                     System.out.println("================== end get refund ==================");
                     System.out.println();

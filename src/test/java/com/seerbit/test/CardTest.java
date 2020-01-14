@@ -94,7 +94,7 @@ public class CardTest {
                     Map<String, Object> cardPayload = new HashMap<>(MIN_VALUE.getValue());
                     cardPayload.put("fullname", "Aminu Grod");
                     cardPayload.put("public_key", client.getConfig().getPublicKey());
-                    cardPayload.put("tranref", "TQ14611X32125PR");
+                    cardPayload.put("tranref", "TQ14611X32130PR");
                     cardPayload.put("email", "kolawolesam@gmail.com");
                     cardPayload.put("mobile", "08030540611");
                     cardPayload.put("channelType", "ACCOUNT");
@@ -121,7 +121,7 @@ public class CardTest {
                     Map<String, Object> otpPayload = new HashMap<>(MIN_VALUE.getValue());
                     Transaction transaction = new Transaction();
                     transaction.setOtp("12345");
-                    transaction.setLinkingReference(String.valueOf(json.get("linkingreference")));
+                    transaction.setLinkingReference(String.valueOf(json.getAsJsonObject("linkingreference").get("linkingreference")));
                     otpPayload.put("transaction", transaction);
                     json = cardService.doValidateOTP(otpPayload);
                     System.out.println("Validate OTP Request: " + GSON.toJson(otpPayload));
