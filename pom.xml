@@ -47,7 +47,17 @@
                     <id>ossrh</id>
                     <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
                 </repository>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
             </distributionManagement>
+            <properties>
+                <gpg.useagent>true</gpg.useagent>
+                <!-- gpg-plugin defaults to trying 'gpg' on the path, this changes that to 'gpg2' instead -->
+                <gpg.executable>gpg2</gpg.executable>
+                <gpg.passphrase>centricgateway@</gpg.passphrase> 
+            </properties>
             <build>
                 <plugins>
                     <plugin>
