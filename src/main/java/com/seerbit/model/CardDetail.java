@@ -14,31 +14,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.seerbit.enums;
+package com.seerbit.model;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
  * @author Seerbit
  */
-public enum NumericConstantsEnum {
-
-    MIN_VALUE(1), MIN_SIZE(1);
-
-    private final int value;
-
-    /**
-     * 
-     * @param value 
-     */
-    NumericConstantsEnum(final int value) {
-        this.value = value;
-    }
-
-    /**
-     * 
-     * @return value
-     */
-    public int getValue() {
-        return value;
-    }
+@Data
+@NoArgsConstructor
+public class Card {
+    
+    private String number;
+    private String cvv;
+    private String expirymonth;
+    private String expiryyear;
+    private String pin;
 }

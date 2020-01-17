@@ -42,7 +42,7 @@ public class TransactionTest {
     private String token;
     private TransactionAuthenticationImpl authService;
     private Seerbit seerbitApp;
-    private Client client ;
+    private Client client;
     private String transactionId;
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
@@ -77,8 +77,11 @@ public class TransactionTest {
                     transactionId = "123456789";
                     TransactionService transactionService = new TransactionServiceImpl(client, token);
                     json = transactionService.doValidateTransaction(transactionId);
-                    System.out.print("Check Transaction Status Response: ");
-                    System.out.println(json.toString());
+                    jsonString = String.format(
+                            "check transaction status response: %s",
+                            GSON.toJson(GSON.fromJson(json.toString(), Map.class))
+                    );
+                    System.out.println(jsonString);
                     System.out.println("================== end check transaction status ==================");
                 }
             }
@@ -86,5 +89,5 @@ public class TransactionTest {
             log.error(exception.getMessage());
         }
     }
-    
+
 }

@@ -1,5 +1,3 @@
-package com.seerbit.test;
-
 /*
  * Copyright (C) 2019 Seerbit
  *
@@ -16,35 +14,37 @@ package com.seerbit.test;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package com.seerbit.test;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.seerbit.Client;
+import com.seerbit.NumericConstants;
 import com.seerbit.Seerbit;
 import com.seerbit.impl.SeerbitImpl;
 import com.seerbit.enums.EnvironmentEnum;
+import com.seerbit.model.Dispute;
 import com.seerbit.model.Evidence;
 import com.seerbit.model.Image;
 import com.seerbit.service.DisputeService;
 import com.seerbit.service.impl.DisputeServiceImpl;
 import com.seerbit.service.impl.MerchantAuthenticationImpl;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import lombok.extern.log4j.Log4j2;
 import org.junit.Test;
 
-import static com.seerbit.enums.NumericConstantsEnum.MIN_VALUE;
-
 /**
  *
  * @author Seerbit
  */
 @Log4j2
-public class DisputeTest {
+public class DisputeTest implements NumericConstants {
 
     private String token;
     private MerchantAuthenticationImpl authService;
@@ -53,26 +53,26 @@ public class DisputeTest {
     private List<Evidence> evidenceList;
     private List<Image> imageList;
 
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().setLenient().create();
 
     @Test
     public void doTestDisputeOperations() {
         try {
             System.out.println("================== start authentication ==================");
             token = null;
-            evidenceList = new ArrayList<>(MIN_VALUE.getValue());
-            imageList = new ArrayList<>(MIN_VALUE.getValue());
+            evidenceList = new ArrayList<>(MIN_SIZE);
+            imageList = new ArrayList<>(MIN_SIZE);
             seerbitApp = new SeerbitImpl();
             client = new Client();
             client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
-            client.setUsername("victorighalo@gmail.com");
-            client.setPassword("WISdom@1");
+            client.setUsername("okechukwu.diei2@mailinator.com");
+            client.setPassword("Centric@123");
             client.setTimeout(20);
             client.setAPIBase(seerbitApp.getApiBase());
             authService = new MerchantAuthenticationImpl(client);
             JsonObject json = authService.doAuth();
             String jsonString = String.format(
-                    "auth response: %s",
+                    "auth response: \n%s",
                     GSON.toJson(GSON.fromJson(json.toString(), Map.class))
             );
             System.out.println(jsonString);
@@ -82,30 +82,55 @@ public class DisputeTest {
             if (Objects.nonNull(json)) {
                 token = authService.getToken();
                 if (Objects.nonNull(token)) {
-                    System.out.println("================== start add dispute ==================");
+                    System.out.println("================= start get all dispute =================");
                     DisputeService disputeService = new DisputeServiceImpl(client, token);
+                    json = disputeService.getAllDispute("00000063", 0, 10);
+                    jsonString = String.format(
+                            "all dispute response: \n%s",
+                            GSON.toJson(GSON.fromJson(json.toString(), Map.class))
+                    );
+                    System.out.println(jsonString);
+                    System.out.println("================== end get all dispute ==================");
+                    System.out.println();
+                    System.out.println();
+                    System.out.println("================= start get dispute =================");
+                    json = disputeService.getDispute("00000063", "15");
+                    jsonString = String.format(
+                            "Get dispute response: \n%s",
+                            GSON.toJson(GSON.fromJson(json.toString(), Map.class))
+                    );
+                    System.out.println(jsonString);
+                    System.out.println("================== end get dispute ==================");
+                    System.out.println();
+                    System.out.println();
+                    System.out.println("================= start update dispute =================");
                     Image images = new Image();
                     images.setImage("image.png");
                     imageList.add(images);
-                    Evidence evidence = Evidence.builder().message(token).images(imageList).build();
+                    Evidence evidence = Evidence.builder()
+                                                .images(imageList)
+                                                .message("ok")
+                                                .messageSender("merchant")
+                                                .build();
                     evidenceList.add(evidence);
-                    Map<String, Object> disputePayload = new HashMap<>(MIN_VALUE.getValue());
-                    disputePayload.put("customer_email", "tosyngy@rocketmail.com");
-                    disputePayload.put("transaction_ref", "PUBK_PJQ5D1577092649489");
-                    disputePayload.put("amount", "10");
-                    disputePayload.put("evidence", evidenceList);
-                    json = disputeService.add("00000013", disputePayload);
-                    System.out.println("Add dispute request: " + GSON.toJson(disputePayload));
-                    System.out.print("Add dispute response: ");
-                    System.out.println(json.toString());
-                    System.out.println("================== end add dispute ==================");
-                    System.out.println();
-                    System.out.println();
-                    System.out.println("================= start get all dispute =================");
-                    json = disputeService.getAllDispute("00000013", 0, 10);
-                    System.out.print("All dispute response: ");
-                    System.out.println(json.toString());
-                    System.out.println("================== end get all dispute ==================");
+                    Dispute disputePayload = Dispute.builder()
+                                                    .evidence(evidenceList)
+                                                    .resolution("decline")
+                                                    .resolutionImage("")
+                                                    .merchantId("00000063")
+                                                    .amount("102.51")
+                                                    .customerEmail("tosyngy@rocketmail.com")
+                                                    .build();
+                    json = disputeService.doUpdateDispute("00000063", "bf3e2fee9bda491199b15a661cf31713", disputePayload);
+                    ObjectMapper mapper = new ObjectMapper();
+                    Map<String, Object> payload = mapper.convertValue(disputePayload, Map.class);
+                    System.out.println("Update dispute request: \n" + GSON.toJson(payload));
+                    jsonString = String.format(
+                            "update dispute response: \n%s",
+                            GSON.toJson(GSON.fromJson(json.toString(), Map.class))
+                    );
+                    System.out.println(jsonString);
+                    System.out.println("================== end update dispute ==================");
                     System.out.println();
                     System.out.println();
                 } else {

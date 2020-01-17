@@ -16,6 +16,7 @@
  */
 package com.seerbit.model;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -25,11 +26,13 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class Card {
+public class Account {
     
-    private String number;
-    private String cvv;
-    private String expirymonth;
-    private String expiryyear;
-    private String pin;
+    private String sender;
+    private String name;
+    @SerializedName("senderbankcode")
+    private String senderBankCode;
+    @SerializedName("senderdateofbirth")
+    private String senderDateOfBirth;
+    private String bvn;    
 }

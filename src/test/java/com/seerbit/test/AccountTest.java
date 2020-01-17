@@ -14,40 +14,40 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package com.seerbit.test;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.seerbit.Client;
+import com.seerbit.NumericConstants;
 import com.seerbit.Seerbit;
 import com.seerbit.impl.SeerbitImpl;
 import com.seerbit.enums.EnvironmentEnum;
 import com.seerbit.model.Account;
+import com.seerbit.model.AccountDetail;
+import com.seerbit.model.OTP;
 import com.seerbit.service.AccountService;
 import com.seerbit.service.impl.AccountServiceImpl;
 import com.seerbit.service.impl.TransactionAuthenticationImpl;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import lombok.extern.log4j.Log4j2;
 import org.junit.Test;
-
-import static com.seerbit.enums.NumericConstantsEnum.MIN_VALUE;
 
 /**
  *
  * @author Seerbit
  */
 @Log4j2
-public class AccountTest {
+public class AccountTest implements NumericConstants {
 
     private String token;
     private TransactionAuthenticationImpl authService;
     private Seerbit seerbitApp;
-    private Client client ;
+    private Client client;
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
@@ -61,14 +61,14 @@ public class AccountTest {
             client.setTimeout(20);
             client.setAPIBase(seerbitApp.getApiBase());
             client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
-            client.setPublicKey("SBTESTPUBK_PjQ5dFOi522L383MlsQYUMAe6cZYviTF");
-            client.setPrivateKey("SBTESTSECK_9CDyHxbubCHnqJba5iiIytD5TLyySiHNvBY1UhPX");
+            client.setPublicKey("SBTESTPUBK_9VpeA7NPZKK0bfrt4m8cAJAvJ6LW2Zrd");
+            client.setPrivateKey("SBTESTSECK_VsCUvHw88dWDx0j3SCV3Gtkz7dwXuYHbgWQ3iqLg");
             client.setTimeout(20);
-            com.seerbit.model.Card card = new com.seerbit.model.Card();
+            com.seerbit.model.CardDetail card = new com.seerbit.model.CardDetail();
             authService = new TransactionAuthenticationImpl(client);
             JsonObject json = authService.doAuth();
             String jsonString = String.format(
-                    "auth response: %s",
+                    "auth response: \n%s",
                     GSON.toJson(GSON.fromJson(json.toString(), Map.class))
             );
             System.out.println(jsonString);
@@ -80,46 +80,55 @@ public class AccountTest {
                 if (Objects.nonNull(token)) {
                     System.out.println("================== start initiate account ==================");
                     AccountService accountService = new AccountServiceImpl(client, token);
-                    Map<String, Object> accountPayload = new HashMap<>(MIN_VALUE.getValue());
-                    accountPayload.put("fullname", "Brown Steve");
-                    accountPayload.put("email", "sbtest@mailinator.com");
-                    accountPayload.put("mobile", "08067238238");
-                    accountPayload.put("public_key", client.getConfig().getPublicKey());
-                    accountPayload.put("channelType", "ACCOUNT");
-                    accountPayload.put("deviceType", "nokia 33");
-                    accountPayload.put("sourceIP", "1.0.1.0");
-                    accountPayload.put("type", "3DSECURE");
-                    accountPayload.put("reference", "sijeij3847748e8");
-                    accountPayload.put("currency", "NGN");
-                    accountPayload.put("description", "pilot test account");
-                    accountPayload.put("country", "NG");
-                    accountPayload.put("fee", "1.00");
-                    accountPayload.put("amount", "100.00");
-                    accountPayload.put("clientappcode", "app1");
-                    accountPayload.put("callbackurl", "http://testing-test.surge.sh");
-                    accountPayload.put("redirecturl", "http://bc-design.surge.sh");
-                    Account account = new Account();
+                    Account accountPayload = new Account();
+                    accountPayload.setFullname("Brown Steve");
+                    accountPayload.setEmail("sbtest@mailinator.com");
+                    accountPayload.setMobile("08067238238");
+                    accountPayload.setPublicKey(client.getConfig().getPublicKey());
+                    accountPayload.setChannelType("ACCOUNT");
+                    accountPayload.setDeviceType("nokia 33");
+                    accountPayload.setSourceIP("1.0.1.0");
+                    accountPayload.setType("3DSECURE");
+                    accountPayload.setReference("sijeij3847748e8");
+                    accountPayload.setCurrency("NGN");
+                    accountPayload.setDescription("pilot test account");
+                    accountPayload.setCountry("NG");
+                    accountPayload.setFee("1.00");
+                    accountPayload.setAmount("100.00");
+                    accountPayload.setClientAppCode("app1");
+                    accountPayload.setCallbackUrl("http://testing-test.surge.sh");
+                    accountPayload.setRedirectUrl("http://bc-design.surge.sh");
+                    AccountDetail account = new AccountDetail();
                     account.setSender("1234567890");
                     account.setName("Moses Victor Esther");
                     account.setSenderBankCode("215");
                     account.setSenderDateOfBirth("04011984");
                     account.setBvn("12341741835");
-                    accountPayload.put("account", account);
-                    System.out.println("Request Body: " + GSON.toJson(accountPayload));
+                    accountPayload.setAccount(account);
+                    ObjectMapper mapper = new ObjectMapper();
+                    Map<String, Object> payload = mapper.convertValue(accountPayload, Map.class);
+                    System.out.println("Request Body: \n" + GSON.toJson(payload));
                     json = accountService.doAuthorize(accountPayload);
-                    System.out.print("Initiate Account Response: ");
-                    System.out.println(json);
+                    jsonString = String.format(
+                            "Initiate account response: \n%s",
+                            GSON.toJson(GSON.fromJson(json.toString(), Map.class))
+                    );
+                    System.out.println(jsonString);
                     System.out.println("================== end initiate account ==================");
                     System.out.println();
                     System.out.println();
                     System.out.println("================== start validate account ==================");
-                    Map<String, Object> validatePayload = new HashMap<>(MIN_VALUE.getValue());
-                    validatePayload.put("linkingreference", "F582528181578659061354");
-                    validatePayload.put("otp","123456");
+                    OTP validatePayload = new OTP();
+                    validatePayload.setLinkingReference("F582528181578659061354");
+                    validatePayload.setOtp("123456");
                     json = accountService.doValidateTransaction(validatePayload);
-                    System.out.println("Validate Account Request: " + GSON.toJson(validatePayload));
-                    System.out.print("Validate Account Response: ");
-                    System.out.println(json);
+                    payload = mapper.convertValue(validatePayload, Map.class);
+                    System.out.println("Validate Account Request: \n" + GSON.toJson(payload));
+                    jsonString = String.format(
+                            "validate account response: \n%s",
+                            GSON.toJson(GSON.fromJson(json.toString(), Map.class))
+                    );
+                    System.out.println(jsonString);
                     System.out.println("================== end validate account ==================");
                     System.out.println();
                     System.out.println();
