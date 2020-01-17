@@ -26,4 +26,6 @@ public interface NumericConstants {
     static final int MIN_VALUE = 1;
     static final int MIN_SIZE = 1;
     static final int NIL = 0;
+    static final int HTTP_STATUS_200 = 200;
+    static final int HTTP_STATUS_299 = 299;
 }

@@ -112,7 +112,7 @@ public class HttpClientImpl
             statusCode = Integer.parseInt(String.valueOf(result[1]));
             String responseBody = EntityUtils.toString(response.getEntity());
             log.info(String.format("JsonResponse: %s", responseBody));
-            if (statusCode < 200 && statusCode > 299 && Objects.nonNull(response)) {
+            if (statusCode < HTTP_STATUS_200 && statusCode > HTTP_STATUS_299 && Objects.nonNull(response)) {
                 SeerbitException.handleException(response);
             }
             json = JsonParser.parseString(responseBody).getAsJsonObject();
@@ -162,7 +162,7 @@ public class HttpClientImpl
             statusCode = Integer.parseInt(String.valueOf(result[1]));
             String responseBody = EntityUtils.toString(response.getEntity());
             log.info(String.format("JsonResponse: %s", responseBody));
-            if (statusCode < 200 && statusCode > 299 && Objects.nonNull(response)) {
+            if (statusCode < HTTP_STATUS_200 && statusCode > HTTP_STATUS_299 && Objects.nonNull(response)) {
                 SeerbitException.handleException(response);
             }
             json = JsonParser.parseString(responseBody).getAsJsonObject();
@@ -204,7 +204,7 @@ public class HttpClientImpl
             statusCode = Integer.parseInt(String.valueOf(result[1]));
             String responseBody = EntityUtils.toString(response.getEntity());
             log.info(String.format("JsonResponse: %s", responseBody));
-            if (statusCode < 200 && statusCode > 299 && Objects.nonNull(response)) {
+            if (statusCode < HTTP_STATUS_200 && statusCode > HTTP_STATUS_299 && Objects.nonNull(response)) {
                 SeerbitException.handleException(response);
             }
             json = JsonParser.parseString(responseBody).getAsJsonObject();
