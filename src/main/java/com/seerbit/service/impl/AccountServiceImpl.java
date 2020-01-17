@@ -16,15 +16,17 @@
  */
 package com.seerbit.service.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
 import com.seerbit.Client;
+import com.seerbit.ClientConstants;
+import com.seerbit.model.Account;
+import com.seerbit.model.OTP;
 import com.seerbit.service.AccountService;
 import com.seerbit.util.Utility;
 import java.util.Map;
 import lombok.extern.log4j.Log4j2;
 
-import static com.seerbit.enums.ClientConstantsEnum.INITIATE_TRANSACTION_ENDPOINT;
-import static com.seerbit.enums.ClientConstantsEnum.VALIDATE_TRANS_ACCOUNT_ENDPOINT;
 
 /**
  *
@@ -32,7 +34,7 @@ import static com.seerbit.enums.ClientConstantsEnum.VALIDATE_TRANS_ACCOUNT_ENDPO
  */
 @Log4j2
 public class AccountServiceImpl extends ServiceTransactionImpl 
-        implements AccountService {
+        implements AccountService, ClientConstants {
 
     /**
      * 
@@ -48,13 +50,15 @@ public class AccountServiceImpl extends ServiceTransactionImpl
     /**
      * POST /sbt/api/account/v1/initiate/transaction
      * 
-     * @param payload
+     * @param accountPayload
      * @return response
      */
     @Override
-    public JsonObject doAuthorize(Map<String, Object> payload) {
+    public JsonObject doAuthorize(Account accountPayload) {
         super.setRequiresToken(true);
-        String endpointURL = INITIATE_TRANSACTION_ENDPOINT.getValue();
+        String endpointURL = INITIATE_TRANSACTION_ENDPOINT;
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> payload = mapper.convertValue(accountPayload, Map.class);
         payload.put("publicKey", this.getClient().getPublicKey());
         response = this.postRequest(endpointURL, payload, token);
         return response;
@@ -63,13 +67,15 @@ public class AccountServiceImpl extends ServiceTransactionImpl
     /**
      * POST /sbt/api/account/v1/validate/transaction
      * 
-     * @param payload
+     * @param otpPayload
      * @return response
      */
     @Override
-    public JsonObject doValidateTransaction(Map<String, Object> payload) {
+    public JsonObject doValidateTransaction(OTP otpPayload) {
         this.requiresToken = true;
-        String endpointURL = VALIDATE_TRANS_ACCOUNT_ENDPOINT.getValue();
+        String endpointURL = VALIDATE_TRANS_ACCOUNT_ENDPOINT;
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> payload = mapper.convertValue(otpPayload, Map.class);
         response = this.postRequest(endpointURL, payload, token);
         return response;
     }

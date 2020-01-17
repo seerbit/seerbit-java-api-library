@@ -17,7 +17,7 @@
 package com.seerbit.service;
 
 import com.google.gson.JsonObject;
-import java.util.Map;
+import com.seerbit.model.Refund;
 
 /**
  *
@@ -26,7 +26,7 @@ import java.util.Map;
 public interface RefundService {
     
     JsonObject doValidate(String transactionId);
-    JsonObject getAllRefund(String userId, int from, int to);
-    JsonObject getRefund(String userId, String refundId);
-    JsonObject doRefund(String userId, Map<String, Object> payload);
+    JsonObject getAllRefund(String businessId, int from, int to);
+    JsonObject getRefund(String businessId, String refundId);
+    JsonObject doRefund(String businessId, Refund payload);
 }

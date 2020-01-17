@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Seerbit
+ * Copyright (C) 2020 centricgateway
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,20 +16,23 @@
  */
 package com.seerbit.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
  *
- * @author Seerbit
+ * @author centricgateway
  */
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
-public class Card {
-    
-    private String number;
-    private String cvv;
-    private String expirymonth;
-    private String expiryyear;
-    private String pin;
+public class Transaction implements Serializable {
+
+    @JsonIgnore
+    private static final long serialVersionUID = 1L;
+
+    private TransactionDetail transaction;
 }

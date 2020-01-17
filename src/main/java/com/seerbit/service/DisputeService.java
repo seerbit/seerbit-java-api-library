@@ -17,7 +17,7 @@
 package com.seerbit.service;
 
 import com.google.gson.JsonObject;
-import java.util.Map;
+import com.seerbit.model.Dispute;
 
 /**
  *
@@ -26,8 +26,6 @@ import java.util.Map;
 public interface DisputeService {
     
     JsonObject getAllDispute(final String userId, int from, int to);
-    JsonObject getDispute(String userId, String disputeId);
-    JsonObject add(String userId, Map<String, Object> payload);
-    JsonObject doCloseDispute(String userId, String disputeId, Map<String, Object> payload);
-    JsonObject doUpdateDispute(String userId, Map<String, Object> payload);
+    JsonObject getDispute(String businessId, String disputeId);
+    JsonObject doUpdateDispute(String businessId, String disputeReference, Dispute payload);
 }

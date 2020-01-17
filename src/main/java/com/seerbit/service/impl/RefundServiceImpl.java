@@ -16,9 +16,11 @@
  */
 package com.seerbit.service.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
 import com.seerbit.Client;
-import com.seerbit.exception.SeerbitException;
+import com.seerbit.ClientConstants;
+import com.seerbit.model.Refund;
 import com.seerbit.service.RefundService;
 import com.seerbit.util.Utility;
 import java.util.Map;
@@ -28,7 +30,7 @@ import java.util.Map;
  * @author Seerbit
  */
 public class RefundServiceImpl extends ServiceMerchantImpl 
-        implements RefundService {
+        implements RefundService, ClientConstants {
 
     /**
      *
@@ -50,48 +52,45 @@ public class RefundServiceImpl extends ServiceMerchantImpl
     @Override
     public JsonObject doValidate(String transactionId) {
         requiresToken = true;
-        String endpointURL = String.format("card/v1/get/transaction/status/%s", transactionId);
+        String endpointURL = String.format(VALIDATE_TRANSACTION_ENDPOINT, transactionId);
         response = this.getRequest(endpointURL, token);
         return response;
     }
 
     /**
-     * GET /merchants/api/v1/user/{userId}/refunds/?page={start_page}&size={size} API call
+     * GET /merchants/api/v1/user/{businessId}/refunds/?page={start_page}&size={size} API call
      *
-     * @param userId
-     * @param from
-     * @param to
+     * @param businessId
+     * @param page
+     * @param size
      * @return response
      */
     @Override
-    public JsonObject getAllRefund(String userId, int from, int to) {
+    public JsonObject getAllRefund(String businessId, int page, int size) {
         this.requiresToken = true;
-        if (from > to) {
-            throw new SeerbitException("first page should not be greater than last page");
-        }
         String endpointURL = String.format(
-                "merchants/api/v1/user/%s/refunds/?page=%d&size=%d",
-                userId,
-                from,
-                to
+                GET_ALL_REFUND_ENDPOINT,
+                businessId,
+                page,
+                size
         );
         response = this.getRequest(endpointURL, token);
         return response;
     }
 
     /**
-     * GET /merchants/api/v1/user/{userId}/refunds/ref/{refundId} API call
+     * GET /merchants/api/v1/user/{businessId}/refunds/{refundId} API call
      *
-     * @param userId
+     * @param businessId
      * @param refundId
      * @return response
      */
     @Override
-    public JsonObject getRefund(String userId, String refundId) {
+    public JsonObject getRefund(String businessId, String refundId) {
         this.requiresToken = true;
         String endpointURL = String.format(
-                "merchants/api/v1/user/%s/refunds/%s",
-                userId,
+                GET_REFUND_ENDPOINT,
+                businessId,
                 refundId
         );
         response = this.getRequest(endpointURL, token);
@@ -99,19 +98,21 @@ public class RefundServiceImpl extends ServiceMerchantImpl
     }
 
     /**
-     * GET /merchants/api/v1/user/{userId}/refunds API call
+     * GET /merchants/api/v1/user/{businessId}/refunds API call
      * 
-     * @param userId
-     * @param payload
+     * @param businessId
+     * @param refundPayload
      * @return response
      */
     @Override
-    public JsonObject doRefund(String userId, Map<String, Object> payload) {
+    public JsonObject doRefund(String businessId, Refund refundPayload) {
         this.requiresToken = true;
         String endpointURL = String.format(
-                "merchants/api/v1/user/%s/refunds",
-                userId
+                DO_REFUND_ENDPOINT,
+                businessId
         );
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> payload = mapper.convertValue(refundPayload, Map.class);
         response = this.postRequest(endpointURL, payload, token);
         return response;
     }

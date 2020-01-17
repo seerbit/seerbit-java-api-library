@@ -16,9 +16,10 @@
  */
 package com.seerbit.service.impl;
 
-import com.seerbit.service.impl.ServiceMerchantImpl;
 import com.google.gson.JsonObject;
 import com.seerbit.Client;
+import com.seerbit.ClientConstants;
+import com.seerbit.NumericConstants;
 import com.seerbit.config.Config;
 import com.seerbit.service.Authentication;
 import com.seerbit.util.Utility;
@@ -26,15 +27,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.seerbit.enums.ClientConstantsEnum.MERCHANT_AUTH_ENDPOINT;
-import static com.seerbit.enums.NumericConstantsEnum.MIN_VALUE;
-
 /**
  *
  * @author Seerbit
  */
 public class MerchantAuthenticationImpl extends ServiceMerchantImpl
-        implements Authentication {
+        implements Authentication, NumericConstants, ClientConstants {
 
     /**
      *
@@ -51,13 +49,12 @@ public class MerchantAuthenticationImpl extends ServiceMerchantImpl
      */
     @Override
     public JsonObject doAuth() {
-        int minValue = MIN_VALUE.getValue();
         client = this.getClient();
         Config config = client.getConfig();
-        Map<String, Object> payload = new HashMap<>(minValue);
+        Map<String, Object> payload = new HashMap<>(MIN_VALUE);
         payload.put("email", config.getUsername());
         payload.put("password", config.getPassword());
-        String merchantAuthEndpoint = MERCHANT_AUTH_ENDPOINT.getValue();
+        String merchantAuthEndpoint = MERCHANT_AUTH_ENDPOINT;
         this.response = this.postRequest(merchantAuthEndpoint, payload, null);
         return this.response;
     }

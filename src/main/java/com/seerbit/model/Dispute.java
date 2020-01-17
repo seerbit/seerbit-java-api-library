@@ -16,10 +16,12 @@
  */
 package com.seerbit.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.io.Serializable;
+import com.seerbit.NumericConstants;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,15 +30,23 @@ import lombok.NoArgsConstructor;
  * @author Seerbit
  */
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransactionDetail implements Serializable {
+public class Dispute implements NumericConstants {
     
-    @JsonIgnore
-    private static final long serialVersionUID = 1L;
+    @Builder.Default
+    private List<Evidence> evidence = new ArrayList<>(MIN_SIZE);
     
-    @JsonProperty("linkingreference")
-    private String linkingReference;
+    private String resolution;
+    private String amount;
     
-    private String otp;
+    @JsonProperty("resolution_image")
+    private String resolutionImage;
+    
+    @JsonProperty("merchant_id")
+    private String merchantId;
+    
+    @JsonProperty("customer_email")
+    private String customerEmail;
 }

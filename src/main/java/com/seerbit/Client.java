@@ -21,9 +21,6 @@ import com.seerbit.config.impl.ConfigImpl;
 import com.seerbit.exception.SeerbitException;
 import java.util.Objects;
 
-import static com.seerbit.enums.ClientConstantsEnum.LIVE_API_BASE;
-import static com.seerbit.enums.ClientConstantsEnum.PILOT_API_BASE;
-import static com.seerbit.enums.ClientConstantsEnum.VERSION_ONE;
 import static com.seerbit.enums.EnvironmentEnum.LIVE;
 import static com.seerbit.enums.EnvironmentEnum.PILOT;
 
@@ -41,7 +38,7 @@ public class Client {
      */
     public Client() {
         config = new ConfigImpl();
-        config.put("version", VERSION_ONE.getValue());
+        config.put("version", ClientConstants.VERSION_ONE);
     }
     
     /**
@@ -52,11 +49,10 @@ public class Client {
         config = new ConfigImpl();
         switch (version) {
             case "1.0.0":
-                config.put("version", VERSION_ONE.getValue());
+                config.put("version", ClientConstants.VERSION_ONE);
                 break;
             default:
-                config.put("version", VERSION_ONE.getValue());
-                break;
+                throw new SeerbitException("Version must be \"1.0.0\"");
         }    
     }
 
@@ -155,10 +151,10 @@ public class Client {
     public void setEnvironment(String environment) {
         if (environment.equalsIgnoreCase(LIVE.getEnvironment())) {
             this.config.put("environment", LIVE.getEnvironment());
-            this.config.put("apiBase", LIVE_API_BASE.getValue());
+            this.config.put("apiBase", ClientConstants.LIVE_API_BASE);
         } else if (environment.equalsIgnoreCase(PILOT.getEnvironment())) {
             this.config.put("environment", PILOT.getEnvironment());
-            this.config.put("apiBase", PILOT_API_BASE.getValue());
+            this.config.put("apiBase", ClientConstants.PILOT_API_BASE);
         } else {
             String errorMessage = String.format(
                     "This environment does not exist, use \"%s\" or \"%s\"",

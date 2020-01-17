@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Seerbit
+ * Copyright (C) 2020 centricgateway
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,18 +14,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.seerbit.service;
-
-import com.google.gson.JsonObject;
-import com.seerbit.model.Account;
-import com.seerbit.model.OTP;
+package com.seerbit;
 
 /**
  *
- * @author Seerbit
+ * @author centricgateway
  */
-public interface AccountService {
-
-    JsonObject doAuthorize(Account payload);
-    JsonObject doValidateTransaction(OTP payload);
+public interface NumericConstants {
+    
+    // numeric constants
+    static final int MIN_VALUE = 1;
+    static final int MIN_SIZE = 1;
+    static final int NIL = 0;
 }

@@ -16,19 +16,15 @@
  */
 package com.seerbit.service.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
 import com.seerbit.Client;
-import com.seerbit.exception.SeerbitException;
+import com.seerbit.ClientConstants;
+import com.seerbit.model.Dispute;
 import com.seerbit.service.DisputeService;
 import com.seerbit.util.Utility;
 import java.util.Map;
 import lombok.extern.log4j.Log4j2;
-
-import static com.seerbit.enums.ClientConstantsEnum.ADD_DISPUTE_ENDPOINT;
-import static com.seerbit.enums.ClientConstantsEnum.CLOSE_DISPUTE_ENDPOINT;
-import static com.seerbit.enums.ClientConstantsEnum.GET_ALL_DISPUTE_ENDPOINT;
-import static com.seerbit.enums.ClientConstantsEnum.GET_DISPUTE_ENDPOINT;
-import static com.seerbit.enums.ClientConstantsEnum.UPDATE_DISPUTE_ENDPOINT;
 
 /**
  *
@@ -36,7 +32,7 @@ import static com.seerbit.enums.ClientConstantsEnum.UPDATE_DISPUTE_ENDPOINT;
  */
 @Log4j2
 public class DisputeServiceImpl extends ServiceMerchantImpl 
-        implements DisputeService {
+        implements DisputeService, ClientConstants {
 
     /**
      *
@@ -50,42 +46,39 @@ public class DisputeServiceImpl extends ServiceMerchantImpl
     }
 
     /**
-     * GET /merchants/api/v1/user/{userId}/disputes/?page={start_page}&size={size}
+     * GET /merchants/api/v1/user/{businessId}/disputes/?page={start_page}&size={size}
      *
-     * @param userId
-     * @param from
-     * @param to
+     * @param businessId
+     * @param page
+     * @param size
      * @return response
      */
     @Override
-    public JsonObject getAllDispute(final String userId, int from, int to) {
+    public JsonObject getAllDispute(final String businessId, int page, int size) {
         this.requiresToken = true;
-        if (from > to) {
-            throw new SeerbitException("first page should not be greater than last page");
-        }
         String endpointURL = String.format(
-                GET_ALL_DISPUTE_ENDPOINT.getValue(),
-                userId,
-                from,
-                to
+                GET_ALL_DISPUTE_ENDPOINT,
+                businessId,
+                page,
+                size
         );
         response = this.getRequest(endpointURL, token);
         return response;
     }
 
     /**
-     * GET /merchants/api/v1/user/{userId}/disputes/{disputeId}
+     * GET /merchants/api/v1/user/{businessId}/disputes/{disputeId}
      *
-     * @param userId
+     * @param businessId
      * @param disputeId
      * @return response
      */
     @Override
-    public JsonObject getDispute(String userId, String disputeId) {
+    public JsonObject getDispute(String businessId, String disputeId) {
         this.requiresToken = true;
         String endpointURL = String.format(
-                GET_DISPUTE_ENDPOINT.getValue(),
-                userId,
+                GET_DISPUTE_ENDPOINT,
+                businessId,
                 disputeId
         );
         response = this.getRequest(endpointURL, token);
@@ -93,61 +86,27 @@ public class DisputeServiceImpl extends ServiceMerchantImpl
     }
 
     /**
-     * POST /merchants/api/v1/user/{userId}/disputes
+     * PUT /merchants/api/v1/user/{businessId}/disputes/{disputeReference}
      *
-     * @param userId
-     * @param payload
+     * @param businessId
+     * @param disputeReference
+     * @param disputePayload
      * @return response
      */
     @Override
-    public JsonObject add(String userId, Map<String, Object> payload) {
-        this.requiresToken = true;
-        String endpointURL = String.format(
-                ADD_DISPUTE_ENDPOINT.getValue(),
-                userId
-        );
-        response = this.postRequest(endpointURL, payload, token);
-        return response;
-    }
-
-    /**
-     * POST /merchants/api/v1/user/{userId}/disputes/{disputeId}/close
-     *
-     * @param userId
-     * @param disputeId
-     * @param payload
-     * @return response
-     */
-    @Override
-    public JsonObject doCloseDispute(
-            String userId,
-            String disputeId,
-            Map<String, Object> payload
+    public JsonObject doUpdateDispute(
+            String businessId, 
+            String disputeReference, 
+            Dispute disputePayload
     ) {
         this.requiresToken = true;
         String endpointURL = String.format(
-                CLOSE_DISPUTE_ENDPOINT.getValue(),
-                userId,
-                disputeId
+                UPDATE_DISPUTE_ENDPOINT,
+                businessId,
+                disputeReference
         );
-        response = this.postRequest(endpointURL, payload, token);
-        return response;
-    }
-
-    /**
-     * PUT /merchants/api/v1/user/{userId}/disputes
-     *
-     * @param userId
-     * @param payload
-     * @return response
-     */
-    @Override
-    public JsonObject doUpdateDispute(String userId, Map<String, Object> payload) {
-        this.requiresToken = true;
-        String endpointURL = String.format(
-                UPDATE_DISPUTE_ENDPOINT.getValue(),
-                userId
-        );
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> payload = mapper.convertValue(disputePayload, Map.class);
         response = this.putRequest(endpointURL, payload, token);
         return response;
     }

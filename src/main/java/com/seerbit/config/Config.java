@@ -19,15 +19,15 @@ package com.seerbit.config;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.seerbit.NumericConstants.MIN_SIZE;
+
 /**
  *
  * @author Seerbit
  */
 public interface Config {
 
-    static final int NIL = 0;
-    static final int INITIAL_CAPACITY = 1;
-    Map<String, Object> data = new HashMap<>(INITIAL_CAPACITY);
+    Map<String, Object> data = new HashMap<>(MIN_SIZE);
 
     /**
      *

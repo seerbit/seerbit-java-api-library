@@ -16,6 +16,9 @@
  */
 package com.seerbit.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,8 +27,12 @@ import lombok.NoArgsConstructor;
  * @author Seerbit
  */
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
-public class Card {
+public class CardDetail implements Serializable {
+    
+    @JsonIgnore
+    private static final long serialVersionUID = 1L;
     
     private String number;
     private String cvv;

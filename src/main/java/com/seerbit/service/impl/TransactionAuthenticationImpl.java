@@ -18,6 +18,8 @@ package com.seerbit.service.impl;
 
 import com.google.gson.JsonObject;
 import com.seerbit.Client;
+import com.seerbit.ClientConstants;
+import com.seerbit.NumericConstants;
 import com.seerbit.config.Config;
 import com.seerbit.service.Authentication;
 import com.seerbit.util.Utility;
@@ -25,15 +27,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.seerbit.enums.ClientConstantsEnum.TRANSACTION_AUTH_ENDPOINT;
-import static com.seerbit.enums.NumericConstantsEnum.MIN_VALUE;
 
 /**
  *
  * @author Seerbit
  */
 public class TransactionAuthenticationImpl extends ServiceTransactionImpl 
-        implements Authentication {
+        implements Authentication, ClientConstants, NumericConstants {
 
     /**
      * 
@@ -50,13 +50,13 @@ public class TransactionAuthenticationImpl extends ServiceTransactionImpl
      */
     @Override
     public JsonObject doAuth() {
-        int minValue = MIN_VALUE.getValue();
+        int minValue = MIN_VALUE;
         client = this.getClient();
         Config config = client.getConfig();
         Map<String, Object> payload = new HashMap<>(minValue);
         payload.put("clientId", config.getPublicKey());
         payload.put("clientSecret", config.getClientSecret());
-        String transactionAuthEndpoint = TRANSACTION_AUTH_ENDPOINT.getValue();
+        String transactionAuthEndpoint = TRANSACTION_AUTH_ENDPOINT;
         this.response = this.postRequest(transactionAuthEndpoint, payload, null);
         return this.response;
     }

@@ -29,7 +29,8 @@ import java.util.Objects;
  *
  * @author Seerbit
  */
-public class ServiceMerchantImpl implements Service, Request {
+public class ServiceMerchantImpl 
+        implements Service, Request {
 
     private final HttpClientImpl httpClient;
     

@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.seerbit.Client;
+import com.seerbit.NumericConstants;
 import com.seerbit.config.Config;
 import com.seerbit.exception.ConnectionException;
 import com.seerbit.exception.SeerbitException;
@@ -41,14 +42,14 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import static com.seerbit.enums.HttpHeaderEnum.CONTENT_TYPE;
-import static com.seerbit.enums.NumericConstantsEnum.MIN_SIZE;
 
 /**
  *
  * @author Seerbit
  */
 @Log4j2
-public class HttpClientImpl implements HttpClient {
+public class HttpClientImpl 
+        implements HttpClient, NumericConstants {
 
     private static final CloseableHttpClient HTTP_CLIENT = HttpClients.createDefault();
 
@@ -98,7 +99,7 @@ public class HttpClientImpl implements HttpClient {
             StringEntity entity = new StringEntity(requestBody);
             postRequest.setEntity(entity);
             if (service.isTokenRequired()) {
-                if (Objects.isNull(token) || token.length() < MIN_SIZE.getValue()) {
+                if (Objects.isNull(token) || token.length() < MIN_SIZE) {
                     throw new ConnectionException("Please provide an authentication token.");
                 } else {
                     String authenticationString = String.format("Bearer %s", token);
@@ -148,7 +149,7 @@ public class HttpClientImpl implements HttpClient {
             StringEntity entity = new StringEntity(requestBody);
             putRequest.setEntity(entity);
             if (service.isTokenRequired()) {
-                if (Objects.isNull(token) || token.length() < MIN_SIZE.getValue()) {
+                if (Objects.isNull(token) || token.length() < MIN_SIZE) {
                     throw new ConnectionException("Please provide an authentication token.");
                 } else {
                     String authenticationString = String.format("Bearer %s", token);
@@ -190,7 +191,7 @@ public class HttpClientImpl implements HttpClient {
             getRequest = new HttpGet(url);
             getRequest.setHeader("Request-Timeout", String.valueOf(config.getTimeout()));
             if (service.isTokenRequired()) {
-                if (Objects.isNull(token) || token.length() < MIN_SIZE.getValue()) {
+                if (Objects.isNull(token) || token.length() < MIN_SIZE) {
                     throw new ConnectionException("Please provide an authentication token.");
                 } else {
                     String authenticationString = String.format("Bearer %s", token);

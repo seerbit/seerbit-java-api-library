@@ -17,7 +17,8 @@
 package com.seerbit.service;
 
 import com.google.gson.JsonObject;
-import java.util.Map;
+import com.seerbit.model.Card;
+import com.seerbit.model.Transaction;
 
 /**
  *
@@ -25,6 +26,6 @@ import java.util.Map;
  */
 public interface CardService {
     
-    JsonObject doAuthorize(Map<String, Object> payload);
-    JsonObject doValidateOTP(Map<String, Object> payload);
+    JsonObject doAuthorize(Card payload);
+    JsonObject doValidateOTP(Transaction payload);
 }

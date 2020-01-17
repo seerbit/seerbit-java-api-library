@@ -16,7 +16,11 @@
  */
 package com.seerbit.model;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.seerbit.enums.RefundTypeEnum;
+import java.io.Serializable;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -25,14 +29,17 @@ import lombok.NoArgsConstructor;
  * @author Seerbit
  */
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
-public class Account {
+public class Refund implements Serializable {
+
+    @JsonIgnore
+    private static final long serialVersionUID = 1L;
     
-    private String sender;
-    private String name;
-    @SerializedName("senderbankcode")
-    private String senderBankCode;
-    @SerializedName("senderdateofbirth")
-    private String senderDateOfBirth;
-    private String bvn;    
+    private RefundTypeEnum type;
+    private String amount;
+    private String description;
+   
+    @JsonProperty("transactionRef")
+    private String transactionReference;
 }

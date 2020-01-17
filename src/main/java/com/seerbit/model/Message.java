@@ -16,12 +16,15 @@
  */
 package com.seerbit.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.seerbit.NumericConstants;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-
-import static com.seerbit.enums.NumericConstantsEnum.MIN_VALUE;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -29,7 +32,13 @@ import static com.seerbit.enums.NumericConstantsEnum.MIN_VALUE;
  */
 @Data
 @Builder
-public class Message {
+@AllArgsConstructor
+@NoArgsConstructor
+public class Message implements NumericConstants, Serializable {
+    
+    @JsonIgnore
+    private static final long serialVersionUID = 1L;
+    
     @Builder.Default
-    private final List<Image> images = new ArrayList<Image>(MIN_VALUE.getValue());
+    private final List<Image> images = new ArrayList<Image>(MIN_VALUE);
 }

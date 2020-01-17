@@ -16,7 +16,10 @@
  */
 package com.seerbit.model;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.io.Serializable;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -25,14 +28,38 @@ import lombok.NoArgsConstructor;
  * @author Seerbit
  */
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
-public class Account {
+public class Account implements Serializable {
+
+    @JsonIgnore
+    private static final long serialVersionUID = 1L;
+
+    private String fullname;
+    private String email;
+    private String mobile;
     
-    private String sender;
-    private String name;
-    @SerializedName("senderbankcode")
-    private String senderBankCode;
-    @SerializedName("senderdateofbirth")
-    private String senderDateOfBirth;
-    private String bvn;    
+    @JsonProperty("public_key")
+    private String publicKey;
+    
+    private AccountDetail account;
+    private String channelType;
+    private String deviceType;
+    private String sourceIP;
+    private String type;
+    private String reference;
+    private String currency;
+    private String description;
+    private String country;
+    private String fee;
+    private String amount;
+    
+    @JsonProperty("clientappcode")
+    private String clientAppCode;
+    
+    @JsonProperty("callbackurl")
+    private String callbackUrl;
+    
+    @JsonProperty("redirecturl")
+    private String redirectUrl;
 }

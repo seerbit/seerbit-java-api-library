@@ -14,18 +14,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.seerbit.service;
+package com.seerbit.model;
 
-import com.google.gson.JsonObject;
-import com.seerbit.model.Account;
-import com.seerbit.model.OTP;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
  * @author Seerbit
  */
-public interface AccountService {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class OTP implements Serializable {
 
-    JsonObject doAuthorize(Account payload);
-    JsonObject doValidateTransaction(OTP payload);
+    @JsonIgnore
+    private static final long serialVersionUID = 1L;
+
+    @JsonProperty("linkingreference")
+    private String linkingReference;
+
+    private String otp;
 }

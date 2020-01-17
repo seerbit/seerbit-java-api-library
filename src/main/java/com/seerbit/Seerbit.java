@@ -17,24 +17,21 @@
  */
 package com.seerbit;
 
-import static com.seerbit.enums.ClientConstantsEnum.LIVE_API_BASE;
-import static com.seerbit.enums.ClientConstantsEnum.PILOT_API_BASE;
+import static com.seerbit.ClientConstants.LIVE_API_BASE;
+import static com.seerbit.ClientConstants.PILOT_API_BASE;
 
 /**
  *
  * @author Seerbit
  */
-public interface Seerbit {
-
-    static final String API_BASE = LIVE_API_BASE.getValue();
-    static final String API_BASE_PILOT = PILOT_API_BASE.getValue();
+public interface Seerbit  {
 
     /**
      *
      * @return apiBase
      */
     public default String getApiBase() {
-        return Seerbit.API_BASE;
+        return LIVE_API_BASE;
     }
 
     /**
@@ -42,7 +39,7 @@ public interface Seerbit {
      * @return apiBasePilot
      */
     public default String getApiBasePilot() {
-        return Seerbit.API_BASE_PILOT;
+        return PILOT_API_BASE;
     }
 
     /**
