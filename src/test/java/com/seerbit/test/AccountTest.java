@@ -64,7 +64,6 @@ public class AccountTest implements NumericConstants {
             client.setPublicKey("SBTESTPUBK_9VpeA7NPZKK0bfrt4m8cAJAvJ6LW2Zrd");
             client.setPrivateKey("SBTESTSECK_VsCUvHw88dWDx0j3SCV3Gtkz7dwXuYHbgWQ3iqLg");
             client.setTimeout(20);
-            com.seerbit.model.CardDetail card = new com.seerbit.model.CardDetail();
             authService = new TransactionAuthenticationImpl(client);
             JsonObject json = authService.doAuth();
             String jsonString = String.format(
