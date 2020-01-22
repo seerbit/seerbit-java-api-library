@@ -58,7 +58,7 @@ You can contribute to this repository so that anyone can benefit from it:
 * Improved features
 * Resolved bug fixes and issues
 
-## Examples
+## Examples  
 
 You can also check the [src/main/java/com/seerbit/demo](https://github.com/seerbit/seerbit-java-v1/tree/master/src/main/java/com/seerbit/demo) folder in this repository for more examples of usage.
 
