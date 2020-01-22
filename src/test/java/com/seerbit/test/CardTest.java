@@ -95,7 +95,7 @@ public class CardTest {
                     Card cardPayload = new Card();
                     cardPayload.setFullname("Aminu Grod");
                     cardPayload.setPublicKey(client.getConfig().getPublicKey());
-                    cardPayload.setTransactionReference("TQ14611X3213323311PR");
+                    cardPayload.setTransactionReference("TQ14611X3213323312PR");
                     cardPayload.setEmail("kolawolesam@gmail.com");
                     cardPayload.setMobile("08030540611");
                     cardPayload.setChannelType("ACCOUNT");

@@ -16,7 +16,6 @@ package com.seerbit.test;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -26,7 +25,6 @@ import com.seerbit.NumericConstants;
 import com.seerbit.Seerbit;
 import com.seerbit.impl.SeerbitImpl;
 import com.seerbit.enums.EnvironmentEnum;
-import com.seerbit.model.Refund;
 import com.seerbit.service.RefundService;
 import com.seerbit.service.impl.MerchantAuthenticationImpl;
 import com.seerbit.service.impl.RefundServiceImpl;
@@ -35,7 +33,6 @@ import java.util.Objects;
 import lombok.extern.log4j.Log4j2;
 import org.junit.Test;
 
-import static com.seerbit.enums.RefundTypeEnum.PARTIAL_REFUND;
 
 /**
  *
