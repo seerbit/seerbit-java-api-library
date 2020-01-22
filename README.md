@@ -78,8 +78,7 @@ Instantiate a client and set the parameters.
     client.setTimeout(20);
 ```
 
-To initiate a transaction request you need to configure your client and perform a 
-transaction authentication. 
+To initiate a transaction request you need to perform a transaction authentication. 
 
 ```java
     TransactionAuthenticationImpl authService = new TransactionAuthenticationImpl(client);
