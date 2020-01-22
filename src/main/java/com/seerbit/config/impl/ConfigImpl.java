@@ -16,18 +16,18 @@
  */
 package com.seerbit.config.impl;
 
+import com.seerbit.NumericConstants;
 import com.seerbit.config.Config;
 import com.seerbit.util.SHA256;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.seerbit.NumericConstants.NIL;
-
 /**
  *
  * @author Seerbit
  */
-public class ConfigImpl implements Config {
+public class ConfigImpl 
+        implements Config, NumericConstants {
     
     public ConfigImpl() {}
 

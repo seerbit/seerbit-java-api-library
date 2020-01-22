@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 centricgateway
+ * Copyright (C) 2019 Seerbit
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@ package com.seerbit;
 
 /**
  *
- * @author centricgateway
+ * @author Seerbit
  */
 public interface NumericConstants {
     

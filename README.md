@@ -91,12 +91,12 @@ Then retrieve your token after authenticating and pass it to the CardService con
   
     CardService cardService = new CardServiceImpl(client, token);
 
-    AccountDetail account = new AccountDetail();
-    account.setName("Sambo Chukwuma Adetutu");
-    account.setBvn("1234567890");
-    account.setSender("1111111111");
-    account.setSenderBankCode("214");
-    account.setSenderDateOfBirth("04011984");
+    AccountDetail accountDetail = new AccountDetail();
+    accountDetail.setName("Sambo Chukwuma Adetutu");
+    accountDetail.setBvn("1234567890");
+    accountDetail.setSender("1111111111");
+    accountDetail.setSenderBankCode("214");
+    accountDetail.setSenderDateOfBirth("04011984");
 
     CardDetail cardDetail = new CardDetail();
     cardDetail.setCvv("100");
@@ -105,26 +105,26 @@ Then retrieve your token after authenticating and pass it to the CardService con
     cardDetail.setExpiryyear("21");
     cardDetail.setPin("1234");
 
-    Card cardPayload = new Card();
-    cardPayload.setFullname("Sambo Chukwuma Adetutu");
-    cardPayload.setPublicKey(client.getConfig().getPublicKey());
-    cardPayload.setTransactionReference("trx00001");
-    cardPayload.setEmail("sambo@example.com");
-    cardPayload.setMobile("08012345678");
-    cardPayload.setChannelType("account");
-    cardPayload.setDeviceType("Nokia 3310");
-    cardPayload.setSourceIP("127.0.0.20");
-    cardPayload.setType("3DSECURE");
-    cardPayload.setCurrency("NGN");
-    cardPayload.setDescription("put a descriptive message here");
-    cardPayload.setCountry("NG");
-    cardPayload.setFee("1.00");
-    cardPayload.setAmount("150.00");
-    cardPayload.setClientAppCode("appl");
-    cardPayload.setCallbackUrl("http://www.example.com");
-    cardPayload.setRedirectUrl("http://www.example.com");
-    cardPayload.setCard(cardDetail);
-    JsonObject json = cardService.doAuthorize(cardPayload);
+    Card card = new Card();
+    card.setFullname("Sambo Chukwuma Adetutu");
+    card.setPublicKey(client.getConfig().getPublicKey());
+    card.setTransactionReference("trx00001");
+    card.setEmail("sambo@example.com");
+    card.setMobile("08012345678");
+    card.setChannelType("account");
+    card.setDeviceType("Nokia 3310");
+    card.setSourceIP("127.0.0.20");
+    card.setType("3DSECURE");
+    card.setCurrency("NGN");
+    card.setDescription("put a descriptive message here");
+    card.setCountry("NG");
+    card.setFee("1.00");
+    card.setAmount("150.00");
+    card.setClientAppCode("appl");
+    card.setCallbackUrl("http://www.example.com");
+    card.setRedirectUrl("http://www.example.com");
+    card.setCard(cardDetail);
+    JsonObject json = cardService.doAuthorize(card);
 ``` 
 
 Find more examples [here](https://github.com/seerbit/seerbit-java-v1/tree/master/src/main/java/com/seerbit/demo).
