@@ -46,7 +46,7 @@ Add this dependency to your project's POM:
 ```xml
 <dependency>
   <groupId>com.seerbit</groupId>
-  <artifactId>seerbit-java-api</artifactId>
+  <artifactId>seerbit-java-v1</artifactId>
   <version>1.0.0</version>
 </dependency>
 ```
