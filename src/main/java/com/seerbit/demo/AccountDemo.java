@@ -58,7 +58,6 @@ public class AccountDemo implements NumericConstants {
             seerbitApp = new SeerbitImpl();
             client = new Client();
             
-            client.setTimeout(20);
             client.setAPIBase(seerbitApp.getApiBase());
             client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
             client.setPublicKey("public_key");
