@@ -16,11 +16,10 @@
 ## Features
 
 The Library supports all APIs under the following services:
-* Card API
-* Refunds
-* Account
+* Payment via API (card and account)
 * Disputes
-* Transaction API
+* Refunds
+* Transaction Status
 
 ## Getting Started
 
