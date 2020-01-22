@@ -70,7 +70,6 @@ Instantiate a client and set the parameters.
 ```java
     Seerbit seerbitApp = new SeerbitImpl();
     Client client = new Client();
-    client.setTimeout(20);
     client.setAPIBase(seerbitApp.getApiBase());
     client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
     client.setPublicKey("public_key");
