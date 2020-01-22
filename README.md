@@ -6,7 +6,7 @@
 
 <h1 align="center">
   <img width="40" valign="bottom" src="https://res.cloudinary.com/dcksdncso/image/upload/v1579682633/java_f2iyuf.png">
-  seerbit-java-api-library
+  seerbit-java-v1
 </h1>
 
 <h4 align="center">
