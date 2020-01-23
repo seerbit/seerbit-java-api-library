@@ -80,7 +80,7 @@ To initiate a transaction request you need to perform a transaction authenticati
 
 ```java
     TransactionAuthenticationImpl authService = new TransactionAuthenticationImpl(client);
-    authService.doAuth();
+    JsonObject = authService.doAuth();
 ```
 
 Then retrieve your token after authenticating and pass it to the CardService constructor along with your client object. You can then construct your payload and call the <code>doAuthorize()</code> method of the CardService class.
