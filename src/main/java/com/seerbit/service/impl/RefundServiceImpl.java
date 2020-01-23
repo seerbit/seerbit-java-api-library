@@ -37,7 +37,7 @@ public class RefundServiceImpl extends ServiceMerchantImpl
      * @param client
      * @param token
      */
-    public RefundServiceImpl(final Client client, final String token) {
+    public RefundServiceImpl(Client client, String token) {
         super(client);
         Utility.doClientNonNull(client);
         this.token = token;

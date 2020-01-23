@@ -26,7 +26,7 @@ import java.util.Objects;
  */
 public class Utility {
     
-    public static void doClientNonNull(final Client client) {
+    public static void doClientNonNull(Client client) {
         if (Objects.isNull(client)) {
             throw new SeerbitException("Client class cannot be null");
         }

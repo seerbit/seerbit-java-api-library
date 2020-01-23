@@ -44,7 +44,7 @@ public class ServiceTransactionImpl implements Service, Request {
      *
      * @param client
      */
-    public ServiceTransactionImpl(final Client client) {
+    public ServiceTransactionImpl(Client client) {
         String message;
         Utility.doClientNonNull(client);
         this.response = new JsonObject();
@@ -95,7 +95,7 @@ public class ServiceTransactionImpl implements Service, Request {
      * @param requiresToken
      */
     @Override
-    public void setRequiresToken(final boolean requiresToken) {
+    public void setRequiresToken(boolean requiresToken) {
         this.requiresToken = requiresToken;
     }
 

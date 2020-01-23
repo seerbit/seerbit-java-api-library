@@ -40,7 +40,7 @@ public class CardServiceImpl extends ServiceTransactionImpl
      * @param client
      * @param token
      */
-    public CardServiceImpl(final Client client, final String token) {
+    public CardServiceImpl(Client client, String token) {
         super(client);
         this.token = token;
         Utility.doClientNonNull(client);

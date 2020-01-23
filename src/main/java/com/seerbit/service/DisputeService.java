@@ -25,7 +25,7 @@ import com.seerbit.model.Dispute;
  */
 public interface DisputeService {
     
-    JsonObject getAllDispute(final String userId, int from, int to);
+    JsonObject getAllDispute(String userId, int from, int to);
     JsonObject getDispute(String businessId, String disputeId);
     JsonObject doUpdateDispute(String businessId, String disputeReference, Dispute payload);
 }

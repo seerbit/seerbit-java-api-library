@@ -38,7 +38,7 @@ public class MerchantAuthenticationImpl extends ServiceMerchantImpl
      *
      * @param client
      */
-    public MerchantAuthenticationImpl(final Client client) {
+    public MerchantAuthenticationImpl(Client client) {
         super(client);
         Utility.doClientNonNull(client);
     }
@@ -51,11 +51,10 @@ public class MerchantAuthenticationImpl extends ServiceMerchantImpl
     public JsonObject doAuth() {
         client = this.getClient();
         Config config = client.getConfig();
-        Map<String, Object> payload = new HashMap<>(MIN_VALUE);
+        Map<String, Object> payload = new HashMap<>(MIN_SIZE);
         payload.put("email", config.getUsername());
         payload.put("password", config.getPassword());
-        String merchantAuthEndpoint = MERCHANT_AUTH_ENDPOINT;
-        this.response = this.postRequest(merchantAuthEndpoint, payload, null);
+        this.response = this.postRequest(MERCHANT_AUTH_ENDPOINT, payload, null);
         return this.response;
     }
 

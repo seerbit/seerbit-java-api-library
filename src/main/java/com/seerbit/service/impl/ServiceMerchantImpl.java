@@ -43,7 +43,7 @@ public class ServiceMerchantImpl
      *
      * @param client
      */
-    public ServiceMerchantImpl(final Client client) {
+    public ServiceMerchantImpl(Client client) {
         Utility.doClientNonNull(client);
         this.httpClient = new HttpClientImpl();
         this.client = client;
@@ -73,7 +73,7 @@ public class ServiceMerchantImpl
      * @param requiresToken
      */
     @Override
-    public void setRequiresToken(final boolean requiresToken) {
+    public void setRequiresToken(boolean requiresToken) {
         this.requiresToken = requiresToken;
     }
 

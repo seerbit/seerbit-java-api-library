@@ -26,5 +26,5 @@ public interface Service {
 
     Client getClient();
     boolean isTokenRequired();
-    void setRequiresToken(final boolean isRequired);
+    void setRequiresToken(boolean isRequired);
 }

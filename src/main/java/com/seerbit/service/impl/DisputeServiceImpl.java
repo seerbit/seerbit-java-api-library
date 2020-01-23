@@ -39,7 +39,7 @@ public class DisputeServiceImpl extends ServiceMerchantImpl
      * @param client
      * @param token
      */
-    public DisputeServiceImpl(final Client client, final String token) {
+    public DisputeServiceImpl(Client client, String token) {
         super(client);
         this.token = token;
         Utility.doClientNonNull(client);
@@ -54,7 +54,7 @@ public class DisputeServiceImpl extends ServiceMerchantImpl
      * @return response
      */
     @Override
-    public JsonObject getAllDispute(final String businessId, int page, int size) {
+    public JsonObject getAllDispute(String businessId, int page, int size) {
         this.requiresToken = true;
         String endpointURL = String.format(
                 GET_ALL_DISPUTE_ENDPOINT,

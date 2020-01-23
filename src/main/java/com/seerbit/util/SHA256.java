@@ -49,7 +49,7 @@ public class SHA256 {
      * @param privateKey
      * @return clientSecret
      */
-    public static String doHashSHA256(final String publicKey, final String privateKey) {
+    public static String doHashSHA256(String publicKey, String privateKey) {
         String clientSecret = null;
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

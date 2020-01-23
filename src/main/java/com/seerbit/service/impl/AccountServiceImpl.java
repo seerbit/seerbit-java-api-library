@@ -41,7 +41,7 @@ public class AccountServiceImpl extends ServiceTransactionImpl
      * @param client
      * @param token 
      */
-    public AccountServiceImpl(final Client client, final String token) {
+    public AccountServiceImpl(Client client, String token) {
         super(client);
         this.token = token;
         Utility.doClientNonNull(client);

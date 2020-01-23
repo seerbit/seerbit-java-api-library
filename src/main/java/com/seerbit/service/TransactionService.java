@@ -24,5 +24,5 @@ import com.google.gson.JsonObject;
  */
 public interface TransactionService {
     
-    JsonObject doValidateTransaction(final String transId);
+    JsonObject doValidateTransaction(String transId);
 }

@@ -39,7 +39,7 @@ public class TransactionAuthenticationImpl extends ServiceTransactionImpl
      * 
      * @param client 
      */
-    public TransactionAuthenticationImpl(final Client client) {
+    public TransactionAuthenticationImpl(Client client) {
         super(client);
         Utility.doClientNonNull(client);
     }
@@ -50,14 +50,12 @@ public class TransactionAuthenticationImpl extends ServiceTransactionImpl
      */
     @Override
     public JsonObject doAuth() {
-        int minValue = MIN_VALUE;
         client = this.getClient();
         Config config = client.getConfig();
-        Map<String, Object> payload = new HashMap<>(minValue);
+        Map<String, Object> payload = new HashMap<>(MIN_SIZE);
         payload.put("clientId", config.getPublicKey());
         payload.put("clientSecret", config.getClientSecret());
-        String transactionAuthEndpoint = TRANSACTION_AUTH_ENDPOINT;
-        this.response = this.postRequest(transactionAuthEndpoint, payload, null);
+        this.response = this.postRequest(TRANSACTION_AUTH_ENDPOINT, payload, null);
         return this.response;
     }
     
