@@ -121,7 +121,7 @@ Then retrieve your token after authenticating and pass it to the CardService con
     card.setClientAppCode("appl");
     card.setCallbackUrl("http://www.example.com");
     card.setRedirectUrl("http://www.example.com");
-    card.setCard(cardDetail);
+    card.setCardDetail(cardDetail);
     JsonObject json = cardService.doAuthorize(card);
 ``` 
 
