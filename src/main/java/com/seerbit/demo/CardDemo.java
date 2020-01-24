@@ -93,8 +93,8 @@ public class CardDemo {
                     CardDetail cardDetail = new CardDetail();
                     cardDetail.setCvv("100");
                     cardDetail.setNumber("5123450000000008");
-                    cardDetail.setExpirymonth("05");
-                    cardDetail.setExpiryyear("21");
+                    cardDetail.setExpiryMonth("05");
+                    cardDetail.setExpiryYear("21");
                     cardDetail.setPin("1234");
                     
                     Card card = new Card();

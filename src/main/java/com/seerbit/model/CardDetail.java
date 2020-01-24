@@ -17,6 +17,7 @@
 package com.seerbit.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,7 +37,11 @@ public class CardDetail implements Serializable {
     
     private String number;
     private String cvv;
-    private String expirymonth;
-    private String expiryyear;
+    
+    @JsonProperty("expirymonth")
+    private String expiryMonth;
+    
+    @JsonProperty("expiryyear")
+    private String expiryYear;
     private String pin;
 }
