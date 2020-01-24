@@ -54,7 +54,9 @@ public class Card implements Serializable {
     private String country;
     private String fee;
     private String amount;
-    private CardDetail card;
+    
+    @JsonProperty("card")
+    private CardDetail cardDetail;
 
     @JsonProperty("clientappcode")
     private String clientAppCode;

@@ -115,7 +115,7 @@ public class CardDemo {
                     card.setClientAppCode("appl");
                     card.setCallbackUrl("http://www.example.com");
                     card.setRedirectUrl("http://www.example.com");
-                    card.setCard(cardDetail);
+                    card.setCardDetail(cardDetail);
                     
                     ObjectMapper mapper = new ObjectMapper();
                     Map<String, Object> payload = mapper.convertValue(card, Map.class);
