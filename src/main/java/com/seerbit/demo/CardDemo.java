@@ -82,13 +82,6 @@ public class CardDemo {
                 if (Objects.nonNull(token)) {
                     System.out.println("================== start initiate card ==================");
                     CardService cardService = new CardServiceImpl(client, token);
-                    
-                    AccountDetail accountDetail = new AccountDetail();
-                    accountDetail.setName("Sambo Chukwuma Adetutu");
-                    accountDetail.setBvn("1234567890");
-                    accountDetail.setSender("1234567890");
-                    accountDetail.setSenderBankCode("214");
-                    accountDetail.setSenderDateOfBirth("04011984");
                       
                     CardDetail cardDetail = new CardDetail();
                     cardDetail.setCvv("100");
