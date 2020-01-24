@@ -89,13 +89,6 @@ Then retrieve your token after authenticating and pass it to the CardService con
   
     CardService cardService = new CardServiceImpl(client, token);
 
-    AccountDetail accountDetail = new AccountDetail();
-    accountDetail.setName("Sambo Chukwuma Adetutu");
-    accountDetail.setBvn("1234567890");
-    accountDetail.setSender("1111111111");
-    accountDetail.setSenderBankCode("214");
-    accountDetail.setSenderDateOfBirth("04011984");
-
     CardDetail cardDetail = new CardDetail();
     cardDetail.setCvv("100");
     cardDetail.setNumber("5123450000000008");
