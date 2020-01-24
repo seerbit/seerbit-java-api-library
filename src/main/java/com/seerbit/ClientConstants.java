@@ -23,7 +23,7 @@ package com.seerbit;
 public interface ClientConstants {
 
     static final String PILOT_API_BASE = "https://pilot-backend.seerbitapi.com/";
-    static final String LIVE_API_BASE = "https://stg-backend.seerbitapi.com/";
+    static final String LIVE_API_BASE = "https://seerbitapi.com/";
 
     // version one endpoints 
     static final String TRANSACTION_AUTH_ENDPOINT = "sbt/api/v1/auth";
