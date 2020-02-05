@@ -27,7 +27,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.test.skip>true</maven.test.skip>
+<!--        <maven.test.skip>false</maven.test.skip>-->
         <maven.javadoc.skip>true</maven.javadoc.skip>
     </properties>
     <scm>
@@ -53,6 +53,7 @@
                 <!-- gpg-plugin defaults to trying 'gpg' on the path, this changes that to 'gpg2' instead -->
                 <gpg.executable>gpg2</gpg.executable>
                 <gpg.passphrase>centricgateway@</gpg.passphrase> 
+                <javadoc.opts>-Xdoclint:none</javadoc.opts>
             </properties>
             <build>
                 <plugins>
@@ -80,19 +81,21 @@
                             </execution>
                         </executions>
                     </plugin>
-<!--                    <plugin>
+                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.0.0</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
                                 <goals>
                                     <goal>jar</goal>
                                 </goals>
+                                <configuration>
+                                    <doclint>none</doclint>
+                                </configuration>
                             </execution>
                         </executions>
-                    </plugin>-->
+                    </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
@@ -106,15 +109,31 @@
                                 </goals>
                             </execution>
                         </executions>
-                    </plugin>                 
-<!--                    <plugin>
+                    </plugin>      
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-site-plugin</artifactId>
+                        <version>3.3</version>
+                        <configuration>
+                            <reportPlugins>
+                                <plugin>
+                                    <groupId>org.apache.maven.plugins</groupId>
+                                    <artifactId>maven-javadoc-plugin</artifactId>
+                                    <configuration>
+                                        <doclint>none</doclint>
+                                    </configuration>
+                                </plugin>
+                            </reportPlugins>
+                        </configuration>
+                    </plugin>           
+                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>3.0.0-M4</version>
                         <configuration>
-                            <skipTests>false</skipTests>
+                            <skipTests>true</skipTests>
                         </configuration>
-                    </plugin>-->
+                    </plugin>
                 </plugins>
             </build>
         </profile>
