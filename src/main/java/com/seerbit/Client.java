@@ -48,7 +48,7 @@ public class Client {
     public Client(final String version) {
         config = new ConfigImpl();
         switch (version) {
-            case "1.0.0":
+            case "1.0.1":
                 config.put("version", ClientConstants.VERSION_ONE);
                 break;
             default:

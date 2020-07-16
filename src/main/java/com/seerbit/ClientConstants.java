@@ -23,26 +23,27 @@ package com.seerbit;
 public interface ClientConstants {
 
     static final String PILOT_API_BASE = "https://pilot-backend.seerbitapi.com/";
-    static final String LIVE_API_BASE = "https://seerbitapi.com/";
+    static final String LIVE_API_BASE = "https://stg-backend.seerbitapi.com/";
 
     // version one endpoints 
-    static final String TRANSACTION_AUTH_ENDPOINT = "sbt/api/v1/auth";
-    static final String MERCHANT_AUTH_ENDPOINT = "merchants/api/v1/auth/login";
-    static final String VALIDATE_TRANS_CARD_ENDPOINT = "sbt/api/card/v1/get/transaction/status";
-    static final String INITIATE_TRANSACTION_ENDPOINT = "sbt/api/account/v1/initiate/transaction";
-    static final String VALIDATE_TRANS_ACCOUNT_ENDPOINT = "sbt/api/account/v1/validate/transaction";
-    static final String INITIATE_CARD_ENDPOINT = "sbt/api/card/v1/init/transaction";
-    static final String VALIDATE_OTP_ENDPOINT = "sbt/api/card/v1/validate/otp";
-    static final String GET_ALL_DISPUTE_ENDPOINT = "merchants/api/v1/user/%s/disputes/?page=%d&size=%d";
-    static final String GET_DISPUTE_ENDPOINT = "merchants/api/v1/user/%s/disputes/%s";
-    static final String ADD_DISPUTE_ENDPOINT = "merchants/api/v1/user/%s/disputes";
-    static final String CLOSE_DISPUTE_ENDPOINT = "merchants/api/v1/user/%s/disputes/%s/close";
-    static final String UPDATE_DISPUTE_ENDPOINT = "merchants/api/v1/user/%s/disputes/%s";
-    static final String GET_ALL_REFUND_ENDPOINT = "merchants/api/v1/user/%s/refunds/?page=%d&size=%d";
-    static final String VALIDATE_TRANSACTION_ENDPOINT = "card/v1/get/transaction/status/%s";
-    static final String DO_REFUND_ENDPOINT = "merchants/api/v1/user/%s/refunds";
-    static final String GET_REFUND_ENDPOINT = "merchants/api/v1/user/%s/refunds/%s";
+    static final String TRANSACTION_AUTH_ENDPOINT = "sbt/api/v2/auth";
+    static final String MERCHANT_AUTH_ENDPOINT = "merchants/api/v2/auth/login";
+    static final String VALIDATE_TRANS_CARD_ENDPOINT = "sbt/api/card/v2/get/transaction/status";
+    static final String INITIATE_TRANSACTION_ENDPOINT = "sbt/api/account/v2/initiate/transaction";
+    static final String VALIDATE_TRANS_ACCOUNT_ENDPOINT = "sbt/api/account/v2/validate/transaction";
+    static final String INITIATE_CARD_ENDPOINT = "sbt/api/card/v2/init/transaction";
+    static final String VALIDATE_OTP_ENDPOINT = "sbt/api/card/v2/validate/otp";
+    static final String GET_ALL_DISPUTE_ENDPOINT = "merchants/api/v2/user/%s/disputes/?page=%d&size=%d";
+    static final String GET_DISPUTE_ENDPOINT = "merchants/api/v2/user/%s/disputes/%s";
+    static final String ADD_DISPUTE_ENDPOINT = "merchants/api/v2/user/%s/disputes";
+    static final String CLOSE_DISPUTE_ENDPOINT = "merchants/api/v2/user/%s/disputes/%s/close";
+    static final String UPDATE_DISPUTE_ENDPOINT = "merchants/api/v2/user/%s/disputes/%s";
+    static final String GET_ALL_REFUND_ENDPOINT = "merchants/api/v2/user/%s/refunds/?page=%d&size=%d";
+    static final String VALIDATE_TRANSACTION_ENDPOINT = "card/v2/get/transaction/status/%s";
+    static final String DO_REFUND_ENDPOINT = "merchants/api/v2/user/%s/refunds";
+    static final String GET_REFUND_ENDPOINT = "merchants/api/v2/user/%s/refunds/%s";
 
     // version types
     static final String VERSION_ONE = "1.0.0";
+    static final String VERSION_TWO = "1.0.0";
 }
