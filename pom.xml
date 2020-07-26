@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.seerbit</groupId>
     <artifactId>seerbit-java-api</artifactId>
@@ -27,12 +28,13 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-<!--        <maven.test.skip>false</maven.test.skip>-->
+        <!--        <maven.test.skip>false</maven.test.skip>-->
         <maven.javadoc.skip>true</maven.javadoc.skip>
     </properties>
     <scm>
         <connection>scm:git:git://bitbucket.org/centricgatewayteam/seerbit-java-library.git</connection>
-        <developerConnection>scm:git:peterdiei@bitbucket.org:centricgatewayteam/seerbit-java-library.git</developerConnection>
+        <developerConnection>scm:git:peterdiei@bitbucket.org:centricgatewayteam/seerbit-java-library.git
+        </developerConnection>
         <url>peterdiei@gbitbucket.org:centricgatewayteam/seerbit-java-library.git</url>
     </scm>
     <profiles>
@@ -52,7 +54,7 @@
                 <gpg.useagent>true</gpg.useagent>
                 <!-- gpg-plugin defaults to trying 'gpg' on the path, this changes that to 'gpg2' instead -->
                 <gpg.executable>gpg2</gpg.executable>
-                <gpg.passphrase>centricgateway@</gpg.passphrase> 
+                <gpg.passphrase>centricgateway@</gpg.passphrase>
                 <javadoc.opts>-Xdoclint:none</javadoc.opts>
             </properties>
             <build>
@@ -109,7 +111,7 @@
                                 </goals>
                             </execution>
                         </executions>
-                    </plugin>      
+                    </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-site-plugin</artifactId>
@@ -125,7 +127,7 @@
                                 </plugin>
                             </reportPlugins>
                         </configuration>
-                    </plugin>           
+                    </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
@@ -139,6 +141,11 @@
         </profile>
     </profiles>
     <dependencies>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.2.1.Final</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -173,6 +180,11 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
         </dependency>
     </dependencies>
 </project>
