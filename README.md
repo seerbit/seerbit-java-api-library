@@ -88,14 +88,9 @@ Instantiate a client and set the parameters. Then perform service authentication
    
 ```
 
-To initiate a transaction request you need to perform a transaction authentication. 
+After retrieving your token following authentication proceed to pass it to the AccountServiceImpl constructor along with your client object. You can then construct your payload and call the <code>doAuthorize()</code> method of the AccountServiceImpl class.
 
-```java
-    TransactionAuthenticationImpl authService = new TransactionAuthenticationImpl(client);
-    JsonObject response = authService.doAuth();
-```
 
-Then retrieve your token after authenticating and pass it to the CardService constructor along with your client object. You can then construct your payload and call the <code>doAuthorize()</code> method of the CardService class.
 ```java
    AccountService accountService;
    Account account;
@@ -137,6 +132,7 @@ Then retrieve your token after authenticating and pass it to the CardService con
    	System.out.println(exception.getMessage());
    }
     
+   System.out.println("response: " + response.toString());
    System.out.println("================== stop account authorization ==================");
 ``` 
 
