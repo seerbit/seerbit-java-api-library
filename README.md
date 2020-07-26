@@ -6,11 +6,11 @@
 
 <h1 align="center">
   <img width="40" valign="bottom" src="https://res.cloudinary.com/dcksdncso/image/upload/v1579682633/java_f2iyuf.png">
-  seerbit-java-v1
+  seerbit-java-v2
 </h1>
 
 <h4 align="center">
-  A Seerbit API Library for Java (Version 1)
+  A Seerbit API Library for Java (Version 2)
 </h4>
 
 ## Features
@@ -46,7 +46,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.seerbit</groupId>
   <artifactId>seerbit-java-api</artifactId>
-  <version>1.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 
@@ -59,21 +59,33 @@ You can contribute to this repository so that anyone can benefit from it:
 
 ## Examples  
 
-You can also check the [src/main/java/com/seerbit/demo](https://github.com/seerbit/seerbit-java-v1/tree/master/src/main/java/com/seerbit/demo) folder in this repository for more examples of usage.
+You can also check the [src/main/java/com/seerbit/demo](https://github.com/seerbit/seerbit-java-v2/tree/master/src/main/java/com/seerbit/demo) folder in this repository for more examples of usage.
 
 ## Using the Library
 
-<strong><h4>Initiate Card Transaction</h4></strong>
-Instantiate a client and set the parameters.
+<strong><h4>Initiate Account Transaction</h4></strong>
+Instantiate a client and set the parameters. Then perform service authentication by instantiating the authentication service object and passing the client to it in its constructor. Retrieve your token by calling the <code>getToken()</code> method.
 
 ```java
-    Seerbit seerbitApp = new SeerbitImpl();
-    Client client = new Client();
-    client.setAPIBase(seerbitApp.getApiBase());
-    client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
-    client.setPublicKey("public_key");
-    client.setPrivateKey("private_key");
-    client.setTimeout(20);
+   Seerbit seerbit;
+   String token;
+   AuthenticationService authService;
+   JsonObject json;
+   String jsonString;
+    
+   seerbit = new SeerbitImpl();
+   client = new Client();
+   client.setApiBase(seerbit.getApiBase());
+   client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
+   client.setPublicKey("public_key");
+   client.setPrivateKey("private_key");
+   client.setTimeout(20);
+   authService = new AuthenticationServiceImpl(client);
+   json = authService.doAuth();
+   jsonString = String.format("auth response: \n%s", json.toString());
+    		
+   token = authService.getToken();
+   
 ```
 
 To initiate a transaction request you need to perform a transaction authentication. 
@@ -85,38 +97,47 @@ To initiate a transaction request you need to perform a transaction authenticati
 
 Then retrieve your token after authenticating and pass it to the CardService constructor along with your client object. You can then construct your payload and call the <code>doAuthorize()</code> method of the CardService class.
 ```java
-    String token = authService.getToken();
-  
-    CardService cardService = new CardServiceImpl(client, token);
-
-    CardDetail cardDetail = new CardDetail();
-    cardDetail.setCvv("100");
-    cardDetail.setNumber("5123450000000008");
-    cardDetail.setExpiryMonth("05");
-    cardDetail.setExpiryYear("21");
-    cardDetail.setPin("1234");
-
-    Card card = new Card();
-    card.setFullname("Sambo Chukwuma Adetutu");
-    card.setPublicKey(client.getConfig().getPublicKey());
-    card.setTransactionReference("trx00001");
-    card.setEmail("sambo@example.com");
-    card.setMobile("08012345678");
-    card.setChannelType("account");
-    card.setDeviceType("Nokia 3310");
-    card.setSourceIP("127.0.0.20");
-    card.setType("3DSECURE");
-    card.setCurrency("NGN");
-    card.setDescription("put a descriptive message here");
-    card.setCountry("NG");
-    card.setFee("1.00");
-    card.setAmount("150.00");
-    card.setClientAppCode("appl");
-    card.setCallbackUrl("http://www.example.com");
-    card.setRedirectUrl("http://www.example.com");
-    card.setCardDetail(cardDetail);
-
-    JsonObject json = cardService.doAuthorize(card);
+   AccountService accountService;
+   Account account;
+   JsonObject response;
+    
+   response = new JsonObject();
+    
+   System.out.println("================== start account authorization ==================");
+    
+   try {
+   	accountService = new AccountServiceImpl(client, token);
+   	account = new Account();
+   	account.setFullName("Musa Chukwuma Adetutu");
+   	account.setEmail("musa@example.com");
+   	account.setMobileNumber("08012345678");
+   	account.setPublicKey(client.getConfig().getPublicKey());
+   	account.setChannelType("BANK_ACCOUNT");
+   	account.setDeviceType("nokia 33");
+   	account.setSourceIP("1.0.1.0");
+   	account.setPaymentReference("trx0001");
+   	account.setCurrency("NGN");
+   	account.setProductDescription("put a description here");
+   	account.setProductId("Foods");
+   	account.setCountry("NG");
+   	account.setFee("1.00");
+   	account.setAmount("100.00");
+   	account.setClientAppCode("app1");
+   	account.setRedirectUrl("http://www.example.com");
+   	account.setAccountName("Diei Okechukwu Peter");
+   	account.setAccountNumber("2213132677");
+   	account.setBankCode("057");
+   	account.setBvn("22912882998");
+   	account.setRetry("false");
+   	account.setInvoiceNumber("1234567891abc123ac");
+   	account.setDateOfBirth("09-08-1909");
+   	account.setPaymentType("ACCOUNT");
+   	response = accountService.doAuthorize(account);
+   } catch (JsonSyntaxException exception) {
+   	System.out.println(exception.getMessage());
+   }
+    
+   System.out.println("================== stop account authorization ==================");
 ``` 
 
 Find more examples [here](https://github.com/seerbit/seerbit-java-v1/tree/master/src/main/java/com/seerbit/demo).
