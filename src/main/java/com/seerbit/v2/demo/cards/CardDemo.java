@@ -47,6 +47,10 @@ public class CardDemo {
 
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
+	private static String doAuthentication() {
+		return "";
+	}
+
 	public static void doCardDemo() {
 		String token;
 		AuthenticationService authService;

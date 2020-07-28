@@ -69,7 +69,7 @@ public class AccountAuthorizeDemo {
 	 *
 	 * @return response (com.google.gson.JsonObject)
 	 */
-	static JsonObject doAuthorize(String token) {
+	private static JsonObject doAuthorize(String token) {
 		AccountService accountService;
 		Account account;
 		JsonObject response;

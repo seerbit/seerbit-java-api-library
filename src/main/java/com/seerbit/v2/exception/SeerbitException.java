@@ -49,8 +49,10 @@ public class SeerbitException extends RuntimeException {
 			errorMessage = String.format("%s: %s", response.get("message").toString(), response.get("errorCode").toString());
 			log.error(errorMessage);
 			throw new SeerbitException(response.get("message").getAsString());
+		} else if (response.has("message")) {
+			throw new SeerbitException(response.get("message").getAsString());
+		} else {
+			throw new SeerbitException("Unknown Error");
 		}
-
-		throw new SeerbitException(response.get("message").getAsString());
 	}
 }
