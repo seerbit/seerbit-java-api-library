@@ -1,7 +1,5 @@
 package com.seerbit.v2.enums;
 
-import com.seerbit.v2.exception.SeerbitException;
-
 public enum AuthType {
 
 	BEARER("Bearer "), BASIC("Basic ");

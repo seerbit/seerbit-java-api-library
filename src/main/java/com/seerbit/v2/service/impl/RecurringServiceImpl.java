@@ -51,6 +51,7 @@ public class RecurringServiceImpl extends ServiceImpl implements RecurringServic
 	 *
 	 * @return response
 	 */
+	@Override
 	public JsonObject doCreateSubscription(Subscription subscriptionPayload) {
 		ObjectMapper mapper;
 		Map<String, Object> payload;
@@ -70,6 +71,7 @@ public class RecurringServiceImpl extends ServiceImpl implements RecurringServic
 	 *
 	 * @return response
 	 */
+	@Override
 	public JsonObject getCustomerSubscriptions(String publicKey, String customerId) {
 		String endpointURL;
 
@@ -86,6 +88,7 @@ public class RecurringServiceImpl extends ServiceImpl implements RecurringServic
 	 *
 	 * @return response
 	 */
+	@Override
 	public JsonObject doUpdateSubscription(Subscription subscriptionPayload) {
 		ObjectMapper mapper;
 		Map<String, Object> payload;
@@ -104,6 +107,7 @@ public class RecurringServiceImpl extends ServiceImpl implements RecurringServic
 	 *
 	 * @return response
 	 */
+	@Override
 	public JsonObject getMerchantSubscriptions(String publicKey) {
 		String endpointURL;
 
@@ -120,6 +124,7 @@ public class RecurringServiceImpl extends ServiceImpl implements RecurringServic
 	 *
 	 * @return response
 	 */
+	@Override
 	public JsonObject doRecurringDebit(RecurringDebit recurringDebitPayload) {
 		ObjectMapper mapper;
 		Map<String, Object> payload;

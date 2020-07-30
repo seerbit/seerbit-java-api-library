@@ -179,6 +179,7 @@ public class Client {
 			case "bearer ":
 			case "basic ":
 				config.put("authenticationScheme", authenticationScheme);
+				break;
 			default:
 				throw new SeerbitException("Invalid authentication scheme");
 		}

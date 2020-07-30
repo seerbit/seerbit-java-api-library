@@ -106,7 +106,7 @@ After retrieving your token following authentication proceed to pass it to the A
    	account.setFullName("Musa Chukwuma Adetutu");
    	account.setEmail("musa@example.com");
    	account.setMobileNumber("08012345678");
-   	account.setPublicKey(client.getConfig().getPublicKey());
+   	account.setPublicKey(client.getPublicKey());
    	account.setChannelType("BANK_ACCOUNT");
    	account.setDeviceType("nokia 33");
    	account.setSourceIP("1.0.1.0");

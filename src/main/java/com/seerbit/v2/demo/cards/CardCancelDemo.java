@@ -22,7 +22,7 @@ import com.seerbit.v2.Seerbit;
 import com.seerbit.v2.enums.AuthType;
 import com.seerbit.v2.enums.EnvironmentEnum;
 import com.seerbit.v2.impl.SeerbitImpl;
-import com.seerbit.v2.model.CardPayment;
+import com.seerbit.v2.model.PaymentCancel;
 import com.seerbit.v2.service.AuthenticationService;
 import com.seerbit.v2.service.CardService;
 import com.seerbit.v2.service.impl.AuthenticationServiceImpl;
@@ -31,7 +31,7 @@ import com.seerbit.v2.service.impl.CardServiceImpl;
 /**
  * @author Seerbit
  */
-public class CardAuthorizeDemo {
+public class CardCancelDemo {
 
 	private static Client client;
 
@@ -40,44 +40,21 @@ public class CardAuthorizeDemo {
 	 *
 	 * @return response
 	 */
-	private static JsonObject doCardAuthorize(final String token) {
+	private static JsonObject doCardCancelPayment(final String token) {
 		CardService cardService;
-		CardPayment cardPayment;
+		PaymentCancel paymentCancel;
 		JsonObject response;
 
-		System.out.println("================== start card authorize ==================");
+		System.out.println("================== start card cancel ==================");
 		cardService = new CardServiceImpl(client, token);
-		cardPayment = CardPayment
-			.builder()
-			.cvv("100")
-			.cardNumber("5123450000000008")
-			.expiryMonth("05")
-			.expiryYear("21")
-			.pin("1234")
-			.fullName("Aminu Grod")
-			.publicKey(client.getPublicKey())
-			.paymentReference("trx0001")
-			.email("demo@example.com")
-			.mobileNumber("08012345678")
-			.channelType("Mastercard")
-			.deviceType("Nokia 3310")
-			.sourceIP("127.0.0.20")
-			.currency("NGN")
-			.retry("false")
-			.invoiceNumber("1234567890abc123ac")
-			.productDescription("demo")
-			.country("NG")
-			.fee("1.00")
-			.amount("150.00")
-			.clientAppCode("appl")
-			.redirectUrl("http://www.example.com")
-			.productId("Foods")
-			.invoiceNumber("1234567890abc123ac")
-			.retry("false")
-			.type("3DSECURE")
-			.build();
-		response = cardService.doAuthorize(cardPayment);
-		System.out.println("================== end card authorize ==================");
+		paymentCancel = new PaymentCancel();
+
+		paymentCancel.setPublicKey(client.getPublicKey());
+		paymentCancel.setPaymentReference("trx0001");
+		paymentCancel.setCountry("NG");
+		paymentCancel.setProductDescription("Foods");
+		response = cardService.doPaymentCancel(paymentCancel);
+		System.out.println("================== start card cancel ==================");
 
 		return response;
 	}
@@ -101,7 +78,7 @@ public class CardAuthorizeDemo {
 		client.setAuthenticationScheme(AuthType.BASIC.getType());
 		authService = new AuthenticationServiceImpl(client);
 		token = authService.getBasicAuthorizationEncodedString();
-		response = CardAuthorizeDemo.doCardAuthorize(token);
-		System.out.println("card authorize response: " + response.toString());
+		response = CardCancelDemo.doCardCancelPayment(token);
+		System.out.println("card cancel response: " + response.toString());
 	}
 }

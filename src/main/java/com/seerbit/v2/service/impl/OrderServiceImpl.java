@@ -50,6 +50,7 @@ public class OrderServiceImpl extends ServiceImpl implements OrderService, Clien
 	 *
 	 * @return response
 	 */
+	@Override
 	public JsonObject doAuthorize(Order orderPayload) {
 		ObjectMapper mapper;
 		Map<String, Object> payload;

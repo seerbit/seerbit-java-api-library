@@ -78,7 +78,7 @@ public class MobileMoneyDemo {
 		mobileMoney = new MobileMoney();
 		mobileMoney.setFullName("john doe");
 		mobileMoney.setMobileNumber("08030540611");
-		mobileMoney.setPublicKey(client.getConfig().getPublicKey());
+		mobileMoney.setPublicKey(client.getPublicKey());
 		mobileMoney.setPaymentReference("1233448383278");
 		mobileMoney.setDeviceType("Nokia 3310");
 		mobileMoney.setSourceIP("1.0.1.0");

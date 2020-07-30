@@ -73,6 +73,7 @@ public class Card3dsDemo {
 		CardService cardService;
 		CardPayment cardPayment;
 
+		System.out.println("================== start card 3ds charge ==================");
 		cardPayment = CardPayment
 			.builder()
 			.publicKey(client.getPublicKey())
@@ -102,6 +103,7 @@ public class Card3dsDemo {
 			.build();
 		cardService = new CardServiceImpl(client, token);
 		response = cardService.doPaymentCharge3DS(cardPayment);
+		System.out.println("================== end card 3ds charge ==================");
 
 		return response;
 	}

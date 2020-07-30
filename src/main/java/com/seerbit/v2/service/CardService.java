@@ -83,6 +83,13 @@ public interface CardService {
 	 *
 	 * @return JsonObject
 	 */
+	JsonObject doTokenize(CardPayment paymentCharge);
+
+	/**
+	 * @param paymentCharge A non-optional class, the payload
+	 *
+	 * @return JsonObject
+	 */
 	JsonObject doPaymentCharge3DS(CardPayment paymentCharge);
 
 	/**

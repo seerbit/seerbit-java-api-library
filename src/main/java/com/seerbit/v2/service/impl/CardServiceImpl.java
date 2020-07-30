@@ -159,11 +159,28 @@ public class CardServiceImpl extends ServiceImpl implements CardService, ClientC
 	 *
 	 * @return response
 	 */
+	@Override
 	public JsonObject doPaymentChargeNon3D(CardPayment cardPaymentPayload) {
 		this.requiresToken = true;
 		mapper = new ObjectMapper();
 		payload = mapper.convertValue(cardPaymentPayload, Map.class);
 		response = this.postRequest(PAYMENT_CHARGE_ENDPOINT, payload, token);
+		return response;
+	}
+
+	/**
+	 * POST /api/v2/payments/tokenize
+	 *
+	 * @param cardPaymentPayload A non-optional class, the payload
+	 *
+	 * @return response
+	 */
+	@Override
+	public JsonObject doTokenize(CardPayment cardPaymentPayload) {
+		this.requiresToken = true;
+		mapper = new ObjectMapper();
+		payload = mapper.convertValue(cardPaymentPayload, Map.class);
+		response = this.postRequest(TOKENIZATION_ENDPOINT, payload, token);
 		return response;
 	}
 
@@ -174,6 +191,7 @@ public class CardServiceImpl extends ServiceImpl implements CardService, ClientC
 	 *
 	 * @return response
 	 */
+	@Override
 	public JsonObject doPaymentCharge3DS(CardPayment cardPaymentPayload) {
 		this.requiresToken = true;
 		mapper = new ObjectMapper();
@@ -189,6 +207,7 @@ public class CardServiceImpl extends ServiceImpl implements CardService, ClientC
 	 *
 	 * @return response
 	 */
+	@Override
 	public JsonObject doPaymentCharge3D(CardPayment cardPaymentPayload) {
 		this.requiresToken = true;
 		mapper = new ObjectMapper();
