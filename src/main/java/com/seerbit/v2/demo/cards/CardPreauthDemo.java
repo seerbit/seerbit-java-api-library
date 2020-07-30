@@ -22,8 +22,11 @@ import com.seerbit.v2.Seerbit;
 import com.seerbit.v2.enums.AuthType;
 import com.seerbit.v2.enums.EnvironmentEnum;
 import com.seerbit.v2.impl.SeerbitImpl;
+import com.seerbit.v2.model.CardPreAuth;
 import com.seerbit.v2.service.AuthenticationService;
+import com.seerbit.v2.service.CardService;
 import com.seerbit.v2.service.impl.AuthenticationServiceImpl;
+import com.seerbit.v2.service.impl.CardServiceImpl;
 
 /**
  * @author Seerbit
@@ -32,6 +35,40 @@ public class CardPreauthDemo {
 
 	private static Client client;
 
+	/**
+	 * @param token token (java.lang.String)
+	 *
+	 * @return response
+	 */
+	private static JsonObject doCardPreauth(String token) {
+		CardPreAuth cardPreauth;
+		CardService cardService;
+		JsonObject response;
+
+		System.out.println("================== start card pre-auth ==================");
+		cardPreauth = new CardPreAuth();
+		cardPreauth.setPaymentReference("SBT20939282829");
+		cardPreauth.setPublicKey(client.getPublicKey());
+		cardPreauth.setCardNumber("5123450000000008");
+		cardPreauth.setCvv("100");
+		cardPreauth.setExpiryMonth("05");
+		cardPreauth.setExpiryYear("21");
+		cardPreauth.setCurrency("KES");
+		cardPreauth.setCountry("KE");
+		cardPreauth.setProductDescription("Foods");
+		cardPreauth.setAmount("100.00");
+		cardPreauth.setEmail("okechukwu.diei2@gmail.com");
+		cardPreauth.setFullName("Diei Okechukwu Peter");
+		cardService = new CardServiceImpl(client, token);
+		response = cardService.doPreauthAuthorization(cardPreauth);
+		System.out.println("================== start card pre-auth ==================");
+
+		return response;
+	}
+
+	/**
+	 * @param args String arguments array for main function
+	 */
 	public static void main(String... args) {
 		String token;
 		Seerbit seerbit;
@@ -48,6 +85,7 @@ public class CardPreauthDemo {
 		client.setAuthenticationScheme(AuthType.BASIC.getType());
 		authService = new AuthenticationServiceImpl(client);
 		token = authService.getBasicAuthorizationEncodedString();
-		// todo
+		response = CardPreauthDemo.doCardPreauth(token);
+		System.out.println("card authorize response: " + response.toString());
 	}
 }
