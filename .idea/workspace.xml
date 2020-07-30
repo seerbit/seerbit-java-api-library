@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a19abc76-a53c-49bd-a9a6-1641f6c06670" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/mobile_money/MobileMoneyNetworksDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/orders/OrdersDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/resources/GetBanksDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/OrderDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/OrderDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/resources/GetBanksDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/resources/GetBanksDemo.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,8 +43,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/mobile_money/MobileMoneyNetworksDemo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="614">
-              <caret line="90" column="4" lean-forward="true" selection-start-line="33" selection-start-column="3" selection-end-line="90" selection-end-column="4" />
+            <state relative-caret-position="791">
+              <caret line="63" column="4" lean-forward="true" selection-start-line="63" selection-start-column="4" selection-end-line="63" selection-end-column="4" />
               <folding>
                 <element signature="e#0#3581#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -60,8 +56,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/resources/GetBanksDemo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="724">
-              <caret line="81" column="58" lean-forward="true" selection-start-line="81" selection-start-column="58" selection-end-line="81" selection-end-column="58" />
+            <state relative-caret-position="552">
+              <caret line="88" column="40" selection-start-line="88" selection-start-column="40" selection-end-line="88" selection-end-column="40" />
               <folding>
                 <element signature="e#0#2431#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -73,8 +69,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/orders/OrdersDemo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="35" selection-end-column="3" />
+            <state relative-caret-position="67">
+              <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
               <folding>
                 <element signature="e#0#2012#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -507,7 +503,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1596146535142" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1596146541922" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="/usr/local/bin/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Java" />
@@ -627,12 +623,12 @@
       <workItem from="1596122443628" duration="714000" />
       <workItem from="1596123449172" duration="53000" />
       <workItem from="1596123556056" duration="1445000" />
-      <workItem from="1596139883656" duration="6500000" />
+      <workItem from="1596139883656" duration="6649000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="149546000" />
+    <option name="totallyTimeSpent" value="149695000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="832" extended-state="6" />
@@ -1146,8 +1142,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/mobile_money/MobileMoneyNetworksDemo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="614">
-          <caret line="90" column="4" lean-forward="true" selection-start-line="33" selection-start-column="3" selection-end-line="90" selection-end-column="4" />
+        <state relative-caret-position="791">
+          <caret line="63" column="4" lean-forward="true" selection-start-line="63" selection-start-column="4" selection-end-line="63" selection-end-column="4" />
           <folding>
             <element signature="e#0#3581#0" expanded="true" />
             <element signature="imports" expanded="true" />
@@ -1157,8 +1153,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/orders/OrdersDemo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="35" selection-end-column="3" />
+        <state relative-caret-position="67">
+          <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
           <folding>
             <element signature="e#0#2012#0" expanded="true" />
             <element signature="imports" expanded="true" />
@@ -1168,8 +1164,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/resources/GetBanksDemo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="724">
-          <caret line="81" column="58" lean-forward="true" selection-start-line="81" selection-start-column="58" selection-end-line="81" selection-end-column="58" />
+        <state relative-caret-position="552">
+          <caret line="88" column="40" selection-start-line="88" selection-start-column="40" selection-end-line="88" selection-end-column="40" />
           <folding>
             <element signature="e#0#2431#0" expanded="true" />
             <element signature="imports" expanded="true" />

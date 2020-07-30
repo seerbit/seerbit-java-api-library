@@ -68,7 +68,7 @@ public class GetBanksDemo {
 	 *
 	 * @return response
 	 */
-	private static JsonObject doGetBankNetworks(String token) {
+	private static JsonObject doGetBanks(String token) {
 		ResourceService resourceService;
 		JsonObject response;
 
@@ -86,7 +86,7 @@ public class GetBanksDemo {
 		JsonObject response;
 
 		token = GetBanksDemo.doAuthenticate();
-		response = GetBanksDemo.doGetBankNetworks(token);
+		response = GetBanksDemo.doGetBanks(token);
 		System.out.println("get bank list response: " + response.toString());
 	}
 }
