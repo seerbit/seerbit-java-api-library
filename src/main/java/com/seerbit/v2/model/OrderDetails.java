@@ -30,7 +30,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-class OrderDetails implements Serializable {
+public class OrderDetails implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
