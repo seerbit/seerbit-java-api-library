@@ -61,8 +61,6 @@ public class SeerbitException extends RuntimeException {
 			throw new SeerbitException(response.get("message").getAsString());
 		} else if (response.has("message")) {
 			throw new SeerbitException(response.get("message").getAsString());
-		} else {
-			throw new SeerbitException("Unknown Error");
 		}
 	}
 }
