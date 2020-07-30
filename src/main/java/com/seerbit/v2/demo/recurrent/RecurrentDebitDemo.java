@@ -14,22 +14,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.seerbit.v2.demo.resources;
+package com.seerbit.v2.demo.recurrent;
 
 import com.google.gson.JsonObject;
 import com.seerbit.v2.Client;
 import com.seerbit.v2.Seerbit;
 import com.seerbit.v2.enums.EnvironmentEnum;
 import com.seerbit.v2.impl.SeerbitImpl;
+import com.seerbit.v2.model.RecurringDebit;
 import com.seerbit.v2.service.AuthenticationService;
-import com.seerbit.v2.service.ResourceService;
+import com.seerbit.v2.service.RecurringService;
 import com.seerbit.v2.service.impl.AuthenticationServiceImpl;
-import com.seerbit.v2.service.impl.ResourceServiceImpl;
+import com.seerbit.v2.service.impl.RecurringServiceImpl;
 
 /**
  * @author Seerbit
  */
-public class GetBanksDemo {
+public class RecurrentDebitDemo {
 
 	private static Client client;
 
@@ -68,14 +69,24 @@ public class GetBanksDemo {
 	 *
 	 * @return response
 	 */
-	private static JsonObject doGetBanks(String token) {
-		ResourceService resourceService;
+	private static JsonObject doRecurringDebit(String token) {
+		RecurringService recurringService;
+		RecurringDebit recurringDebit;
 		JsonObject response;
 
-		System.out.println("================== start get banks ==================");
-		resourceService = new ResourceServiceImpl(client, token);
-		response = resourceService.getBankList(client.getPublicKey());
-		System.out.println("================== stop get banks ==================");
+		System.out.println("================== start recurring debit ==================");
+		recurringDebit = RecurringDebit
+			.builder()
+			.amount("20")
+			.email("okechukwu.diei2@gmail.com")
+			.paymentReference("SBT2ssu292988j2h")
+			.currency("NGN")
+			.publicKey(client.getPublicKey())
+			.authorizationCode("1234567898765325")
+			.build();
+		recurringService = new RecurringServiceImpl(client, token);
+		response = recurringService.doRecurringDebit(recurringDebit);
+		System.out.println("================== end recurring debit ==================");
 
 		return response;
 	}
@@ -87,8 +98,8 @@ public class GetBanksDemo {
 		String token;
 		JsonObject response;
 
-		token = GetBanksDemo.doAuthenticate();
-		response = GetBanksDemo.doGetBanks(token);
-		System.out.println("get bank list response: " + response.toString());
+		token = RecurrentDebitDemo.doAuthenticate();
+		response = RecurrentDebitDemo.doRecurringDebit(token);
+		System.out.println("get recurring debit response: " + response.toString());
 	}
 }

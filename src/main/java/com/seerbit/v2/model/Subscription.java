@@ -60,4 +60,5 @@ public class Subscription implements Serializable {
 	private String billingPeriod;
 	private String billingId;
 	private String status;
+	private boolean subscriptionAmount;
 }

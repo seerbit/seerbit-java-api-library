@@ -14,22 +14,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.seerbit.v2.demo.resources;
+package com.seerbit.v2.demo.recurrent;
 
 import com.google.gson.JsonObject;
 import com.seerbit.v2.Client;
 import com.seerbit.v2.Seerbit;
 import com.seerbit.v2.enums.EnvironmentEnum;
 import com.seerbit.v2.impl.SeerbitImpl;
+import com.seerbit.v2.model.Subscription;
 import com.seerbit.v2.service.AuthenticationService;
-import com.seerbit.v2.service.ResourceService;
+import com.seerbit.v2.service.RecurringService;
 import com.seerbit.v2.service.impl.AuthenticationServiceImpl;
-import com.seerbit.v2.service.impl.ResourceServiceImpl;
+import com.seerbit.v2.service.impl.RecurringServiceImpl;
 
 /**
  * @author Seerbit
  */
-public class GetBanksDemo {
+public class CreateRecurrentDemo {
 
 	private static Client client;
 
@@ -68,14 +69,38 @@ public class GetBanksDemo {
 	 *
 	 * @return response
 	 */
-	private static JsonObject doGetBanks(String token) {
-		ResourceService resourceService;
+	private static JsonObject doCreateSubscription(String token) {
+		RecurringService recurringService;
+		Subscription subscription;
 		JsonObject response;
 
-		System.out.println("================== start get banks ==================");
-		resourceService = new ResourceServiceImpl(client, token);
-		response = resourceService.getBankList(client.getPublicKey());
-		System.out.println("================== stop get banks ==================");
+		System.out.println("================== start create subscription ==================");
+		subscription = Subscription
+			.builder()
+			.amount("20")
+			.billingCycle("DAILY")
+			.billingPeriod("4")
+			.callbackUrl("https://checkout.seerbitapi.com")
+			.cardName("Bola Olat")
+			.cardNumber("2223000000000007")
+			.country("KE")
+			.currency("KES")
+			.cvv("100")
+			.email("okechukwu.diei2@gmail.com")
+			.expiryMonth("05")
+			.expiryYear("21")
+			.mobileNumber("08030540611")
+			.paymentReference("SBT2272727182827788172")
+			.planId("")
+			.publicKey(client.getPublicKey())
+			.startDate("2019-01-11")
+			.productDescription("Test Token")
+			.productId("Terrain")
+			.subscriptionAmount(false)
+			.build();
+		recurringService = new RecurringServiceImpl(client, token);
+		response = recurringService.doCreateSubscription(subscription);
+		System.out.println("================== end create subscription ==================");
 
 		return response;
 	}
@@ -87,8 +112,8 @@ public class GetBanksDemo {
 		String token;
 		JsonObject response;
 
-		token = GetBanksDemo.doAuthenticate();
-		response = GetBanksDemo.doGetBanks(token);
-		System.out.println("get bank list response: " + response.toString());
+		token = CreateRecurrentDemo.doAuthenticate();
+		response = CreateRecurrentDemo.doCreateSubscription(token);
+		System.out.println("get create subscription response: " + response.toString());
 	}
 }

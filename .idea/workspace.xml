@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a19abc76-a53c-49bd-a9a6-1641f6c06670" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/status/GetTransactionStatusDemo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/recurrent/CreateRecurrentDemo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/recurrent/GetCustomerDemo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/recurrent/GetMerchantDemo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/recurrent/RecurrentDebitDemo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/resources/GetBanksDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/resources/GetBanksDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/CardPreAuth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/CardPreAuth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/MobileMoney.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/MobileMoney.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/RecurringDebit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/RecurringDebit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/Subscription.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/Subscription.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,50 +38,12 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/config/Config.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="25" column="3" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
-              <folding>
-                <element signature="e#0#1359#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/mobile_money/MobileMoneyNetworksDemo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="83" column="44" lean-forward="true" selection-start-line="83" selection-start-column="44" selection-end-line="83" selection-end-column="44" />
-              <folding>
-                <element signature="e#0#3581#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/orders/OrdersDemo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-436">
-              <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#2012#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/resources/GetBanksDemo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-506">
-              <caret line="14" column="10" lean-forward="true" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+            <state relative-caret-position="1071">
+              <caret line="77" column="59" selection-start-line="77" selection-start-column="59" selection-end-line="77" selection-end-column="59" />
               <folding>
+                <element signature="e#0#2793#0" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
@@ -80,12 +51,38 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/status/GetSubscriptionStatusDemo.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/recurrent/CreateRecurrentDemo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="449">
-              <caret line="77" column="44" selection-start-line="77" selection-start-column="44" selection-end-line="77" selection-end-column="44" />
+            <state relative-caret-position="228">
+              <caret line="76" column="92" lean-forward="true" selection-start-line="76" selection-start-column="6" selection-end-line="76" selection-end-column="92" />
               <folding>
-                <element signature="e#0#3186#0" expanded="true" />
+                <element signature="e#0#2814#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/recurrent/RecurrentDebitDemo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="558">
+              <caret line="103" column="4" lean-forward="true" selection-start-line="93" selection-start-column="3" selection-end-line="103" selection-end-column="4" />
+              <folding>
+                <element signature="e#0#3716#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/recurrent/GetCustomerDemo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="372">
+              <caret line="76" column="67" lean-forward="true" selection-start-line="76" selection-start-column="67" selection-end-line="76" selection-end-column="67" />
+              <folding>
+                <element signature="e#0#759#0" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
@@ -93,12 +90,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/status/GetTransactionStatusDemo.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/recurrent/GetMerchantDemo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="562">
-              <caret line="94" column="41" selection-start-line="94" selection-start-column="41" selection-end-line="94" selection-end-column="41" />
+            <state relative-caret-position="526">
+              <caret line="77" column="61" selection-start-line="77" selection-start-column="61" selection-end-line="77" selection-end-column="61" />
               <folding>
-                <element signature="e#0#3183#0" expanded="true" />
+                <element signature="e#0#3142#0" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
@@ -106,28 +103,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/config/impl/ConfigImpl.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/RecurringDebit.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-240">
-              <caret line="46" selection-start-line="46" selection-end-line="46" />
+            <state relative-caret-position="199">
+              <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
               <folding>
-                <element signature="e#0#2276#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-                <element signature="e#1708#1709#0" expanded="true" />
-                <element signature="e#1799#1800#0" expanded="true" />
-                <element signature="e#1968#1969#0" expanded="true" />
-                <element signature="e#2006#2007#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/cards/CardPreauthDemo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-12">
-              <caret line="11" column="11" lean-forward="true" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-              <folding>
+                <element signature="e#0#2033#0" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
@@ -135,26 +116,39 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/mobile_money/MobileMoneyDemo.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/MobileMoney.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="57" column="9" selection-start-line="57" selection-start-column="9" selection-end-line="57" selection-end-column="9" />
-              <folding>
-                <element signature="e#0#3557#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="101">
+              <caret line="23" selection-start-line="23" selection-end-line="23" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/account/AccountAuthorizeDemo.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/CardPreAuth.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="30" column="3" selection-start-line="30" selection-start-column="3" selection-end-line="30" selection-end-column="3" />
+            <state relative-caret-position="112">
+              <caret line="23" selection-start-line="23" selection-end-line="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/Order.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="35">
+              <caret line="24" selection-start-line="24" selection-end-line="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/Subscription.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="599">
+              <caret line="61" column="21" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
               <folding>
-                <element signature="e#0#4291#0" expanded="true" />
-                <element signature="imports" expanded="true" />
+                <element signature="e#0#1851#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -185,6 +179,8 @@
       <find>NotEmpty</find>
       <find>paymentType</find>
       <find>card</find>
+      <find>authorizationCode</find>
+      <find>javax.validation.constraints.Email;</find>
     </findStrings>
     <replaceStrings>
       <replace>config</replace>
@@ -193,9 +189,11 @@
       <replace>System.out.println</replace>
       <replace>NotBlank</replace>
       <replace>cardPayment</replace>
+      <replace>org.hibernate.validation.constraints.Email</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src</dir>
+      <dir>$PROJECT_DIR$</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -204,11 +202,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/service/AccountService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/service/CardService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/service/MobileMoneyService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/service/OrderService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/service/RefundService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/service/RecurringService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/service/ResourceService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/service/Service.java" />
@@ -219,14 +212,10 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/RequestValidator.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/Account.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/CardPreAuth.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/MobileMoney.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/Order.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/Otp.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/PaymentCancel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/PaymentCapture.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/PaymentRefund.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/RecurringDebit.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/TransactionDetail.java" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/cards/CardDemo.java" />
@@ -243,7 +232,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/CardPayment.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/OrderDetails.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/status/GetSubscriptionStatusDemo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/resources/GetBanksDemo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/orders/OrdersDemo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/mobile_money/MobileMoneyNetworksDemo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/mobile_money/MobileMoneyDemo.java" />
@@ -255,6 +243,16 @@
         <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/config/Config.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/config/impl/ConfigImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/status/GetTransactionStatusDemo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/resources/GetBanksDemo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/Subscription.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/recurrent/CreateRecurrentDemo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/recurrent/RecurrentDebitDemo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/RecurringDebit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/MobileMoney.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/CardPreAuth.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/Order.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/recurrent/GetCustomerDemo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/recurrent/GetMerchantDemo.java" />
       </list>
     </option>
   </component>
@@ -393,6 +391,16 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="v2" type="462c0819:PsiDirectoryNode" />
               <item name="demo" type="462c0819:PsiDirectoryNode" />
+              <item name="recurrent" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="seerbit-java-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SeerbitAPIJavaSDK" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="v2" type="462c0819:PsiDirectoryNode" />
+              <item name="demo" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -518,13 +526,14 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1596147653676" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1596150310267" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="/usr/local/bin/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Java" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.seerbit.v2.demo.recurrent" />
       <recent name="com.seerbit.v2.demo.status" />
       <recent name="com.seerbit.v2.demo.mobile_money" />
       <recent name="com.seerbit.v2.service.impl" />
@@ -543,7 +552,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.AccountAuthorizeDemo">
+  <component name="RunManager" selected="Application.RecurrentDebitDemo">
     <configuration name="AccountAuthorizeDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.seerbit.v2.demo.account.AccountAuthorizeDemo" />
       <module name="seerbit-java-api" />
@@ -583,8 +592,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RecurrentDebitDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.seerbit.v2.demo.recurrent.RecurrentDebitDemo" />
+      <module name="seerbit-java-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.seerbit.v2.demo.recurrent.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.RecurrentDebitDemo" />
         <item itemvalue="Application.AccountAuthorizeDemo" />
         <item itemvalue="Application.AccountOtpDemo" />
         <item itemvalue="Application.CardPreauthDemo" />
@@ -639,12 +662,12 @@
       <workItem from="1596122443628" duration="714000" />
       <workItem from="1596123449172" duration="53000" />
       <workItem from="1596123556056" duration="1445000" />
-      <workItem from="1596139883656" duration="7595000" />
+      <workItem from="1596139883656" duration="10262000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="150641000" />
+    <option name="totallyTimeSpent" value="153308000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="832" extended-state="6" />
@@ -665,7 +688,7 @@
       <window_info anchor="bottom" id="Docker" order="4" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="5" />
       <window_info anchor="bottom" id="Find" order="6" weight="0.32587412" />
-      <window_info anchor="bottom" id="Run" order="7" weight="0.3277311" />
+      <window_info anchor="bottom" id="Run" order="7" weight="0.32635984" />
       <window_info anchor="bottom" id="Debug" order="8" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
@@ -695,69 +718,16 @@
           <properties />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/recurrent/CreateRecurrentDemo.java</url>
+          <line>34</line>
+          <properties field="client" class="com.seerbit.v2.demo.recurrent.CreateRecurrentDemo" />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="-274">
-            <caret line="90" column="97" selection-start-line="90" selection-start-column="97" selection-end-line="90" selection-end-column="97" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/RecurringDebit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="45" column="23" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/PaymentRefund.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="27" column="18" lean-forward="true" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/TransactionDetail.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="28" column="18" lean-forward="true" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/old/CentricGateway/src/java/com/cgw/core/dash/persist/MerchantPersistence.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2628">
-          <folding>
-            <element signature="e#0#16601#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/Subscription.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="38" column="51" lean-forward="true" selection-start-line="38" selection-start-column="51" selection-end-line="38" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#1851#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/PaymentCancel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-117">
@@ -821,16 +791,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="25" column="3" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/MobileMoney.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1023,28 +983,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/CardPreAuth.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-91">
-          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#2575#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/Order.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
-          <caret line="74" column="37" selection-start-line="74" selection-start-column="11" selection-end-line="74" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#2325#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/OrderDetails.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
@@ -1136,7 +1074,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/cards/CardPreauthDemo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-12">
-          <caret line="11" column="11" lean-forward="true" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1157,7 +1095,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/mobile_money/MobileMoneyNetworksDemo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
-          <caret line="83" column="44" lean-forward="true" selection-start-line="83" selection-start-column="44" selection-end-line="83" selection-end-column="44" />
+          <caret line="83" column="44" selection-start-line="83" selection-start-column="44" selection-end-line="83" selection-end-column="44" />
           <folding>
             <element signature="e#0#3581#0" expanded="true" />
             <element signature="imports" expanded="true" />
@@ -1165,19 +1103,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/resources/GetBanksDemo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-506">
-          <caret line="14" column="10" lean-forward="true" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/status/GetSubscriptionStatusDemo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
+        <state relative-caret-position="641">
           <caret line="77" column="44" selection-start-line="77" selection-start-column="44" selection-end-line="77" selection-end-column="44" />
           <folding>
             <element signature="e#0#3186#0" expanded="true" />
@@ -1188,10 +1116,107 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/status/GetTransactionStatusDemo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="562">
-          <caret line="94" column="41" selection-start-line="94" selection-start-column="41" selection-end-line="94" selection-end-column="41" />
+        <state relative-caret-position="492">
+          <caret line="90" selection-start-line="90" selection-end-line="90" />
           <folding>
             <element signature="e#0#3183#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/MobileMoney.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="101">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/CardPreAuth.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/Order.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="35">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/Subscription.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="599">
+          <caret line="61" column="21" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#1851#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/model/RecurringDebit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#2033#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/resources/GetBanksDemo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1071">
+          <caret line="77" column="59" selection-start-line="77" selection-start-column="59" selection-end-line="77" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#2793#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/recurrent/RecurrentDebitDemo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="103" column="4" lean-forward="true" selection-start-line="93" selection-start-column="3" selection-end-line="103" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#3716#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/recurrent/CreateRecurrentDemo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="76" column="92" lean-forward="true" selection-start-line="76" selection-start-column="6" selection-end-line="76" selection-end-column="92" />
+          <folding>
+            <element signature="e#0#2814#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/recurrent/GetCustomerDemo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="76" column="67" lean-forward="true" selection-start-line="76" selection-start-column="67" selection-end-line="76" selection-end-column="67" />
+          <folding>
+            <element signature="e#0#759#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seerbit/v2/demo/recurrent/GetMerchantDemo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="526">
+          <caret line="77" column="61" selection-start-line="77" selection-start-column="61" selection-end-line="77" selection-end-column="61" />
+          <folding>
+            <element signature="e#0#3142#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>

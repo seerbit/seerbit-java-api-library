@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.seerbit.v2.demo.resources;
+package com.seerbit.v2.demo.recurrent;
 
 import com.google.gson.JsonObject;
 import com.seerbit.v2.Client;
@@ -22,14 +22,14 @@ import com.seerbit.v2.Seerbit;
 import com.seerbit.v2.enums.EnvironmentEnum;
 import com.seerbit.v2.impl.SeerbitImpl;
 import com.seerbit.v2.service.AuthenticationService;
-import com.seerbit.v2.service.ResourceService;
+import com.seerbit.v2.service.RecurringService;
 import com.seerbit.v2.service.impl.AuthenticationServiceImpl;
-import com.seerbit.v2.service.impl.ResourceServiceImpl;
+import com.seerbit.v2.service.impl.RecurringServiceImpl;
 
 /**
  * @author Seerbit
  */
-public class GetBanksDemo {
+public class GetCustomerDemo {
 
 	private static Client client;
 
@@ -68,14 +68,14 @@ public class GetBanksDemo {
 	 *
 	 * @return response
 	 */
-	private static JsonObject doGetBanks(String token) {
-		ResourceService resourceService;
+	private static JsonObject getCustomerSubscription(String token, String customerId) {
 		JsonObject response;
+		RecurringService recurringService;
 
-		System.out.println("================== start get banks ==================");
-		resourceService = new ResourceServiceImpl(client, token);
-		response = resourceService.getBankList(client.getPublicKey());
-		System.out.println("================== stop get banks ==================");
+		System.out.println("================== start get customer subscription ==================");
+		recurringService = new RecurringServiceImpl(client, token);
+		response = recurringService.getCustomerSubscriptions(client.getPublicKey(), customerId);
+		System.out.println("================== end get customer subscription ==================");
 
 		return response;
 	}
@@ -85,10 +85,12 @@ public class GetBanksDemo {
 	 */
 	public static void main(String... args) {
 		String token;
+		String customerId;
 		JsonObject response;
 
-		token = GetBanksDemo.doAuthenticate();
-		response = GetBanksDemo.doGetBanks(token);
-		System.out.println("get bank list response: " + response.toString());
+		token = GetCustomerDemo.doAuthenticate();
+		customerId = "ESH227277";
+		response = GetCustomerDemo.getCustomerSubscription(token, customerId);
+		System.out.println("get recurring customer data response: " + response.toString());
 	}
 }
