@@ -21,9 +21,11 @@ import com.seerbit.v2.Client;
 import com.seerbit.v2.ClientConstants;
 import com.seerbit.v2.NumericConstants;
 import com.seerbit.v2.config.Config;
+import com.seerbit.v2.exception.SeerbitException;
 import com.seerbit.v2.service.AuthenticationService;
 import com.seerbit.v2.util.Utility;
 
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -57,8 +59,31 @@ public class AuthenticationServiceImpl extends ServiceImpl implements Authentica
 		key = config.getPrivateKey() + "." + config.getPublicKey();
 		payload = new HashMap<>(MIN_SIZE);
 		payload.put("key", key);
+
 		response = this.postRequest(AUTHENTICATION_ENDPOINT, payload, null);
 		return response;
+	}
+
+	/**
+	 * @return basic authentication String
+	 */
+	public String getBasicAuthorizationEncodedString() {
+		String authorizationString;
+		String authenticationScheme;
+
+		client = this.getClient();
+		authenticationScheme = client.getAuthenticationScheme();
+
+		switch (authenticationScheme.toLowerCase()) {
+			case "basic ":
+			case "bearer ":
+				break;
+			default:
+				throw new SeerbitException("Set authentication scheme to basic before calling this method");
+		}
+
+		authorizationString = client.getPublicKey() + ":" + client.getPrivateKey();
+		return Base64.getEncoder().encodeToString(authorizationString.getBytes());
 	}
 
 	/**

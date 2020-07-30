@@ -22,16 +22,67 @@ import com.seerbit.v2.Seerbit;
 import com.seerbit.v2.enums.AuthType;
 import com.seerbit.v2.enums.EnvironmentEnum;
 import com.seerbit.v2.impl.SeerbitImpl;
+import com.seerbit.v2.model.CardPayment;
 import com.seerbit.v2.service.AuthenticationService;
+import com.seerbit.v2.service.CardService;
 import com.seerbit.v2.service.impl.AuthenticationServiceImpl;
+import com.seerbit.v2.service.impl.CardServiceImpl;
 
 /**
  * @author Seerbit
  */
-public class CardPreauthDemo {
+public class CardAuthorizeDemo {
 
 	private static Client client;
 
+	/**
+	 * @param token token (java.lang.String)
+	 *
+	 * @return response
+	 */
+	private static JsonObject doCardAuthorize(final String token) {
+		CardService cardService;
+		CardPayment cardPayment;
+		JsonObject response;
+
+		cardService = new CardServiceImpl(client, token);
+		cardPayment = CardPayment
+			.builder()
+			.cvv("100")
+			.cardNumber("5123450000000008")
+			.expiryMonth("05")
+			.expiryYear("21")
+			.pin("1234")
+			.fullName("Aminu Grod")
+			.publicKey(client.getConfig().getPublicKey())
+			.paymentReference("trx0001")
+			.email("demo@example.com")
+			.mobileNumber("08012345678")
+			.channelType("Mastercard")
+			.deviceType("Nokia 3310")
+			.sourceIP("127.0.0.20")
+			.currency("NGN")
+			.retry("false")
+			.invoiceNumber("1234567890abc123ac")
+			.productDescription("demo")
+			.country("NG")
+			.fee("1.00")
+			.amount("150.00")
+			.clientAppCode("appl")
+			.redirectUrl("http://www.example.com")
+			.productId("Foods")
+			.invoiceNumber("1234567890abc123ac")
+			.retry("false")
+			.type("3DSECURE")
+			.build();
+		response = cardService.doAuthorize(cardPayment);
+
+		return response;
+	}
+
+	/**
+	 * @param args String arguments array for main function
+	 */
 	public static void main(String... args) {
 		String token;
 		Seerbit seerbit;
@@ -48,6 +99,7 @@ public class CardPreauthDemo {
 		client.setAuthenticationScheme(AuthType.BASIC.getType());
 		authService = new AuthenticationServiceImpl(client);
 		token = authService.getBasicAuthorizationEncodedString();
-		// todo
+		response = CardAuthorizeDemo.doCardAuthorize(token);
+		System.out.println("card authorize response: " + response.toString());
 	}
 }

@@ -37,6 +37,7 @@ public interface ClientConstants {
 	String PAYMENT_REFUND_ENDPOINT = "api/v2/payments/refund";
 	String PAYMENT_CANCEL_ENDPOINT = "api/v2/payments/cancel";
 	String PAYMENT_CHARGE_ENDPOINT = "api/v2/payments/charge";
+	String TOKENIZATION_ENDPOINT = "api/v2/payments/tokenize";
 
 	//refunds
 	String REFUND_ENDPOINT = "merchants/api/v1/user/%s/refunds";

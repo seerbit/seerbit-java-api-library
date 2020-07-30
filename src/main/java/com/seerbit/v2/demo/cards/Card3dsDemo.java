@@ -14,23 +14,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.seerbit.v2.demo.mobile_money;
+package com.seerbit.v2.demo.cards;
 
 import com.google.gson.JsonObject;
 import com.seerbit.v2.Client;
 import com.seerbit.v2.Seerbit;
 import com.seerbit.v2.enums.EnvironmentEnum;
 import com.seerbit.v2.impl.SeerbitImpl;
-import com.seerbit.v2.model.MobileMoney;
+import com.seerbit.v2.model.CardPayment;
 import com.seerbit.v2.service.AuthenticationService;
-import com.seerbit.v2.service.MobileMoneyService;
+import com.seerbit.v2.service.CardService;
 import com.seerbit.v2.service.impl.AuthenticationServiceImpl;
-import com.seerbit.v2.service.impl.MobileMoneyServiceImpl;
+import com.seerbit.v2.service.impl.CardServiceImpl;
 
 /**
- * @author centricgateway
+ * @author Seerbit
  */
-public class MobileMoneyDemo {
+public class Card3dsDemo {
 
 	private static Client client;
 
@@ -60,38 +60,48 @@ public class MobileMoneyDemo {
 		System.out.println("\n");
 		System.out.println("\n");
 		token = authService.getToken();
-
 		return token;
 	}
 
 	/**
-	 * @param token (java.lang.String)
+	 * @param token token (java.lang.String)
 	 *
 	 * @return response
 	 */
-	private static JsonObject doMobileMoneyPayment(String token) {
-		MobileMoney mobileMoney;
-		MobileMoneyService mobileMoneyService;
+	private static JsonObject doCard3dsCharge(String token) {
 		JsonObject response;
+		CardService cardService;
+		CardPayment cardPayment;
 
-		mobileMoneyService = new MobileMoneyServiceImpl(client, token);
-		mobileMoney = new MobileMoney();
-		mobileMoney.setFullName("john doe");
-		mobileMoney.setMobileNumber("08030540611");
-		mobileMoney.setPublicKey(client.getConfig().getPublicKey());
-		mobileMoney.setPaymentReference("1233448383278");
-		mobileMoney.setDeviceType("Nokia 3310");
-		mobileMoney.setSourceIP("1.0.1.0");
-		mobileMoney.setCurrency("UGX");
-		mobileMoney.setProductDescription("snacks");
-		mobileMoney.setCountry("UG");
-		mobileMoney.setFee("1.00");
-		mobileMoney.setNetwork("MTN");
-		mobileMoney.setVoucherCode("");
-		mobileMoney.setAmount("10.01");
-		mobileMoney.setProductId("grocery");
-		mobileMoney.setPaymentType("MOMO");
-		response = mobileMoneyService.doAuthorize(mobileMoney);
+		cardPayment = CardPayment
+			.builder()
+			.publicKey(client.getPublicKey())
+			.amount("1000.00")
+			.fee("10.00")
+			.fullName("Victor Ighalo")
+			.mobileNumber("08032000033")
+			.currency("NGN")
+			.country("NG")
+			.paymentReference("SBT1237473728")
+			.email("johndoe@gmail.com")
+			.productId("Foods")
+			.productDescription("Test Description")
+			.clientAppCode("kpp64")
+			.redirectUrl("www.ser1.com")
+			.channelType("Mastercard")
+			.deviceType("Apple Laptop")
+			.sourceIP("127.0.0.1:3456")
+			.cardNumber("5123450000000008")
+			.cvv("100")
+			.expiryMonth("05")
+			.expiryYear("21")
+			.pin("####")
+			.retry("false")
+			.paymentType("CARD")
+			.invoiceNumber("1234567890abc123ac")
+			.build();
+		cardService = new CardServiceImpl(client, token);
+		response = cardService.doPaymentCharge3DS(cardPayment);
 
 		return response;
 	}
@@ -103,8 +113,8 @@ public class MobileMoneyDemo {
 		String token;
 		JsonObject response;
 
-		token = MobileMoneyDemo.doAuthenticate();
-		response = MobileMoneyDemo.doMobileMoneyPayment(token);
-		System.out.println("mobile money authorize response: " + response.toString());
+		token = Card3dsDemo.doAuthenticate();
+		response = Card3dsDemo.doCard3dsCharge(token);
+		System.out.println("card 3ds response: " + response.toString());
 	}
 }

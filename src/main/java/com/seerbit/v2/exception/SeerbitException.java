@@ -44,9 +44,19 @@ public class SeerbitException extends RuntimeException {
 	 */
 	public static void handleException(final JsonObject response) {
 		String errorMessage;
+		String status;
 
-		if (response.has("message") && response.has("errorCode")) {
-			errorMessage = String.format("%s: %s", response.get("message").toString(), response.get("errorCode").toString());
+		if (response.has("status") && response.has("data")) {
+			status = response.get("status").getAsString();
+
+			if (status.equalsIgnoreCase("error")) {
+				throw new SeerbitException(response.get("data").getAsJsonObject().get("message").getAsString());
+			}
+
+		}
+
+		if (response.has("message") && response.has("error")) {
+			errorMessage = String.format("%s: %s", response.get("message").toString(), response.get("error").toString());
 			log.error(errorMessage);
 			throw new SeerbitException(response.get("message").getAsString());
 		} else if (response.has("message")) {

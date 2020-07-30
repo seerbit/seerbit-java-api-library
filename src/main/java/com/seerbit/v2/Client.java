@@ -39,6 +39,7 @@ public class Client {
 	public Client() {
 		config = new ConfigImpl();
 		config.put("version", ClientConstants.VERSION_TWO);
+		config.put("authenticationScheme", "Bearer ");
 	}
 
 	/**
@@ -46,6 +47,7 @@ public class Client {
 	 */
 	public Client(final String version) {
 		config = new ConfigImpl();
+		config.put("authenticationScheme", "Bearer ");
 
 		if ("1.0.1".equals(version)) {
 			config.put("version", ClientConstants.VERSION_TWO);
@@ -149,7 +151,7 @@ public class Client {
 	/**
 	 * @return apiBase
 	 */
-	public String setApiBase() {
+	public String getApiBase() {
 		return String.valueOf(config.get("apiBase"));
 	}
 
@@ -158,5 +160,28 @@ public class Client {
 	 */
 	public void setTimeout(final int timeout) {
 		config.put("timeout", timeout);
+	}
+
+	/**
+	 *
+	 * @return authenticationScheme A non-optional String, the authentication scheme
+	 */
+	public String getAuthenticationScheme() {
+		return String.valueOf(config.get("authenticationScheme"));
+	}
+
+	/**
+	 * @param authenticationScheme A non-optional String, the authentication scheme
+	 */
+	public void setAuthenticationScheme(final String authenticationScheme) {
+
+		switch(authenticationScheme.toLowerCase()) {
+			case "bearer ":
+			case "basic ":
+				config.put("authenticationScheme", authenticationScheme);
+			default:
+				throw new SeerbitException("Invalid authentication scheme");
+		}
+
 	}
 }

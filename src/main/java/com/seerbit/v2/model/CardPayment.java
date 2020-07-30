@@ -39,6 +39,7 @@ public class CardPayment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String publicKey;
+	private String paymentType;
 	private String amount;
 	private String fee;
 	private String fullName;
@@ -47,6 +48,7 @@ public class CardPayment implements Serializable {
 	private String country;
 	private String paymentReference;
 	private String email;
+	private String cardToken;
 	private String productId;
 	private String productDescription;
 	private String clientAppCode;
@@ -61,4 +63,5 @@ public class CardPayment implements Serializable {
 	private String pin;
 	private String retry;
 	private String invoiceNumber;
+	private String type;
 }

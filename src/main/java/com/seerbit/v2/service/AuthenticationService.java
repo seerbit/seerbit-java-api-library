@@ -32,4 +32,10 @@ public interface AuthenticationService extends Service {
 	 * @return String
 	 */
 	String getToken();
+
+	/**
+	 *
+	 * @return String
+	 */
+	String getBasicAuthorizationEncodedString();
 }

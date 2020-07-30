@@ -82,6 +82,7 @@ public class HttpClientImpl implements HttpClient, NumericConstants {
 		Config config;
 		String requestBody;
 		StringEntity entity;
+		String authenticationScheme;
 		String authenticationString;
 		String responseBody;
 		Object[] result;
@@ -103,7 +104,16 @@ public class HttpClientImpl implements HttpClient, NumericConstants {
 				if (Objects.isNull(token) || token.length() < MIN_SIZE) {
 					throw new ConnectionException("Please provide an authentication token.");
 				} else {
-					authenticationString = String.format("Bearer %s", token);
+					authenticationScheme = service.getClient().getAuthenticationScheme();
+
+					if (authenticationScheme.equalsIgnoreCase("basic ")) {
+						authenticationString = String.format("Basic %s", token);
+					} else if (authenticationScheme.equalsIgnoreCase("bearer ")) {
+						authenticationString = String.format("Bearer %s", token);
+					} else {
+						throw new SeerbitException("Invalid Authentication Scheme");
+					}
+
 					postRequest.setHeader("Authorization", authenticationString);
 				}
 
@@ -146,6 +156,8 @@ public class HttpClientImpl implements HttpClient, NumericConstants {
 		Config config;
 		String requestBody;
 		StringEntity entity;
+		String authenticationScheme;
+		String authenticationString;
 		Object[] result;
 		String responseBody;
 
@@ -166,7 +178,16 @@ public class HttpClientImpl implements HttpClient, NumericConstants {
 				if (Objects.isNull(token) || token.length() < MIN_SIZE) {
 					throw new ConnectionException("Please provide an authentication token.");
 				} else {
-					String authenticationString = String.format("Bearer %s", token);
+					authenticationScheme = service.getClient().getAuthenticationScheme();
+
+					if (authenticationScheme.equalsIgnoreCase("basic ")) {
+						authenticationString = String.format("Basic %s", token);
+					} else if (authenticationScheme.equalsIgnoreCase("bearer ")) {
+						authenticationString = String.format("Bearer %s", token);
+					} else {
+						throw new SeerbitException("Invalid Authentication Scheme");
+					}
+
 					putRequest.setHeader("Authorization", authenticationString);
 				}
 
@@ -206,6 +227,7 @@ public class HttpClientImpl implements HttpClient, NumericConstants {
 		Object[] result;
 		String authenticationString;
 		String responseBody;
+		String authenticationScheme;
 
 		try {
 			client = service.getClient();
@@ -218,7 +240,16 @@ public class HttpClientImpl implements HttpClient, NumericConstants {
 				if (Objects.isNull(token) || token.length() < MIN_SIZE) {
 					throw new ConnectionException("Please provide an authentication token.");
 				} else {
-					authenticationString = String.format("Bearer %s", token);
+					authenticationScheme = service.getClient().getAuthenticationScheme();
+
+					if (authenticationScheme.equalsIgnoreCase("basic ")) {
+						authenticationString = String.format("Basic %s", token);
+					} else if (authenticationScheme.equalsIgnoreCase("bearer ")) {
+						authenticationString = String.format("Bearer %s", token);
+					} else {
+						throw new SeerbitException("Invalid Authentication Scheme");
+					}
+
 					getRequest.setHeader("Authorization", authenticationString);
 				}
 
