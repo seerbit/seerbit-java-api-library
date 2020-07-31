@@ -49,7 +49,6 @@ public class CardTokenizeDemo {
 		cardPayment = CardPayment
 			.builder()
 			.publicKey(client.getPublicKey())
-			.amount("1000.00")
 			.fullName("Victor Ighalo")
 			.mobileNumber("08032000033")
 			.currency("KES")
