@@ -52,7 +52,9 @@ public class CardCaptureDemo {
 		paymentCapture.setPublicKey(client.getPublicKey());
 		paymentCapture.setPaymentReference("trx0001");
 		paymentCapture.setCountry("NG");
+		paymentCapture.setCurrency("NGN");
 		paymentCapture.setProductDescription("Foods");
+		paymentCapture.setAmount("1.00");
 		response = cardService.doPaymentCapture(paymentCapture);
 		System.out.println("================== start card capture ==================");
 

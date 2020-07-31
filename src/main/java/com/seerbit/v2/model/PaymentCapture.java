@@ -57,8 +57,4 @@ public class PaymentCapture implements Serializable {
 	@NotBlank(message = "\"amount\" cannot be blank")
 	@NotNull(message = "\"amount\" cannot be null")
 	private String amount;
-
-	@NotBlank(message = "\"captureDelayHours\" cannot be blank")
-	@NotNull(message = "\"captureDelayHours\" cannot be null")
-	private String captureDelayHours;
 }
