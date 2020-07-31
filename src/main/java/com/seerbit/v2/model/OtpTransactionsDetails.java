@@ -16,7 +16,6 @@
  */
 package com.seerbit.v2.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,21 +25,20 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
- * @author Seerbit
+ * @author centricgateway
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransactionDetail implements Serializable {
+public class OtpTransactionsDetails implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@JsonProperty("linkingreference")
-	@NotNull(message = "\"linkingreference\" cannot be null")
 	@NotBlank(message = "\"linkingreference\" cannot be blank")
-	private String linkingReference;
+	@NotNull(message = "\"linkingreference\" cannot be null")
+	private String linkingreference;
 
-	@NotNull(message = "\"otp\" cannot be null")
 	@NotBlank(message = "\"otp\" cannot be blank")
+	@NotNull(message = "\"otp\" cannot be null")
 	private String otp;
 }

@@ -19,10 +19,10 @@ package com.seerbit.v2.service;
 import com.google.gson.JsonObject;
 import com.seerbit.v2.model.CardPayment;
 import com.seerbit.v2.model.CardPreAuth;
+import com.seerbit.v2.model.OtpCard;
 import com.seerbit.v2.model.PaymentCancel;
 import com.seerbit.v2.model.PaymentCapture;
 import com.seerbit.v2.model.PaymentRefund;
-import com.seerbit.v2.model.Transaction;
 
 /**
  * @author Seerbit
@@ -37,11 +37,11 @@ public interface CardService {
 	JsonObject doAuthorize(CardPayment card);
 
 	/**
-	 * @param transaction A non-optional class, the payload
+	 * @param otpCard A non-optional class, the payload
 	 *
 	 * @return JsonObject
 	 */
-	JsonObject doValidate(Transaction transaction);
+	JsonObject doValidate(OtpCard otpCard);
 
 	/**
 	 * @param cardPreAuth A non-optional class, the payload

@@ -22,7 +22,8 @@ import com.seerbit.v2.Seerbit;
 import com.seerbit.v2.enums.AuthType;
 import com.seerbit.v2.enums.EnvironmentEnum;
 import com.seerbit.v2.impl.SeerbitImpl;
-import com.seerbit.v2.model.PaymentCancel;
+import com.seerbit.v2.model.OtpCard;
+import com.seerbit.v2.model.OtpTransactionsDetails;
 import com.seerbit.v2.service.AuthenticationService;
 import com.seerbit.v2.service.CardService;
 import com.seerbit.v2.service.impl.AuthenticationServiceImpl;
@@ -31,7 +32,7 @@ import com.seerbit.v2.service.impl.CardServiceImpl;
 /**
  * @author Seerbit
  */
-public class CardCancelDemo {
+public class CardValidateOtpDemo {
 
 	private static Client client;
 
@@ -40,20 +41,21 @@ public class CardCancelDemo {
 	 *
 	 * @return response
 	 */
-	private static JsonObject doCardCancelPayment(final String token) {
+	private static JsonObject doValidateOtp(final String token) {
 		CardService cardService;
-		PaymentCancel paymentCancel;
+		OtpCard otpCard;
+		OtpTransactionsDetails otpTransactionsDetails;
 		JsonObject response;
 
-		System.out.println("================== start card cancel ==================");
+		System.out.println("================== start card validate 2FA ==================");
 		cardService = new CardServiceImpl(client, token);
-		paymentCancel = new PaymentCancel();
-		paymentCancel.setPublicKey(client.getPublicKey());
-		paymentCancel.setPaymentReference("trx0001");
-		paymentCancel.setCountry("NG");
-		paymentCancel.setProductDescription("Foods");
-		response = cardService.doPaymentCancel(paymentCancel);
-		System.out.println("================== start card cancel ==================");
+		otpCard = new OtpCard();
+		otpTransactionsDetails = new OtpTransactionsDetails();
+		otpTransactionsDetails.setLinkingreference("F2372727771772882727");
+		otpTransactionsDetails.setOtp("273736");
+		otpCard.setTransactions(otpTransactionsDetails);
+		response = cardService.doValidate(otpCard);
+		System.out.println("================== start card validate 2FA ==================");
 
 		return response;
 	}
@@ -77,7 +79,7 @@ public class CardCancelDemo {
 		client.setAuthenticationScheme(AuthType.BASIC.getType());
 		authService = new AuthenticationServiceImpl(client);
 		token = authService.getBasicAuthorizationEncodedString();
-		response = CardCancelDemo.doCardCancelPayment(token);
-		System.out.println("card cancel response: " + response.toString());
+		response = CardValidateOtpDemo.doValidateOtp(token);
+		System.out.println("card validate 2FA response: " + response.toString());
 	}
 }

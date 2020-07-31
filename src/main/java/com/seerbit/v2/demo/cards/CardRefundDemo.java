@@ -22,7 +22,7 @@ import com.seerbit.v2.Seerbit;
 import com.seerbit.v2.enums.AuthType;
 import com.seerbit.v2.enums.EnvironmentEnum;
 import com.seerbit.v2.impl.SeerbitImpl;
-import com.seerbit.v2.model.PaymentCancel;
+import com.seerbit.v2.model.PaymentRefund;
 import com.seerbit.v2.service.AuthenticationService;
 import com.seerbit.v2.service.CardService;
 import com.seerbit.v2.service.impl.AuthenticationServiceImpl;
@@ -31,7 +31,7 @@ import com.seerbit.v2.service.impl.CardServiceImpl;
 /**
  * @author Seerbit
  */
-public class CardCancelDemo {
+public class CardRefundDemo {
 
 	private static Client client;
 
@@ -40,20 +40,22 @@ public class CardCancelDemo {
 	 *
 	 * @return response
 	 */
-	private static JsonObject doCardCancelPayment(final String token) {
+	private static JsonObject doCardRefundPayment(final String token) {
 		CardService cardService;
-		PaymentCancel paymentCancel;
+		PaymentRefund paymentRefund;
 		JsonObject response;
 
-		System.out.println("================== start card cancel ==================");
+		System.out.println("================== start card refund ==================");
 		cardService = new CardServiceImpl(client, token);
-		paymentCancel = new PaymentCancel();
-		paymentCancel.setPublicKey(client.getPublicKey());
-		paymentCancel.setPaymentReference("trx0001");
-		paymentCancel.setCountry("NG");
-		paymentCancel.setProductDescription("Foods");
-		response = cardService.doPaymentCancel(paymentCancel);
-		System.out.println("================== start card cancel ==================");
+		paymentRefund = new PaymentRefund();
+		paymentRefund.setPublicKey(client.getPublicKey());
+		paymentRefund.setPaymentReference("trx0001");
+		paymentRefund.setCountry("NG");
+		paymentRefund.setCurrency("NGN");
+		paymentRefund.setProductDescription("Foods");
+		paymentRefund.setAmount("1.00");
+		response = cardService.doPaymentRefund(paymentRefund);
+		System.out.println("================== start card refund ==================");
 
 		return response;
 	}
@@ -77,7 +79,7 @@ public class CardCancelDemo {
 		client.setAuthenticationScheme(AuthType.BASIC.getType());
 		authService = new AuthenticationServiceImpl(client);
 		token = authService.getBasicAuthorizationEncodedString();
-		response = CardCancelDemo.doCardCancelPayment(token);
-		System.out.println("card cancel response: " + response.toString());
+		response = CardRefundDemo.doCardRefundPayment(token);
+		System.out.println("card refund response: " + response.toString());
 	}
 }

@@ -48,7 +48,6 @@ public class CardCaptureDemo {
 		System.out.println("================== start card capture ==================");
 		cardService = new CardServiceImpl(client, token);
 		paymentCapture = new PaymentCapture();
-
 		paymentCapture.setPublicKey(client.getPublicKey());
 		paymentCapture.setPaymentReference("trx0001");
 		paymentCapture.setCountry("NG");

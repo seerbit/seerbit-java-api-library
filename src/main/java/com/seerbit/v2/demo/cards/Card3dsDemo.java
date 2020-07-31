@@ -96,7 +96,7 @@ public class Card3dsDemo {
 			.cvv("100")
 			.expiryMonth("05")
 			.expiryYear("21")
-			.pin("####")
+			.pin("1234")
 			.retry("false")
 			.paymentType("CARD")
 			.invoiceNumber("1234567890abc123ac")

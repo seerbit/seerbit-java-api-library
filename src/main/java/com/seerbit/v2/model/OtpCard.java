@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 centricgateway
+ * Copyright (C) 2020 Seerbit
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,15 +24,15 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
- * @author centricgateway
+ * @author Seerbit
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Transaction implements Serializable {
+public class OtpCard implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@NotNull(message = "\"transaction\" cannot be null")
-	private TransactionDetail transaction;
+	@NotNull(message = "\"transactions\" cannot be null")
+	private OtpTransactionsDetails transactions;
 }

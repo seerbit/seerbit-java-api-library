@@ -86,6 +86,6 @@ public class CardPreauthDemo {
 		authService = new AuthenticationServiceImpl(client);
 		token = authService.getBasicAuthorizationEncodedString();
 		response = CardPreauthDemo.doCardPreauth(token);
-		System.out.println("card authorize response: " + response.toString());
+		System.out.println("card pre-auth response: " + response.toString());
 	}
 }

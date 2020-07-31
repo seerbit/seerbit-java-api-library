@@ -23,10 +23,10 @@ import com.seerbit.v2.ClientConstants;
 import com.seerbit.v2.RequestValidator;
 import com.seerbit.v2.model.CardPayment;
 import com.seerbit.v2.model.CardPreAuth;
+import com.seerbit.v2.model.OtpCard;
 import com.seerbit.v2.model.PaymentCancel;
 import com.seerbit.v2.model.PaymentCapture;
 import com.seerbit.v2.model.PaymentRefund;
-import com.seerbit.v2.model.Transaction;
 import com.seerbit.v2.service.CardService;
 import com.seerbit.v2.util.Utility;
 
@@ -68,18 +68,18 @@ public class CardServiceImpl extends ServiceImpl implements CardService, ClientC
 	}
 
 	/**
-	 * POST /api/v2/payments/validate
+	 * POST /api/v2/payments/otp
 	 *
-	 * @param transactionPayload A non-optional class, the payload
+	 * @param otpCard A non-optional class, the payload
 	 *
 	 * @return response
 	 */
 	@Override
-	public JsonObject doValidate(Transaction transactionPayload) {
+	public JsonObject doValidate(OtpCard otpCard) {
 		this.requiresToken = true;
-		RequestValidator.doValidate(transactionPayload);
+		RequestValidator.doValidate(otpCard);
 		mapper = new ObjectMapper();
-		payload = mapper.convertValue(transactionPayload, Map.class);
+		payload = mapper.convertValue(otpCard, Map.class);
 		response = this.postRequest(VALIDATE_CARD_PAYMENT_ENDPOINT, payload, token);
 		return response;
 	}

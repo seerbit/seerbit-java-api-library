@@ -22,7 +22,7 @@ import com.seerbit.v2.Seerbit;
 import com.seerbit.v2.enums.AuthType;
 import com.seerbit.v2.enums.EnvironmentEnum;
 import com.seerbit.v2.impl.SeerbitImpl;
-import com.seerbit.v2.model.PaymentCancel;
+import com.seerbit.v2.model.CardPayment;
 import com.seerbit.v2.service.AuthenticationService;
 import com.seerbit.v2.service.CardService;
 import com.seerbit.v2.service.impl.AuthenticationServiceImpl;
@@ -31,7 +31,7 @@ import com.seerbit.v2.service.impl.CardServiceImpl;
 /**
  * @author Seerbit
  */
-public class CardCancelDemo {
+public class CardNon3dDemo {
 
 	private static Client client;
 
@@ -40,20 +40,33 @@ public class CardCancelDemo {
 	 *
 	 * @return response
 	 */
-	private static JsonObject doCardCancelPayment(final String token) {
-		CardService cardService;
-		PaymentCancel paymentCancel;
+	private static JsonObject doCardNon3dCharge(String token) {
 		JsonObject response;
+		CardService cardService;
+		CardPayment cardPayment;
 
-		System.out.println("================== start card cancel ==================");
+		System.out.println("================== start card non-3d charge ==================");
+		cardPayment = CardPayment
+			.builder()
+			.publicKey(client.getPublicKey())
+			.amount("1000.00")
+			.fullName("Victor Ighalo")
+			.mobileNumber("08032000033")
+			.currency("KES")
+			.country("KE")
+			.paymentReference("SBT1237473728")
+			.email("johndoe@gmail.com")
+			.pin("1234")
+			.cardNumber("5123450000000008")
+			.cvv("100")
+			.expiryMonth("05")
+			.expiryYear("21")
+			.productId("Foods")
+			.productDescription("Test Description")
+			.build();
 		cardService = new CardServiceImpl(client, token);
-		paymentCancel = new PaymentCancel();
-		paymentCancel.setPublicKey(client.getPublicKey());
-		paymentCancel.setPaymentReference("trx0001");
-		paymentCancel.setCountry("NG");
-		paymentCancel.setProductDescription("Foods");
-		response = cardService.doPaymentCancel(paymentCancel);
-		System.out.println("================== start card cancel ==================");
+		response = cardService.doPaymentChargeNon3D(cardPayment);
+		System.out.println("================== end card non-3d charge ==================");
 
 		return response;
 	}
@@ -63,9 +76,9 @@ public class CardCancelDemo {
 	 */
 	public static void main(String... args) {
 		String token;
+		JsonObject response;
 		Seerbit seerbit;
 		AuthenticationService authService;
-		JsonObject response;
 
 		seerbit = new SeerbitImpl();
 		client = new Client();
@@ -77,7 +90,7 @@ public class CardCancelDemo {
 		client.setAuthenticationScheme(AuthType.BASIC.getType());
 		authService = new AuthenticationServiceImpl(client);
 		token = authService.getBasicAuthorizationEncodedString();
-		response = CardCancelDemo.doCardCancelPayment(token);
-		System.out.println("card cancel response: " + response.toString());
+		response = CardNon3dDemo.doCardNon3dCharge(token);
+		System.out.println("card non-3d response: " + response.toString());
 	}
 }
