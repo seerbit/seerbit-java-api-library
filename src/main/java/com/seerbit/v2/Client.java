@@ -163,7 +163,6 @@ public class Client {
 	}
 
 	/**
-	 *
 	 * @return authenticationScheme A non-optional String, the authentication scheme
 	 */
 	public String getAuthenticationScheme() {
@@ -174,11 +173,24 @@ public class Client {
 	 * @param authenticationScheme A non-optional String, the authentication scheme
 	 */
 	public void setAuthenticationScheme(final String authenticationScheme) {
+		String authScheme;
 
-		switch(authenticationScheme.toLowerCase()) {
+		authScheme = authenticationScheme.toLowerCase();
+
+		switch (authScheme) {
 			case "bearer ":
 			case "basic ":
-				config.put("authenticationScheme", authenticationScheme);
+			case "bearer":
+			case "basic":
+
+				switch (authScheme) {
+					case "bearer":
+					case "basic":
+						authScheme = authScheme + " ";
+						break;
+				}
+
+				config.put("authenticationScheme", authScheme);
 				break;
 			default:
 				throw new SeerbitException("Invalid authentication scheme");
