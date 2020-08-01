@@ -37,7 +37,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
 
@@ -119,13 +118,10 @@ public class HttpClientImpl implements HttpClient, NumericConstants {
 
 			}
 
-			System.out.println("Request headers to Seerbit: " + Arrays.toString(postRequest.getAllHeaders()));
 			result = this.request(postRequest);
 			response = (CloseableHttpResponse) result[0];
 			statusCode = Integer.parseInt(String.valueOf(result[1]));
 			responseBody = EntityUtils.toString(response.getEntity());
-			System.out.println(String.format("JsonResponse: %s", responseBody));
-
 			json = JsonParser.parseString(responseBody).getAsJsonObject();
 
 			if (statusCode < HTTP_STATUS_200 || statusCode > HTTP_STATUS_299 || Objects.isNull(response)) {
@@ -193,12 +189,10 @@ public class HttpClientImpl implements HttpClient, NumericConstants {
 
 			}
 
-			System.out.println("Request headers to Seerbit: " + Arrays.toString(putRequest.getAllHeaders()));
 			result = this.request(putRequest);
 			response = (CloseableHttpResponse) result[0];
 			statusCode = Integer.parseInt(String.valueOf(result[1]));
 			responseBody = EntityUtils.toString(response.getEntity());
-			System.out.println(String.format("JsonResponse: %s", responseBody));
 			json = JsonParser.parseString(responseBody).getAsJsonObject();
 
 			if (statusCode < HTTP_STATUS_200 || statusCode > HTTP_STATUS_299 || Objects.nonNull(response)) {
@@ -255,13 +249,10 @@ public class HttpClientImpl implements HttpClient, NumericConstants {
 
 			}
 
-			System.out.println("Request headers to Seerbit: " + Arrays.toString(getRequest.getAllHeaders()));
 			result = this.request(getRequest);
 			response = (CloseableHttpResponse) result[0];
 			statusCode = Integer.parseInt(String.valueOf(result[1]));
 			responseBody = EntityUtils.toString(response.getEntity());
-			System.out.println(String.format("JsonResponse: %s", responseBody));
-
 			json = JsonParser.parseString(responseBody).getAsJsonObject();
 
 			if (statusCode < HTTP_STATUS_200 || statusCode > HTTP_STATUS_299 || Objects.nonNull(response)) {

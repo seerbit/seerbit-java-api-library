@@ -67,11 +67,13 @@ You can also check the [src/main/java/com/seerbit/demo](https://github.com/seerb
 Instantiate a client and set the parameters. Then perform service authentication by instantiating the authentication service object and passing the client to it in its constructor. Retrieve your token by calling the <code>getToken()</code> method.
 
 ```java
+   // declare variables
    Seerbit seerbit;
    String token;
    AuthenticationService authService;
    JsonObject json;
    String jsonString;
+   Client client;
     
    seerbit = new SeerbitImpl();
    client = new Client();
@@ -95,44 +97,35 @@ After retrieving your token following authentication proceed to pass it to the A
    AccountService accountService;
    Account account;
    JsonObject response;
-    
-   response = new JsonObject();
-    
+   		
    System.out.println("================== start account authorization ==================");
-    
-   try {
-   	accountService = new AccountServiceImpl(client, token);
-   	account = new Account();
-   	account.setFullName("Musa Chukwuma Adetutu");
-   	account.setEmail("musa@example.com");
-   	account.setMobileNumber("08012345678");
-   	account.setPublicKey(client.getPublicKey());
-   	account.setChannelType("BANK_ACCOUNT");
-   	account.setDeviceType("nokia 33");
-   	account.setSourceIP("1.0.1.0");
-   	account.setPaymentReference("trx0001");
-   	account.setCurrency("NGN");
-   	account.setProductDescription("put a description here");
-   	account.setProductId("Foods");
-   	account.setCountry("NG");
-   	account.setFee("1.00");
-   	account.setAmount("100.00");
-   	account.setClientAppCode("app1");
-   	account.setRedirectUrl("http://www.example.com");
-   	account.setAccountName("Diei Okechukwu Peter");
-   	account.setAccountNumber("2213132677");
-   	account.setBankCode("057");
-   	account.setBvn("22912882998");
-   	account.setRetry("false");
-   	account.setInvoiceNumber("1234567891abc123ac");
-   	account.setDateOfBirth("09-08-1909");
-   	account.setPaymentType("ACCOUNT");
-   	response = accountService.doAuthorize(account);
-   } catch (JsonSyntaxException exception) {
-   	System.out.println(exception.getMessage());
-   }
-    
-   System.out.println("response: " + response.toString());
+   accountService = new AccountServiceImpl(client, token); // pass the client and token in the constructor
+   account = new Account();
+   account.setFullName("Musa Chukwuma Adetutu");
+   account.setEmail("musa@example.com");
+   account.setMobileNumber("08012345678");
+   account.setPublicKey(client.getPublicKey());
+   account.setChannelType("BANK_ACCOUNT");
+   account.setDeviceType("nokia 33");
+   account.setSourceIP("1.0.1.0");
+   account.setPaymentReference("trx0001");
+   account.setCurrency("NGN");
+   account.setProductDescription("put a description here");
+   account.setProductId("Foods");
+   account.setCountry("NG");
+   account.setFee("1.00");
+   account.setAmount("100.00");
+   account.setClientAppCode("app1");
+   account.setRedirectUrl("http://www.example.com");
+   account.setAccountName("Diei Okechukwu Peter");
+   account.setAccountNumber("2213132677");
+   account.setBankCode("057");
+   account.setBvn("22912882998");
+   account.setRetry("false");
+   account.setInvoiceNumber("1234567891abc123ac");
+   account.setDateOfBirth("01-01-2020");
+   account.setPaymentType("ACCOUNT");
+   response = accountService.doAuthorize(account);
    System.out.println("================== stop account authorization ==================");
 ``` 
 

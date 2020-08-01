@@ -16,10 +16,10 @@
  */
 package com.seerbit.v2.demo.cards;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.seerbit.v2.Client;
 import com.seerbit.v2.Seerbit;
-import com.seerbit.v2.enums.AuthType;
 import com.seerbit.v2.enums.EnvironmentEnum;
 import com.seerbit.v2.impl.SeerbitImpl;
 import com.seerbit.v2.model.CardPayment;
@@ -36,6 +36,35 @@ public class CardAuthorizeDemo {
 	private static Client client;
 
 	/**
+	 * @return token (java.lang.String)
+	 */
+	private static String doAuthenticate() {
+		Seerbit seerbit;
+		String token;
+		AuthenticationService authService;
+		JsonObject json;
+		String jsonString;
+
+		System.out.println("================== start authentication ==================");
+		seerbit = new SeerbitImpl();
+		client = new Client();
+		client.setApiBase(seerbit.getApiBase());
+		client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
+		client.setPublicKey("public_key");
+		client.setPrivateKey("private_key");
+		client.setTimeout(20);
+		authService = new AuthenticationServiceImpl(client);
+		json = authService.doAuth();
+		jsonString = String.format("auth response: \n%s", json.toString());
+		System.out.println(jsonString);
+		System.out.println("================== end authentication ==================");
+		System.out.println("\n");
+		System.out.println("\n");
+		token = authService.getToken();
+		return token;
+	}
+
+	/**
 	 * @param token token (java.lang.String)
 	 *
 	 * @return response
@@ -49,33 +78,33 @@ public class CardAuthorizeDemo {
 		cardService = new CardServiceImpl(client, token);
 		cardPayment = CardPayment
 			.builder()
-			.cvv("100")
+			.publicKey(client.getPublicKey())
+			.amount("100.00")
+			.fee("10")
+			.fullName("John Doe")
+			.mobileNumber("08032000001")
+			.currency("KES")
+			.country("KE")
+			.paymentReference("LKJHGFDR123UI23992JN23R3")
+			.email("jd@gmail.com")
+			.productId("Food")
+			.productDescription("Rasberry")
+			.clientAppCode("kpp2")
+			.redirectUrl("http://checkout.com")
+			.channelType("Mastercard")
+			.deviceType("Laptop")
+			.sourceIP("127.0.0.1")
 			.cardNumber("5123450000000008")
+			.cvv("100")
 			.expiryMonth("05")
 			.expiryYear("21")
 			.pin("1234")
-			.fullName("Aminu Grod")
-			.publicKey(client.getPublicKey())
-			.paymentReference("trx0001")
-			.email("demo@example.com")
-			.mobileNumber("08012345678")
-			.channelType("Mastercard")
-			.deviceType("Nokia 3310")
-			.sourceIP("127.0.0.20")
-			.currency("NGN")
 			.retry("false")
 			.invoiceNumber("1234567890abc123ac")
-			.productDescription("demo")
-			.country("NG")
-			.fee("1.00")
-			.amount("150.00")
-			.clientAppCode("appl")
-			.redirectUrl("http://www.example.com")
-			.productId("Foods")
-			.invoiceNumber("1234567890abc123ac")
-			.retry("false")
 			.type("3DSECURE")
+			.paymentType("CARD")
 			.build();
+		System.out.println("request: " + new Gson().toJson(cardPayment));
 		response = cardService.doAuthorize(cardPayment);
 		System.out.println("================== end card authorize ==================");
 
@@ -87,20 +116,9 @@ public class CardAuthorizeDemo {
 	 */
 	public static void main(String... args) {
 		String token;
-		Seerbit seerbit;
-		AuthenticationService authService;
 		JsonObject response;
 
-		seerbit = new SeerbitImpl();
-		client = new Client();
-		client.setApiBase(seerbit.getApiBase());
-		client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
-		client.setPublicKey("public_key");
-		client.setPrivateKey("private_key");
-		client.setTimeout(20);
-		client.setAuthenticationScheme(AuthType.BASIC.getType());
-		authService = new AuthenticationServiceImpl(client);
-		token = authService.getBasicAuthorizationEncodedString();
+		token = CardAuthorizeDemo.doAuthenticate();
 		response = CardAuthorizeDemo.doCardAuthorize(token);
 		System.out.println("card authorize response: " + response.toString());
 	}

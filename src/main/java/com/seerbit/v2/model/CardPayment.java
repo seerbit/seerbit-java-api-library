@@ -64,4 +64,5 @@ public class CardPayment implements Serializable {
 	private String retry;
 	private String invoiceNumber;
 	private String type;
+	private String scheduleId;
 }

@@ -17,7 +17,6 @@
 package com.seerbit.v2.demo.account;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
 import com.seerbit.v2.Client;
 import com.seerbit.v2.Seerbit;
 import com.seerbit.v2.enums.EnvironmentEnum;
@@ -74,42 +73,34 @@ public class AccountAuthorizeDemo {
 		Account account;
 		JsonObject response;
 
-		response = new JsonObject();
-
 		System.out.println("================== start account authorization ==================");
-
-		try {
-			accountService = new AccountServiceImpl(client, token);
-			account = new Account();
-			account.setFullName("Musa Chukwuma Adetutu");
-			account.setEmail("musa@example.com");
-			account.setMobileNumber("08012345678");
-			account.setPublicKey(client.getPublicKey());
-			account.setChannelType("BANK_ACCOUNT");
-			account.setDeviceType("nokia 33");
-			account.setSourceIP("1.0.1.0");
-			account.setPaymentReference("trx0001");
-			account.setCurrency("NGN");
-			account.setProductDescription("put a description here");
-			account.setProductId("Foods");
-			account.setCountry("NG");
-			account.setFee("1.00");
-			account.setAmount("100.00");
-			account.setClientAppCode("app1");
-			account.setRedirectUrl("http://www.example.com");
-			account.setAccountName("Diei Okechukwu Peter");
-			account.setAccountNumber("2213132677");
-			account.setBankCode("057");
-			account.setBvn("22912882998");
-			account.setRetry("false");
-			account.setInvoiceNumber("1234567891abc123ac");
-			account.setDateOfBirth("09-08-1909");
-			account.setPaymentType("ACCOUNT");
-			response = accountService.doAuthorize(account);
-		} catch (JsonSyntaxException exception) {
-			System.out.println(exception.getMessage());
-		}
-
+		accountService = new AccountServiceImpl(client, token);
+		account = new Account();
+		account.setFullName("Musa Chukwuma Adetutu");
+		account.setEmail("musa@example.com");
+		account.setMobileNumber("08012345678");
+		account.setPublicKey(client.getPublicKey());
+		account.setChannelType("BANK_ACCOUNT");
+		account.setDeviceType("nokia 33");
+		account.setSourceIP("1.0.1.0");
+		account.setPaymentReference("trx0001");
+		account.setCurrency("NGN");
+		account.setProductDescription("put a description here");
+		account.setProductId("Foods");
+		account.setCountry("NG");
+		account.setFee("1.00");
+		account.setAmount("100.00");
+		account.setClientAppCode("app1");
+		account.setRedirectUrl("http://www.example.com");
+		account.setAccountName("Diei Okechukwu Peter");
+		account.setAccountNumber("2213132677");
+		account.setBankCode("057");
+		account.setBvn("22912882998");
+		account.setRetry("false");
+		account.setInvoiceNumber("1234567891abc123ac");
+		account.setDateOfBirth("09-08-1909");
+		account.setPaymentType("ACCOUNT");
+		response = accountService.doAuthorize(account);
 		System.out.println("================== stop account authorization ==================");
 		System.out.println("\n");
 		System.out.println("\n");
