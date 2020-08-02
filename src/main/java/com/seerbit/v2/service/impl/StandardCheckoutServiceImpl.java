@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
 import com.seerbit.v2.Client;
 import com.seerbit.v2.RequestValidator;
+import com.seerbit.v2.exception.SeerbitException;
 import com.seerbit.v2.model.StandardCheckout;
 import com.seerbit.v2.service.StandardCheckoutService;
 import com.seerbit.v2.util.Utility;
@@ -55,18 +56,28 @@ public class StandardCheckoutServiceImpl extends ServiceImpl implements Standard
 	public String getHash(StandardCheckout standardCheckoutPayload) {
 		ObjectMapper mapper;
 		Map<String, Object> payload;
+		String hash;
 
 		RequestValidator.doValidate(standardCheckoutPayload);
 		this.requiresToken = true;
+		hash = "";
 		mapper = new ObjectMapper();
 		payload = mapper.convertValue(standardCheckoutPayload, Map.class);
 		response = this.postRequest(HASH_REQUEST, payload, token);
-		return response
-			.get("data")
-			.getAsJsonObject()
-			.get("hash")
-			.getAsJsonObject()
-			.get("hash")
-			.getAsString();
+
+		if (response.has("data")) {
+			response = response.get("data").getAsJsonObject();
+
+			if (response.has("hash")) {
+				hash = response.get("hash").getAsJsonObject().get("hash").getAsString();
+			} else {
+				throw new SeerbitException("Unable to obtain hash");
+			}
+
+		} else {
+			throw new SeerbitException("Unable to obtain hash");
+		}
+
+		return hash;
 	}
 }
