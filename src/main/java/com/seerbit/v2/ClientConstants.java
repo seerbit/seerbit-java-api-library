@@ -28,7 +28,9 @@ public interface ClientConstants {
 	// authentication
 	String AUTHENTICATION_ENDPOINT = "api/v2/encrypt/keys";
 
-	// bank & card payment options
+	// bank, checkout, & card payment options
+	String HASH_REQUEST = "api/v2/encrypt/hashs";
+	String INITIALIZE_TRANSACTIONS = "api/v2/payments";
 	String INITIATE_PAYMENT_ENDPOINT = "api/v2/payments/initiates";
 	String VALIDATE_PAYMENT_ENDPOINT = "api/v2/payments/validate";
 	String VALIDATE_CARD_PAYMENT_ENDPOINT = "api/v2/payments/otp";
