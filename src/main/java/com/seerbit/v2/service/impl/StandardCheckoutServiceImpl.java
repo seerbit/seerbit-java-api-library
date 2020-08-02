@@ -60,7 +60,6 @@ public class StandardCheckoutServiceImpl extends ServiceImpl implements Standard
 
 		RequestValidator.doValidate(standardCheckoutPayload);
 		this.requiresToken = true;
-		hash = "";
 		mapper = new ObjectMapper();
 		payload = mapper.convertValue(standardCheckoutPayload, Map.class);
 		response = this.postRequest(HASH_REQUEST, payload, token);
