@@ -1,6 +1,7 @@
 package com.seerbit.v2.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.seerbit.v2.Client;
 import com.seerbit.v2.RequestValidator;
@@ -62,6 +63,7 @@ public class StandardCheckoutServiceImpl extends ServiceImpl implements Standard
 		this.requiresToken = true;
 		mapper = new ObjectMapper();
 		payload = mapper.convertValue(standardCheckoutPayload, Map.class);
+		System.out.println("request: " + new Gson().toJson(standardCheckoutPayload));
 		response = this.postRequest(HASH_REQUEST, payload, token);
 
 		if (response.has("data")) {
