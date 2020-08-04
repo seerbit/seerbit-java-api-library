@@ -22,7 +22,7 @@ package com.seerbit.v2;
 public interface ClientConstants {
 
 	// base url
-	String TEST_API_BASE = "https://stg-backend.seerbitapi.com/";
+	String TEST_API_BASE = "https://pilot-backend.seerbitapi.com/";
 	String LIVE_API_BASE = "https://seerbitapi.com/";
 
 	// authentication
