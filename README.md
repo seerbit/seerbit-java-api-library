@@ -59,7 +59,7 @@ You can contribute to this repository so that anyone can benefit from it:
 
 ## Examples  
 
-You can also check the [src/main/java/com/seerbit/demo](https://github.com/seerbit/seerbit-java-v2/tree/master/src/main/java/com/seerbit/demo) folder in this repository for more examples of usage.
+You can also check the [src/main/java/com/seerbit/demo](https://github.com/seerbit/seerbit-java-api-library/tree/v2/src/main/java/com/seerbit/v2/demo) folder in this repository for more examples of usage.
 
 ## Using the Library
 
@@ -129,7 +129,7 @@ After retrieving your token following authentication proceed to pass it to the A
    System.out.println("================== stop account authorization ==================");
 ``` 
 
-Find more examples [here](https://github.com/seerbit/seerbit-java-v1/tree/master/src/main/java/com/seerbit/demo).
+Find more examples [here](https://github.com/seerbit/seerbit-java-api-library/tree/v2/src/main/java/com/seerbit/v2/demo).
 
 ## Licence
 GNU General Public License. For more information, see the LICENSE file.
