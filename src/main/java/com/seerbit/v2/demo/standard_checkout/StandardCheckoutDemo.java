@@ -54,8 +54,8 @@ public class StandardCheckoutDemo {
 		client = new Client();
 		client.setApiBase(seerbit.getApiBase());
 		client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
-		client.setPublicKey("SBTESTPUBK_p8GqvFSFNCBahSJinczKd9aIPoRUZfda");
-		client.setPrivateKey("SBTESTSECK_kFgKytQK1KSvbR616rUMqNYOUedK3Btm5igZgxaZ");
+		client.setPublicKey("public_key");
+		client.setPrivateKey("private_key");
 		client.setTimeout(20);
 		authService = new AuthenticationServiceImpl(client);
 		json = authService.doAuth();
