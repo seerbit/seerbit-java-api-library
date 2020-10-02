@@ -19,16 +19,19 @@ package com.seerbit.v2.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
 import com.seerbit.v2.Client;
-import com.seerbit.v2.ClientConstants;
 import com.seerbit.v2.model.Refund;
 import com.seerbit.v2.service.RefundService;
 import com.seerbit.v2.util.Utility;
 
 import java.util.Map;
 
+import static com.seerbit.v2.ClientConstants.REFUND_DETAIL_ENDPOINT;
+import static com.seerbit.v2.ClientConstants.REFUND_ENDPOINT;
+import static com.seerbit.v2.ClientConstants.REFUND_LIST_ENDPOINT;
+
 /** @author Seerbit */
 @SuppressWarnings("unchecked")
-public class RefundServiceImpl extends ServiceImpl implements RefundService, ClientConstants {
+public class RefundServiceImpl extends ServiceImpl implements RefundService {
 
   /**
    * @param client A non-optional class, the client

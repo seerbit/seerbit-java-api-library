@@ -17,54 +17,55 @@
 package com.seerbit.v2;
 
 /** @author Seerbit */
-public interface ClientConstants {
+public abstract class ClientConstants {
 
   // base url
-  String TEST_API_BASE = "https://pilot-backend.seerbitapi.com/";
-  String LIVE_API_BASE = "https://seerbitapi.com/";
+  public static final String TEST_API_BASE = "https://pilot-backend.seerbitapi.com/";
+  public static final String LIVE_API_BASE = "https://seerbitapi.com/";
 
   // authentication
-  String AUTHENTICATION_ENDPOINT = "api/v2/encrypt/keys";
+  public static final String AUTHENTICATION_ENDPOINT = "api/v2/encrypt/keys";
 
   // bank, checkout, & card payment options
-  String HASH_REQUEST = "api/v2/encrypt/hashs";
-  String INITIALIZE_TRANSACTIONS = "api/v2/payments";
-  String INITIATE_PAYMENT_ENDPOINT = "api/v2/payments/initiates";
-  String VALIDATE_PAYMENT_ENDPOINT = "api/v2/payments/validate";
-  String VALIDATE_CARD_PAYMENT_ENDPOINT = "api/v2/payments/otp";
-  String PREAUTH_AUTHORIZE_ENDPOINT = "api/v2/payments/authorise";
-  String PAYMENT_CAPTURE_ENDPOINT = "api/v2/payments/capture";
-  String PAYMENT_REFUND_ENDPOINT = "api/v2/payments/refund";
-  String PAYMENT_CANCEL_ENDPOINT = "api/v2/payments/cancel";
-  String PAYMENT_CHARGE_ENDPOINT = "api/v2/payments/charge";
-  String TOKENIZATION_ENDPOINT = "api/v2/payments/tokenize";
+  public static final String HASH_REQUEST = "api/v2/encrypt/hashs";
+  public static final String INITIALIZE_TRANSACTIONS = "api/v2/payments";
+  public static final String INITIATE_PAYMENT_ENDPOINT = "api/v2/payments/initiates";
+  public static final String VALIDATE_PAYMENT_ENDPOINT = "api/v2/payments/validate";
+  public static final String VALIDATE_CARD_PAYMENT_ENDPOINT = "api/v2/payments/otp";
+  public static final String PREAUTH_AUTHORIZE_ENDPOINT = "api/v2/payments/authorise";
+  public static final String PAYMENT_CAPTURE_ENDPOINT = "api/v2/payments/capture";
+  public static final String PAYMENT_REFUND_ENDPOINT = "api/v2/payments/refund";
+  public static final String PAYMENT_CANCEL_ENDPOINT = "api/v2/payments/cancel";
+  public static final String PAYMENT_CHARGE_ENDPOINT = "api/v2/payments/charge";
+  public static final String TOKENIZATION_ENDPOINT = "api/v2/payments/tokenize";
 
   // refunds
-  String REFUND_ENDPOINT = "merchants/api/v1/user/%s/refunds";
-  String REFUND_DETAIL_ENDPOINT = "merchants/api/v1/user/%s/refunds/%s";
-  String REFUND_LIST_ENDPOINT = "merchants/api/v1/user/%s/refunds?page=%s&size=%s";
+  public static final String REFUND_ENDPOINT = "merchants/api/v1/user/%s/refunds";
+  public static final String REFUND_DETAIL_ENDPOINT = "merchants/api/v1/user/%s/refunds/%s";
+  public static final String REFUND_LIST_ENDPOINT =
+      "merchants/api/v1/user/%s/refunds?page=%s&size=%s";
 
   // orders
-  String ORDERS_ENDPOINT = "api/v2/payments/order";
+  public static final String ORDERS_ENDPOINT = "api/v2/payments/order";
 
   // mobile money
-  String AVAILABLE_NETWORKS_ENDPOINT = "api/v2/networks";
+  public static final String AVAILABLE_NETWORKS_ENDPOINT = "api/v2/networks";
 
   // recurring
-  String SUBSCRIPTION_ENDPOINT = "api/v2/recurring/subscribes";
-  String CUSTOMER_SUBSCRIPTION_ENDPOINT = "api/v2/recurring/%s/customerId/%s";
-  String UPDATE_SUBSCRIPTION_ENDPOINT = "api/v2/recurring/updates";
-  String MERCHANT_SUBSCRIPTIONS_ENDPOINT = "api/v2/recurring/publicKey/%s";
-  String CHARGE_ENDPOINT = "api/v2/recurring/charge";
+  public static final String SUBSCRIPTION_ENDPOINT = "api/v2/recurring/subscribes";
+  public static final String CUSTOMER_SUBSCRIPTION_ENDPOINT = "api/v2/recurring/%s/customerId/%s";
+  public static final String UPDATE_SUBSCRIPTION_ENDPOINT = "api/v2/recurring/updates";
+  public static final String MERCHANT_SUBSCRIPTIONS_ENDPOINT = "api/v2/recurring/publicKey/%s";
+  public static final String CHARGE_ENDPOINT = "api/v2/recurring/charge";
 
   // status queries
-  String TRX_STATUS_ENDPOINT = "api/v2/payments/query/%s";
-  String SUBSCRIPTION_STATUS_ENDPOINT = "api/v2/recurring/billingId/%S";
+  public static final String TRX_STATUS_ENDPOINT = "api/v2/payments/query/%s";
+  public static final String SUBSCRIPTION_STATUS_ENDPOINT = "api/v2/recurring/billingId/%S";
 
   // bank list
-  String BANK_LIST_ENDPOINT = "api/v2/banks/merchant/%s";
+  public static final String BANK_LIST_ENDPOINT = "api/v2/banks/merchant/%s";
 
   // version types
-  String VERSION_ONE = "1.0.0";
-  String VERSION_TWO = "1.0.1";
+  public static final String VERSION_ONE = "1.0.0";
+  public static final String VERSION_TWO = "1.0.1";
 }

@@ -18,13 +18,15 @@ package com.seerbit.v2.service.impl;
 
 import com.google.gson.JsonObject;
 import com.seerbit.v2.Client;
-import com.seerbit.v2.ClientConstants;
 import com.seerbit.v2.service.StatusService;
 import com.seerbit.v2.util.Utility;
 
+import static com.seerbit.v2.ClientConstants.SUBSCRIPTION_STATUS_ENDPOINT;
+import static com.seerbit.v2.ClientConstants.TRX_STATUS_ENDPOINT;
+
 /** @author Seerbit */
 @SuppressWarnings("unchecked")
-public class StatusServiceImpl extends ServiceImpl implements StatusService, ClientConstants {
+public class StatusServiceImpl extends ServiceImpl implements StatusService {
 
   /**
    * @param client A non-optional class, the client

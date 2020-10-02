@@ -18,8 +18,6 @@ package com.seerbit.v2.service.impl;
 
 import com.google.gson.JsonObject;
 import com.seerbit.v2.Client;
-import com.seerbit.v2.ClientConstants;
-import com.seerbit.v2.NumericConstants;
 import com.seerbit.v2.config.Config;
 import com.seerbit.v2.exception.SeerbitException;
 import com.seerbit.v2.service.AuthenticationService;
@@ -30,9 +28,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.seerbit.v2.ClientConstants.AUTHENTICATION_ENDPOINT;
+import static com.seerbit.v2.NumericConstants.MIN_SIZE;
+
 /** @author Seerbit */
-public class AuthenticationServiceImpl extends ServiceImpl
-    implements AuthenticationService, ClientConstants, NumericConstants {
+public class AuthenticationServiceImpl extends ServiceImpl implements AuthenticationService {
 
   /** @param client A non-optional class, the client */
   public AuthenticationServiceImpl(Client client) {

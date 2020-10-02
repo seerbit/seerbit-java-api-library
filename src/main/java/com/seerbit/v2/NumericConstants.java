@@ -17,12 +17,12 @@
 package com.seerbit.v2;
 
 /** @author Seerbit */
-public interface NumericConstants {
+public abstract class NumericConstants {
 
   // numeric constants
-  int MIN_VALUE = 1;
-  int MIN_SIZE = 1;
-  int NIL = 0;
-  int HTTP_STATUS_200 = 200;
-  int HTTP_STATUS_299 = 299;
+  public static final int MIN_VALUE = 1;
+  public static final int MIN_SIZE = 1;
+  public static final int NIL = 0;
+  public static final int HTTP_STATUS_200 = 200;
+  public static final int HTTP_STATUS_299 = 299;
 }

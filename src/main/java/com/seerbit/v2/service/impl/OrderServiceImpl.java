@@ -19,7 +19,6 @@ package com.seerbit.v2.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
 import com.seerbit.v2.Client;
-import com.seerbit.v2.ClientConstants;
 import com.seerbit.v2.RequestValidator;
 import com.seerbit.v2.model.Order;
 import com.seerbit.v2.service.OrderService;
@@ -27,9 +26,11 @@ import com.seerbit.v2.util.Utility;
 
 import java.util.Map;
 
+import static com.seerbit.v2.ClientConstants.ORDERS_ENDPOINT;
+
 /** @author Seerbit */
 @SuppressWarnings("unchecked")
-public class OrderServiceImpl extends ServiceImpl implements OrderService, ClientConstants {
+public class OrderServiceImpl extends ServiceImpl implements OrderService {
 
   /**
    * @param client A non-optional class, the client

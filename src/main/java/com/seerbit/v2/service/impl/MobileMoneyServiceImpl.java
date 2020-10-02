@@ -19,7 +19,6 @@ package com.seerbit.v2.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
 import com.seerbit.v2.Client;
-import com.seerbit.v2.ClientConstants;
 import com.seerbit.v2.RequestValidator;
 import com.seerbit.v2.model.MobileMoney;
 import com.seerbit.v2.service.MobileMoneyService;
@@ -27,9 +26,11 @@ import com.seerbit.v2.util.Utility;
 
 import java.util.Map;
 
+import static com.seerbit.v2.ClientConstants.AVAILABLE_NETWORKS_ENDPOINT;
+import static com.seerbit.v2.ClientConstants.INITIATE_PAYMENT_ENDPOINT;
+
 @SuppressWarnings("unchecked")
-public class MobileMoneyServiceImpl extends ServiceImpl
-    implements MobileMoneyService, ClientConstants {
+public class MobileMoneyServiceImpl extends ServiceImpl implements MobileMoneyService {
 
   /**
    * @param client A non-optional class, the client

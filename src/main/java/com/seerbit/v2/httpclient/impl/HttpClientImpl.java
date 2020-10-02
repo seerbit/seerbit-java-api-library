@@ -20,7 +20,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.seerbit.v2.Client;
-import com.seerbit.v2.NumericConstants;
 import com.seerbit.v2.config.Config;
 import com.seerbit.v2.exception.ConnectionException;
 import com.seerbit.v2.exception.SeerbitException;
@@ -40,10 +39,13 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.seerbit.v2.NumericConstants.HTTP_STATUS_200;
+import static com.seerbit.v2.NumericConstants.HTTP_STATUS_299;
+import static com.seerbit.v2.NumericConstants.MIN_SIZE;
 import static com.seerbit.v2.enums.HttpHeaderEnum.CONTENT_TYPE;
 
 /** @author Seerbit */
-public class HttpClientImpl implements HttpClient, NumericConstants {
+public class HttpClientImpl implements HttpClient {
 
   private static final CloseableHttpClient HTTP_CLIENT = HttpClients.createDefault();
 

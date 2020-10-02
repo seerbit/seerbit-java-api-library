@@ -16,15 +16,16 @@
  */
 package com.seerbit.v2.config.impl;
 
-import com.seerbit.v2.NumericConstants;
 import com.seerbit.v2.config.Config;
 import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
+import static com.seerbit.v2.NumericConstants.NIL;
+
 /** @author Seerbit */
 @NoArgsConstructor
-public class ConfigImpl implements Config, NumericConstants {
+public class ConfigImpl implements Config {
 
   /** @return publicKey */
   @Override

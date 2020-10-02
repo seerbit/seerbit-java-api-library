@@ -19,7 +19,6 @@ package com.seerbit.v2.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
 import com.seerbit.v2.Client;
-import com.seerbit.v2.ClientConstants;
 import com.seerbit.v2.RequestValidator;
 import com.seerbit.v2.model.CardPayment;
 import com.seerbit.v2.model.CardPreAuth;
@@ -32,9 +31,18 @@ import com.seerbit.v2.util.Utility;
 
 import java.util.Map;
 
+import static com.seerbit.v2.ClientConstants.INITIATE_PAYMENT_ENDPOINT;
+import static com.seerbit.v2.ClientConstants.PAYMENT_CANCEL_ENDPOINT;
+import static com.seerbit.v2.ClientConstants.PAYMENT_CAPTURE_ENDPOINT;
+import static com.seerbit.v2.ClientConstants.PAYMENT_CHARGE_ENDPOINT;
+import static com.seerbit.v2.ClientConstants.PAYMENT_REFUND_ENDPOINT;
+import static com.seerbit.v2.ClientConstants.PREAUTH_AUTHORIZE_ENDPOINT;
+import static com.seerbit.v2.ClientConstants.TOKENIZATION_ENDPOINT;
+import static com.seerbit.v2.ClientConstants.VALIDATE_CARD_PAYMENT_ENDPOINT;
+
 /** @author Seerbit */
 @SuppressWarnings("unchecked")
-public class CardServiceImpl extends ServiceImpl implements CardService, ClientConstants {
+public class CardServiceImpl extends ServiceImpl implements CardService {
 
   private ObjectMapper mapper;
   private Map<String, Object> payload;

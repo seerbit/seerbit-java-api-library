@@ -18,12 +18,13 @@ package com.seerbit.v2.service.impl;
 
 import com.google.gson.JsonObject;
 import com.seerbit.v2.Client;
-import com.seerbit.v2.ClientConstants;
 import com.seerbit.v2.service.ResourceService;
 import com.seerbit.v2.util.Utility;
 
+import static com.seerbit.v2.ClientConstants.BANK_LIST_ENDPOINT;
+
 /** @author Seerbit */
-public class ResourceServiceImpl extends ServiceImpl implements ResourceService, ClientConstants {
+public class ResourceServiceImpl extends ServiceImpl implements ResourceService {
 
   /**
    * @param client A non-optional class, the client
