@@ -54,7 +54,7 @@ public class CardPreauthDemo {
     cardPreauth.setFullName("Diei Okechukwu Peter");
     CardService cardService = new CardServiceImpl(client, token);
     JsonObject response = cardService.doPreauthAuthorization(cardPreauth);
-    System.out.println("================== start card pre-auth ==================");
+    System.out.println("================== stop card pre-auth ==================");
     return response;
   }
 

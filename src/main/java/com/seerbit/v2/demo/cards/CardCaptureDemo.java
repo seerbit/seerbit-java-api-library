@@ -48,7 +48,7 @@ public class CardCaptureDemo {
     paymentCapture.setProductDescription("Foods");
     paymentCapture.setAmount("1.00");
     JsonObject response = cardService.doPaymentCapture(paymentCapture);
-    System.out.println("================== start card capture ==================");
+    System.out.println("================== stop card capture ==================");
     return response;
   }
 

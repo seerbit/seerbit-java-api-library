@@ -33,30 +33,22 @@ public class GetTransactionStatusDemo {
 
   /** @return token (java.lang.String) */
   private static String doAuthenticate() {
-    Seerbit seerbit;
-    String token;
-    AuthenticationService authService;
-    JsonObject json;
-    String jsonString;
-
     System.out.println("================== start authentication ==================");
-    seerbit = new SeerbitImpl();
+    Seerbit seerbit = new SeerbitImpl();
     client = new Client();
     client.setApiBase(seerbit.getApiBase());
     client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
     client.setPublicKey("public_key");
     client.setPrivateKey("private_key");
     client.setTimeout(20);
-    authService = new AuthenticationServiceImpl(client);
-    json = authService.doAuth();
-    jsonString = String.format("auth response: \n%s", json.toString());
+    AuthenticationService authService = new AuthenticationServiceImpl(client);
+    JsonObject json = authService.doAuth();
+    String jsonString = String.format("auth response: \n%s", json.toString());
     System.out.println(jsonString);
     System.out.println("================== end authentication ==================");
     System.out.println("\n");
     System.out.println("\n");
-    token = authService.getToken();
-
-    return token;
+    return authService.getToken();
   }
 
   /**
@@ -65,26 +57,18 @@ public class GetTransactionStatusDemo {
    * @return response
    */
   private static JsonObject doQueryStatus(String token, String reference) {
-    StatusService statusService;
-    JsonObject response;
-
     System.out.println("================== start get transaction status ==================");
-    statusService = new StatusServiceImpl(client, token);
-    response = statusService.getTransactionStatus(reference);
+    StatusService statusService = new StatusServiceImpl(client, token);
+    JsonObject response = statusService.getTransactionStatus(reference);
     System.out.println("================== stop get transaction status ==================");
-
     return response;
   }
 
   /** @param args String arguments array for main function */
   public static void main(String... args) {
-    String token;
-    String reference;
-    JsonObject response;
-
-    reference = "227171662717";
-    token = GetTransactionStatusDemo.doAuthenticate();
-    response = GetTransactionStatusDemo.doQueryStatus(token, reference);
+    String reference = "227171662717";
+    String token = GetTransactionStatusDemo.doAuthenticate();
+    JsonObject response = GetTransactionStatusDemo.doQueryStatus(token, reference);
     System.out.println("get transaction status response: " + response.toString());
   }
 }

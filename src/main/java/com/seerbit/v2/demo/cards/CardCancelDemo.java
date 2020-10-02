@@ -46,7 +46,7 @@ public class CardCancelDemo {
     paymentCancel.setCountry("NG");
     paymentCancel.setProductDescription("Foods");
     JsonObject response = cardService.doPaymentCancel(paymentCancel);
-    System.out.println("================== start card cancel ==================");
+    System.out.println("================== stop card cancel ==================");
     return response;
   }
 

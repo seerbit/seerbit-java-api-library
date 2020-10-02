@@ -48,7 +48,7 @@ public class CardRefundDemo {
     paymentRefund.setProductDescription("Foods");
     paymentRefund.setAmount("1.00");
     JsonObject response = cardService.doPaymentRefund(paymentRefund);
-    System.out.println("================== start card refund ==================");
+    System.out.println("================== stop card refund ==================");
     return response;
   }
 
