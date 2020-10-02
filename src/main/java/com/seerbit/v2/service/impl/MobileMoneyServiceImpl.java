@@ -28,48 +28,44 @@ import com.seerbit.v2.util.Utility;
 import java.util.Map;
 
 @SuppressWarnings("unchecked")
-public class MobileMoneyServiceImpl extends ServiceImpl implements MobileMoneyService, ClientConstants {
+public class MobileMoneyServiceImpl extends ServiceImpl
+    implements MobileMoneyService, ClientConstants {
 
-	/**
-	 * @param client A non-optional class, the client
-	 * @param token  A non-optional String, the auth token
-	 */
-	public MobileMoneyServiceImpl(Client client, String token) {
-		super(client);
-		this.token = token;
-		Utility.nonNull(client);
-	}
+  /**
+   * @param client A non-optional class, the client
+   * @param token A non-optional String, the auth token
+   */
+  public MobileMoneyServiceImpl(Client client, String token) {
+    super(client);
+    this.token = token;
+    Utility.nonNull(client);
+  }
 
-	/**
-	 * POST /api/v2/payments/initiates
-	 *
-	 * @param mobileMoneyPayload A non-optional class, the payload
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject doAuthorize(MobileMoney mobileMoneyPayload) {
-		ObjectMapper mapper;
-		Map<String, Object> payload;
+  /**
+   * POST /api/v2/payments/initiates
+   *
+   * @param mobileMoneyPayload A non-optional class, the payload
+   * @return response
+   */
+  @Override
+  public JsonObject doAuthorize(MobileMoney mobileMoneyPayload) {
+    this.requiresToken = true;
+    RequestValidator.doValidate(mobileMoneyPayload);
+    ObjectMapper mapper = new ObjectMapper();
+    Map<String, Object> payload = mapper.convertValue(mobileMoneyPayload, Map.class);
+    response = this.postRequest(INITIATE_PAYMENT_ENDPOINT, payload, token);
+    return response;
+  }
 
-		this.requiresToken = true;
-		RequestValidator.doValidate(mobileMoneyPayload);
-		mapper = new ObjectMapper();
-		payload = mapper.convertValue(mobileMoneyPayload, Map.class);
-		response = this.postRequest(INITIATE_PAYMENT_ENDPOINT, payload, token);
-		return response;
-	}
-
-	/**
-	 * POST /api/v2/networks
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject getAvailableNetworks() {
-		this.requiresToken = true;
-		response = this.getRequest(AVAILABLE_NETWORKS_ENDPOINT, token);
-		return response;
-	}
-
+  /**
+   * POST /api/v2/networks
+   *
+   * @return response
+   */
+  @Override
+  public JsonObject getAvailableNetworks() {
+    this.requiresToken = true;
+    response = this.getRequest(AVAILABLE_NETWORKS_ENDPOINT, token);
+    return response;
+  }
 }

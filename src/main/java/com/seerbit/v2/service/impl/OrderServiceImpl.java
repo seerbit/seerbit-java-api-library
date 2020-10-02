@@ -27,39 +27,33 @@ import com.seerbit.v2.util.Utility;
 
 import java.util.Map;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 @SuppressWarnings("unchecked")
 public class OrderServiceImpl extends ServiceImpl implements OrderService, ClientConstants {
 
-	/**
-	 * @param client A non-optional class, the client
-	 * @param token  A non-optional String, the auth token
-	 */
-	public OrderServiceImpl(Client client, String token) {
-		super(client);
-		Utility.nonNull(client);
-		this.token = token;
-	}
+  /**
+   * @param client A non-optional class, the client
+   * @param token A non-optional String, the auth token
+   */
+  public OrderServiceImpl(Client client, String token) {
+    super(client);
+    Utility.nonNull(client);
+    this.token = token;
+  }
 
-	/**
-	 * POST /api/v2/payments/order
-	 *
-	 * @param orderPayload A non-optional class, the payload
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject doAuthorize(Order orderPayload) {
-		ObjectMapper mapper;
-		Map<String, Object> payload;
-
-		RequestValidator.doValidate(orderPayload);
-		this.requiresToken = true;
-		mapper = new ObjectMapper();
-		payload = mapper.convertValue(orderPayload, Map.class);
-		response = this.postRequest(ORDERS_ENDPOINT, payload, token);
-		return response;
-	}
+  /**
+   * POST /api/v2/payments/order
+   *
+   * @param orderPayload A non-optional class, the payload
+   * @return response
+   */
+  @Override
+  public JsonObject doAuthorize(Order orderPayload) {
+    RequestValidator.doValidate(orderPayload);
+    this.requiresToken = true;
+    ObjectMapper mapper = new ObjectMapper();
+    Map<String, Object> payload = mapper.convertValue(orderPayload, Map.class);
+    response = this.postRequest(ORDERS_ENDPOINT, payload, token);
+    return response;
+  }
 }

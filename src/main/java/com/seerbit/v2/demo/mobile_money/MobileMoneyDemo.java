@@ -27,84 +27,60 @@ import com.seerbit.v2.service.MobileMoneyService;
 import com.seerbit.v2.service.impl.AuthenticationServiceImpl;
 import com.seerbit.v2.service.impl.MobileMoneyServiceImpl;
 
-/**
- * @author centricgateway
- */
+/** @author centricgateway */
 public class MobileMoneyDemo {
 
-	private static Client client;
+  private static Client client;
 
-	/**
-	 * @return token (java.lang.String)
-	 */
-	private static String doAuthenticate() {
-		Seerbit seerbit;
-		String token;
-		AuthenticationService authService;
-		JsonObject json;
-		String jsonString;
+  /** @return token (java.lang.String) */
+  private static String doAuthenticate() {
+    System.out.println("================== start authentication ==================");
+    Seerbit seerbit = new SeerbitImpl();
+    client = new Client();
+    client.setApiBase(seerbit.getApiBase());
+    client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
+    client.setPublicKey("public_key");
+    client.setPrivateKey("private_key");
+    client.setTimeout(20);
+    AuthenticationService authService = new AuthenticationServiceImpl(client);
+    JsonObject json = authService.doAuth();
+    String jsonString = String.format("auth response: \n%s", json.toString());
+    System.out.println(jsonString);
+    System.out.println("================== end authentication ==================");
+    System.out.println("\n");
+    System.out.println("\n");
+    return authService.getToken();
+  }
 
-		System.out.println("================== start authentication ==================");
-		seerbit = new SeerbitImpl();
-		client = new Client();
-		client.setApiBase(seerbit.getApiBase());
-		client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
-		client.setPublicKey("public_key");
-		client.setPrivateKey("private_key");
-		client.setTimeout(20);
-		authService = new AuthenticationServiceImpl(client);
-		json = authService.doAuth();
-		jsonString = String.format("auth response: \n%s", json.toString());
-		System.out.println(jsonString);
-		System.out.println("================== end authentication ==================");
-		System.out.println("\n");
-		System.out.println("\n");
-		token = authService.getToken();
+  /**
+   * @param token (java.lang.String)
+   * @return response
+   */
+  private static JsonObject doMobileMoneyPayment(String token) {
+    MobileMoneyService mobileMoneyService = new MobileMoneyServiceImpl(client, token);
+    MobileMoney mobileMoney = new MobileMoney();
+    mobileMoney.setFullName("john doe");
+    mobileMoney.setMobileNumber("08030540611");
+    mobileMoney.setPublicKey(client.getPublicKey());
+    mobileMoney.setPaymentReference("1233448383278");
+    mobileMoney.setDeviceType("Nokia 3310");
+    mobileMoney.setSourceIP("1.0.1.0");
+    mobileMoney.setCurrency("UGX");
+    mobileMoney.setProductDescription("snacks");
+    mobileMoney.setCountry("UG");
+    mobileMoney.setFee("1.00");
+    mobileMoney.setNetwork("MTN");
+    mobileMoney.setVoucherCode("");
+    mobileMoney.setAmount("10.01");
+    mobileMoney.setProductId("grocery");
+    mobileMoney.setPaymentType("MOMO");
+    return mobileMoneyService.doAuthorize(mobileMoney);
+  }
 
-		return token;
-	}
-
-	/**
-	 * @param token (java.lang.String)
-	 *
-	 * @return response
-	 */
-	private static JsonObject doMobileMoneyPayment(String token) {
-		MobileMoney mobileMoney;
-		MobileMoneyService mobileMoneyService;
-		JsonObject response;
-
-		mobileMoneyService = new MobileMoneyServiceImpl(client, token);
-		mobileMoney = new MobileMoney();
-		mobileMoney.setFullName("john doe");
-		mobileMoney.setMobileNumber("08030540611");
-		mobileMoney.setPublicKey(client.getPublicKey());
-		mobileMoney.setPaymentReference("1233448383278");
-		mobileMoney.setDeviceType("Nokia 3310");
-		mobileMoney.setSourceIP("1.0.1.0");
-		mobileMoney.setCurrency("UGX");
-		mobileMoney.setProductDescription("snacks");
-		mobileMoney.setCountry("UG");
-		mobileMoney.setFee("1.00");
-		mobileMoney.setNetwork("MTN");
-		mobileMoney.setVoucherCode("");
-		mobileMoney.setAmount("10.01");
-		mobileMoney.setProductId("grocery");
-		mobileMoney.setPaymentType("MOMO");
-		response = mobileMoneyService.doAuthorize(mobileMoney);
-
-		return response;
-	}
-
-	/**
-	 * @param args String arguments array for main function
-	 */
-	public static void main(String... args) {
-		String token;
-		JsonObject response;
-
-		token = MobileMoneyDemo.doAuthenticate();
-		response = MobileMoneyDemo.doMobileMoneyPayment(token);
-		System.out.println("mobile money authorize response: " + response.toString());
-	}
+  /** @param args String arguments array for main function */
+  public static void main(String... args) {
+    String token = MobileMoneyDemo.doAuthenticate();
+    JsonObject response = MobileMoneyDemo.doMobileMoneyPayment(token);
+    System.out.println("mobile money authorize response: " + response.toString());
+  }
 }

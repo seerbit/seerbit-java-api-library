@@ -22,53 +22,45 @@ import com.seerbit.v2.ClientConstants;
 import com.seerbit.v2.service.StatusService;
 import com.seerbit.v2.util.Utility;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 @SuppressWarnings("unchecked")
 public class StatusServiceImpl extends ServiceImpl implements StatusService, ClientConstants {
 
-	/**
-	 * @param client A non-optional class, the client
-	 * @param token  A non-optional String, the auth token
-	 */
-	public StatusServiceImpl(Client client, String token) {
-		super(client);
-		Utility.nonNull(client);
-		this.token = token;
-	}
+  /**
+   * @param client A non-optional class, the client
+   * @param token A non-optional String, the auth token
+   */
+  public StatusServiceImpl(Client client, String token) {
+    super(client);
+    Utility.nonNull(client);
+    this.token = token;
+  }
 
-	/**
-	 * GET /api/v2/payments/query/{paymentReference}
-	 *
-	 * @param paymentReference A non-optional String, the payment reference
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject getTransactionStatus(String paymentReference) {
-		String endpointURL;
+  /**
+   * GET /api/v2/payments/query/{paymentReference}
+   *
+   * @param paymentReference A non-optional String, the payment reference
+   * @return response
+   */
+  @Override
+  public JsonObject getTransactionStatus(String paymentReference) {
+    this.requiresToken = true;
+    String endpointURL = String.format(TRX_STATUS_ENDPOINT, paymentReference);
+    response = this.getRequest(endpointURL, token);
+    return response;
+  }
 
-		this.requiresToken = true;
-		endpointURL = String.format(TRX_STATUS_ENDPOINT, paymentReference);
-		response = this.getRequest(endpointURL, token);
-		return response;
-	}
-
-	/**
-	 * GET /api/v2/recurring/billingId/{billingId}
-	 *
-	 * @param billingId A non-optional String, the billing id
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject getSubscriptionStatus(String billingId) {
-		String endpointURL;
-
-		this.requiresToken = true;
-		endpointURL = String.format(SUBSCRIPTION_STATUS_ENDPOINT, billingId);
-		response = this.getRequest(endpointURL, token);
-		return response;
-	}
+  /**
+   * GET /api/v2/recurring/billingId/{billingId}
+   *
+   * @param billingId A non-optional String, the billing id
+   * @return response
+   */
+  @Override
+  public JsonObject getSubscriptionStatus(String billingId) {
+    this.requiresToken = true;
+    String endpointURL = String.format(SUBSCRIPTION_STATUS_ENDPOINT, billingId);
+    response = this.getRequest(endpointURL, token);
+    return response;
+  }
 }

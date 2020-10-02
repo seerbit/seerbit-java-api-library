@@ -21,36 +21,28 @@ import java.util.Map;
 
 import static com.seerbit.v2.NumericConstants.MIN_SIZE;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public interface Config {
 
-	Map<String, Object> data = new HashMap<>(MIN_SIZE);
+  Map<String, Object> data = new HashMap<>(MIN_SIZE);
 
-	/**
-	 * @param key   A non-optional String, the key
-	 * @param value A non-optional String, the key value
-	 */
-	void put(final String key, final Object value);
+  /**
+   * @param key A non-optional String, the key
+   * @param value A non-optional String, the key value
+   */
+  void put(final String key, final Object value);
 
-	int getTimeout();
+  int getTimeout();
 
-	/**
-	 * @param param A non-optional String, the param
-	 *
-	 * @return java.lang.Object
-	 */
-	Object get(final String param);
+  /**
+   * @param param A non-optional String, the param
+   * @return java.lang.Object
+   */
+  Object get(final String param);
 
-	/**
-	 * @return publicKey
-	 */
-	String getPublicKey();
+  /** @return publicKey */
+  String getPublicKey();
 
-	/**
-	 * @return privateKey
-	 */
-	String getPrivateKey();
-
+  /** @return privateKey */
+  String getPrivateKey();
 }

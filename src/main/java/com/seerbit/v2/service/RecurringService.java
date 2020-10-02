@@ -20,44 +20,37 @@ import com.google.gson.JsonObject;
 import com.seerbit.v2.model.RecurringDebit;
 import com.seerbit.v2.model.Subscription;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public interface RecurringService {
 
-	/**
-	 * @param subscription A non-optional class, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject doCreateSubscription(Subscription subscription);
+  /**
+   * @param subscription A non-optional class, the payload
+   * @return JsonObject
+   */
+  JsonObject doCreateSubscription(Subscription subscription);
 
-	/**
-	 * @param publicKey  A non-optional String, the merchant public key
-	 * @param customerId A non-optional String, the customer Id
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject getCustomerSubscriptions(String publicKey, String customerId);
+  /**
+   * @param publicKey A non-optional String, the merchant public key
+   * @param customerId A non-optional String, the customer Id
+   * @return JsonObject
+   */
+  JsonObject getCustomerSubscriptions(String publicKey, String customerId);
 
-	/**
-	 * @param subscription A non-optional class, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject doUpdateSubscription(Subscription subscription);
+  /**
+   * @param subscription A non-optional class, the payload
+   * @return JsonObject
+   */
+  JsonObject doUpdateSubscription(Subscription subscription);
 
-	/**
-	 * @param publicKey A non-optional String, the merchant public key
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject getMerchantSubscriptions(String publicKey);
+  /**
+   * @param publicKey A non-optional String, the merchant public key
+   * @return JsonObject
+   */
+  JsonObject getMerchantSubscriptions(String publicKey);
 
-	/**
-	 * @param recurringDebit A non-optional class, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject doRecurringDebit(RecurringDebit recurringDebit);
+  /**
+   * @param recurringDebit A non-optional class, the payload
+   * @return JsonObject
+   */
+  JsonObject doRecurringDebit(RecurringDebit recurringDebit);
 }

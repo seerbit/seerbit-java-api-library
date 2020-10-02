@@ -26,175 +26,134 @@ import java.util.Objects;
 import static com.seerbit.v2.enums.EnvironmentEnum.LIVE;
 import static com.seerbit.v2.enums.EnvironmentEnum.TEST;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public class Client {
 
-	private Config config;
+  private Config config;
 
-	/**
-	 * default constructor
-	 */
-	public Client() {
-		config = new ConfigImpl();
-		config.put("version", ClientConstants.VERSION_TWO);
-		config.put("authenticationScheme", "Bearer ");
-	}
+  /** default constructor */
+  public Client() {
+    config = new ConfigImpl();
+    config.put("version", ClientConstants.VERSION_TWO);
+    config.put("authenticationScheme", "Bearer ");
+  }
 
-	/**
-	 * @param version A non-optional String, the api version
-	 */
-	public Client(final String version) {
-		config = new ConfigImpl();
-		config.put("authenticationScheme", "Bearer ");
+  /** @param version A non-optional String, the api version */
+  public Client(final String version) {
+    config = new ConfigImpl();
+    config.put("authenticationScheme", "Bearer ");
 
-		if ("1.0.1".equals(version)) {
-			config.put("version", ClientConstants.VERSION_TWO);
-		} else {
-			throw new SeerbitException("Version must be \"1.0.1\"");
-		}
+    if ("1.0.1".equals(version)) {
+      config.put("version", ClientConstants.VERSION_TWO);
+    } else {
+      throw new SeerbitException("Version must be \"1.0.1\"");
+    }
+  }
 
-	}
+  /** @return config */
+  public Config getConfig() {
+    return config;
+  }
 
-	/**
-	 * @return config
-	 */
-	public Config getConfig() {
-		return config;
-	}
+  /** @param config A non-optional class, the SDK config */
+  public void setConfig(Config config) {
+    this.config = config;
+  }
 
-	/**
-	 * @param config A non-optional class, the SDK config
-	 */
-	public void setConfig(Config config) {
-		this.config = config;
-	}
+  /** @param publicKey A non-optional String, the merchant public key */
+  public void setPublicKey(final String publicKey) {
+    config.put("publicKey", publicKey);
+  }
 
-	/**
-	 * @param publicKey A non-optional String, the merchant public key
-	 */
-	public void setPublicKey(final String publicKey) {
-		config.put("publicKey", publicKey);
-	}
+  /** @param privateKey A non-optional String, the merchant private key */
+  public void setPrivateKey(final String privateKey) {
+    config.put("privateKey", privateKey);
+  }
 
-	/**
-	 * @param privateKey A non-optional String, the merchant private key
-	 */
-	public void setPrivateKey(final String privateKey) {
-		config.put("privateKey", privateKey);
-	}
+  /** @return publicKey */
+  public String getPublicKey() {
+    return String.valueOf(config.get("publicKey"));
+  }
 
-	/**
-	 * @return publicKey
-	 */
-	public String getPublicKey() {
-		return String.valueOf(config.get("publicKey"));
-	}
+  /** @return privateKey */
+  public String getPrivateKey() {
+    return String.valueOf(config.get("privateKey"));
+  }
 
-	/**
-	 * @return privateKey
-	 */
-	public String getPrivateKey() {
-		return String.valueOf(config.get("privateKey"));
-	}
+  /** @return version */
+  public String getVersion() {
+    return String.valueOf(config.get("version"));
+  }
 
-	/**
-	 * @return version
-	 */
-	public String getVersion() {
-		return String.valueOf(config.get("version"));
-	}
+  /** @param environment A non-optional String, the client environment */
+  public void setEnvironment(String environment) {
+    String errorMessage;
 
-	/**
-	 * @param environment A non-optional String, the client environment
-	 */
-	public void setEnvironment(String environment) {
-		String errorMessage;
+    if (environment.equalsIgnoreCase(EnvironmentEnum.LIVE.getEnvironment())) {
+      config.put("environment", EnvironmentEnum.LIVE.getEnvironment());
+      config.put("apiBase", ClientConstants.LIVE_API_BASE);
+    } else if (environment.equalsIgnoreCase(TEST.getEnvironment())) {
+      config.put("environment", TEST.getEnvironment());
+      config.put("apiBase", ClientConstants.TEST_API_BASE);
+    } else {
+      errorMessage =
+          String.format(
+              "This environment does not exist, use \"%s\" or \"%s\"",
+              LIVE.getEnvironment(), TEST.getEnvironment());
+      throw new SeerbitException(errorMessage);
+    }
+  }
 
-		if (environment.equalsIgnoreCase(EnvironmentEnum.LIVE.getEnvironment())) {
-			config.put("environment", EnvironmentEnum.LIVE.getEnvironment());
-			config.put("apiBase", ClientConstants.LIVE_API_BASE);
-		} else if (environment.equalsIgnoreCase(TEST.getEnvironment())) {
-			config.put("environment", TEST.getEnvironment());
-			config.put("apiBase", ClientConstants.TEST_API_BASE);
-		} else {
-			errorMessage = String.format(
-				"This environment does not exist, use \"%s\" or \"%s\"", LIVE.getEnvironment(), TEST.getEnvironment()
-			);
-			throw new SeerbitException(errorMessage);
-		}
-	}
+  /** @return environment */
+  public String getEnvironment() {
+    String environment = null;
 
-	/**
-	 * @return environment
-	 */
-	public String getEnvironment() {
-		String environment;
+    if (Objects.nonNull(config.get("environment"))) {
+      environment = String.valueOf(config.get("environment"));
+    }
 
-		environment = null;
+    return environment;
+  }
 
-		if (Objects.nonNull(config.get("environment"))) {
-			environment = String.valueOf(config.get("environment"));
-		}
+  /** @param apiBase A non-optional String, the api base */
+  public void setApiBase(final String apiBase) {
+    config.put("apiBase", apiBase);
+  }
 
-		return environment;
-	}
+  /** @return apiBase */
+  public String getApiBase() {
+    return String.valueOf(config.get("apiBase"));
+  }
 
-	/**
-	 * @param apiBase A non-optional String, the api base
-	 */
-	public void setApiBase(final String apiBase) {
-		config.put("apiBase", apiBase);
-	}
+  /** @param timeout A non-optional int, the http request timeout */
+  public void setTimeout(final int timeout) {
+    config.put("timeout", timeout);
+  }
 
-	/**
-	 * @return apiBase
-	 */
-	public String getApiBase() {
-		return String.valueOf(config.get("apiBase"));
-	}
+  /** @return authenticationScheme A non-optional String, the authentication scheme */
+  public String getAuthenticationScheme() {
+    return String.valueOf(config.get("authenticationScheme"));
+  }
 
-	/**
-	 * @param timeout A non-optional int, the http request timeout
-	 */
-	public void setTimeout(final int timeout) {
-		config.put("timeout", timeout);
-	}
+  /** @param authenticationScheme A non-optional String, the authentication scheme */
+  public void setAuthenticationScheme(final String authenticationScheme) {
+    String authScheme = authenticationScheme.toLowerCase();
 
-	/**
-	 * @return authenticationScheme A non-optional String, the authentication scheme
-	 */
-	public String getAuthenticationScheme() {
-		return String.valueOf(config.get("authenticationScheme"));
-	}
-
-	/**
-	 * @param authenticationScheme A non-optional String, the authentication scheme
-	 */
-	public void setAuthenticationScheme(final String authenticationScheme) {
-		String authScheme;
-
-		authScheme = authenticationScheme.toLowerCase();
-
-		switch (authScheme) {
-			case "bearer ":
-			case "basic ":
-			case "bearer":
-			case "basic":
-
-				switch (authScheme) {
-					case "bearer":
-					case "basic":
-						authScheme = authScheme + " ";
-						break;
-				}
-
-				config.put("authenticationScheme", authScheme);
-				break;
-			default:
-				throw new SeerbitException("Invalid authentication scheme");
-		}
-
-	}
+    switch (authScheme) {
+      case "bearer ":
+      case "basic ":
+      case "bearer":
+      case "basic":
+        switch (authScheme) {
+          case "bearer":
+          case "basic":
+            authScheme = authScheme + " ";
+            break;
+        }
+        config.put("authenticationScheme", authScheme);
+        break;
+      default:
+        throw new SeerbitException("Invalid authentication scheme");
+    }
+  }
 }

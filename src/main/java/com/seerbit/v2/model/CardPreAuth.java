@@ -30,51 +30,50 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class CardPreAuth implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	@NotBlank(message = "\"paymentReference\" cannot be blank")
-	@NotNull(message = "\"paymentReference\" cannot be null")
-	private String paymentReference;
+  @NotBlank(message = "\"paymentReference\" cannot be blank")
+  @NotNull(message = "\"paymentReference\" cannot be null")
+  private String paymentReference;
 
-	@NotBlank(message = "\"publicKey\" cannot be blank")
-	@NotNull(message = "\"publicKey\" cannot be null")
-	private String publicKey;
+  @NotBlank(message = "\"publicKey\" cannot be blank")
+  @NotNull(message = "\"publicKey\" cannot be null")
+  private String publicKey;
 
+  @NotBlank(message = "\"cardNumber\" cannot be blank")
+  @NotNull(message = "\"cardNumber\" cannot be null")
+  private String cardNumber;
 
-	@NotBlank(message = "\"cardNumber\" cannot be blank")
-	@NotNull(message = "\"cardNumber\" cannot be null")
-	private String cardNumber;
+  @NotBlank(message = "\"cvv\" cannot be blank")
+  @NotNull(message = "\"cvv\" cannot be null")
+  private String cvv;
 
-	@NotBlank(message = "\"cvv\" cannot be blank")
-	@NotNull(message = "\"cvv\" cannot be null")
-	private String cvv;
+  @NotBlank(message = "\"expiryMonth\" cannot be blank")
+  @NotNull(message = "\"expiryMonth\" cannot be null")
+  private String expiryMonth;
 
-	@NotBlank(message = "\"expiryMonth\" cannot be blank")
-	@NotNull(message = "\"expiryMonth\" cannot be null")
-	private String expiryMonth;
+  @NotBlank(message = "\"expiryYear\" cannot be blank")
+  @NotNull(message = "\"expiryYear\" cannot be null")
+  private String expiryYear;
 
-	@NotBlank(message = "\"expiryYear\" cannot be blank")
-	@NotNull(message = "\"expiryYear\" cannot be null")
-	private String expiryYear;
+  @NotBlank(message = "\"currency\" cannot be blank")
+  @NotNull(message = "\"currency\" cannot be null")
+  private String currency;
 
-	@NotBlank(message = "\"currency\" cannot be blank")
-	@NotNull(message = "\"currency\" cannot be null")
-	private String currency;
+  @NotBlank(message = "\"country\" cannot be blank")
+  @NotNull(message = "\"country\" cannot be null")
+  private String country;
 
-	@NotBlank(message = "\"country\" cannot be blank")
-	@NotNull(message = "\"country\" cannot be null")
-	private String country;
+  private String productDescription;
 
-	private String productDescription;
+  @NotBlank(message = "\"amount\" cannot be blank")
+  @NotNull(message = "\"amount\" cannot be null")
+  private String amount;
 
-	@NotBlank(message = "\"amount\" cannot be blank")
-	@NotNull(message = "\"amount\" cannot be null")
-	private String amount;
+  @NotBlank(message = "\"email\" cannot be blank")
+  @NotNull(message = "\"email\" cannot be null")
+  @Email(message = "\"email\" must be a valid email")
+  private String email;
 
-	@NotBlank(message = "\"email\" cannot be blank")
-	@NotNull(message = "\"email\" cannot be null")
-	@Email(message = "\"email\" must be a valid email")
-	private String email;
-
-	private String fullName;
+  private String fullName;
 }

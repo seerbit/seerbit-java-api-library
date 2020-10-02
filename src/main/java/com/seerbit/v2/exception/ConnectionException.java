@@ -19,16 +19,12 @@ package com.seerbit.v2.exception;
 
 import lombok.NoArgsConstructor;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 @NoArgsConstructor
 public class ConnectionException extends RuntimeException {
 
-	/**
-	 * @param message A non-optional String, the error message
-	 */
-	public ConnectionException(final String message) {
-		super(message);
-	}
+  /** @param message A non-optional String, the error message */
+  public ConnectionException(final String message) {
+    super(message);
+  }
 }

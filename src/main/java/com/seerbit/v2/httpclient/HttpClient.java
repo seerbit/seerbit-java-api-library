@@ -21,37 +21,32 @@ import com.seerbit.v2.service.Service;
 
 import java.util.Map;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public interface HttpClient {
 
-	/**
-	 * @param service    A non-optional class, the Service
-	 * @param requestUrl A non-optional String, the request url
-	 * @param params     A non-optional Map, the payload
-	 * @param token      A nullable String, the auth token
-	 *
-	 * @return json
-	 */
-	JsonObject post(Service service, String requestUrl, Map<String, Object> params, String token);
+  /**
+   * @param service A non-optional class, the Service
+   * @param requestUrl A non-optional String, the request url
+   * @param params A non-optional Map, the payload
+   * @param token A nullable String, the auth token
+   * @return json
+   */
+  JsonObject post(Service service, String requestUrl, Map<String, Object> params, String token);
 
-	/**
-	 * @param service    A non-optional class, the Service
-	 * @param requestUrl A non-optional String, the request url
-	 * @param params     A non-optional Map, the payload
-	 * @param token      A nullable String, the auth token
-	 *
-	 * @return json
-	 */
-	JsonObject put(Service service, String requestUrl, Map<String, Object> params, String token);
+  /**
+   * @param service A non-optional class, the Service
+   * @param requestUrl A non-optional String, the request url
+   * @param params A non-optional Map, the payload
+   * @param token A nullable String, the auth token
+   * @return json
+   */
+  JsonObject put(Service service, String requestUrl, Map<String, Object> params, String token);
 
-	/**
-	 * @param service    A non-optional class, the Service
-	 * @param requestUrl A non-optional String, the request url
-	 * @param token      A nullable String, the auth token
-	 *
-	 * @return json
-	 */
-	JsonObject get(Service service, String requestUrl, String token);
+  /**
+   * @param service A non-optional class, the Service
+   * @param requestUrl A non-optional String, the request url
+   * @param token A nullable String, the auth token
+   * @return json
+   */
+  JsonObject get(Service service, String requestUrl, String token);
 }

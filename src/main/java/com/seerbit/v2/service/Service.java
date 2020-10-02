@@ -18,18 +18,12 @@ package com.seerbit.v2.service;
 
 import com.seerbit.v2.Client;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public interface Service {
 
-	/**
-	 * @return Client
-	 */
-	Client getClient();
+  /** @return Client */
+  Client getClient();
 
-	/**
-	 * @return boolean
-	 */
-	boolean isTokenRequired();
+  /** @return boolean */
+  boolean isTokenRequired();
 }

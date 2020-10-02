@@ -24,28 +24,26 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDetails implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	@NotBlank(message = "\"orderId\" cannot be blank")
-	@NotNull(message = "\"orderId\" cannot be null")
-	private String orderId;
+  @NotBlank(message = "\"orderId\" cannot be blank")
+  @NotNull(message = "\"orderId\" cannot be null")
+  private String orderId;
 
-	@NotBlank(message = "\"currency\" cannot be blank")
-	@NotNull(message = "\"currency\" cannot be null")
-	private String currency;
+  @NotBlank(message = "\"currency\" cannot be blank")
+  @NotNull(message = "\"currency\" cannot be null")
+  private String currency;
 
-	@NotBlank(message = "\"amount\" cannot be blank")
-	@NotNull(message = "\"amount\" cannot be null")
-	private String amount;
+  @NotBlank(message = "\"amount\" cannot be blank")
+  @NotNull(message = "\"amount\" cannot be null")
+  private String amount;
 
-	private String productId;
-	private String productDescription;
+  private String productId;
+  private String productDescription;
 }

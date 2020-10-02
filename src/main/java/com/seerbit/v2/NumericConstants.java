@@ -16,15 +16,13 @@
  */
 package com.seerbit.v2;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public interface NumericConstants {
 
-	// numeric constants
-	int MIN_VALUE = 1;
-	int MIN_SIZE = 1;
-	int NIL = 0;
-	int HTTP_STATUS_200 = 200;
-	int HTTP_STATUS_299 = 299;
+  // numeric constants
+  int MIN_VALUE = 1;
+  int MIN_SIZE = 1;
+  int NIL = 0;
+  int HTTP_STATUS_200 = 200;
+  int HTTP_STATUS_299 = 299;
 }

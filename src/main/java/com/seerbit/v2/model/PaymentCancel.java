@@ -24,27 +24,25 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class PaymentCancel implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	@NotBlank(message = "\"paymentReference\" cannot be blank")
-	@NotNull(message = "\"paymentReference\" cannot be null")
-	private String paymentReference;
+  @NotBlank(message = "\"paymentReference\" cannot be blank")
+  @NotNull(message = "\"paymentReference\" cannot be null")
+  private String paymentReference;
 
-	@NotBlank(message = "\"publicKey\" cannot be blank")
-	@NotNull(message = "\"publicKey\" cannot be null")
-	private String publicKey;
+  @NotBlank(message = "\"publicKey\" cannot be blank")
+  @NotNull(message = "\"publicKey\" cannot be null")
+  private String publicKey;
 
-	@NotBlank(message = "\"country\" cannot be blank")
-	@NotNull(message = "\"country\" cannot be null")
-	private String country;
+  @NotBlank(message = "\"country\" cannot be blank")
+  @NotNull(message = "\"country\" cannot be null")
+  private String country;
 
-	private String productDescription;
+  private String productDescription;
 }

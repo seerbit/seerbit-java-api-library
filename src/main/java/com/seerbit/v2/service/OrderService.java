@@ -19,15 +19,12 @@ package com.seerbit.v2.service;
 import com.google.gson.JsonObject;
 import com.seerbit.v2.model.Order;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public interface OrderService {
 
-	/**
-	 * @param order A non-optional class, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject doAuthorize(Order order);
+  /**
+   * @param order A non-optional class, the payload
+   * @return JsonObject
+   */
+  JsonObject doAuthorize(Order order);
 }

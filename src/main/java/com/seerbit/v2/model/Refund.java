@@ -24,21 +24,19 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Refund implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private RefundTypeEnum type = RefundTypeEnum.FULL_REFUND;
+  private RefundTypeEnum type = RefundTypeEnum.FULL_REFUND;
 
-	private String amount;
-	private String resolution;
+  private String amount;
+  private String resolution;
 
-	@JsonProperty("resolution_image")
-	private String resolutionImage;
+  @JsonProperty("resolution_image")
+  private String resolutionImage;
 }

@@ -20,22 +20,18 @@ import com.google.gson.JsonObject;
 import com.seerbit.v2.model.Account;
 import com.seerbit.v2.model.Otp;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public interface AccountService {
 
-	/**
-	 * @param accountPayload A non-optional class, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject doAuthorize(Account accountPayload);
+  /**
+   * @param accountPayload A non-optional class, the payload
+   * @return JsonObject
+   */
+  JsonObject doAuthorize(Account accountPayload);
 
-	/**
-	 * @param otpPayload A non-optional class, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject doValidate(Otp otpPayload);
+  /**
+   * @param otpPayload A non-optional class, the payload
+   * @return JsonObject
+   */
+  JsonObject doValidate(Otp otpPayload);
 }

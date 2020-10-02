@@ -17,32 +17,22 @@
  */
 package com.seerbit.v2;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public interface Seerbit {
 
-	/**
-	 * @return apiBase
-	 */
-	default String getApiBase() {
-		return ClientConstants.LIVE_API_BASE;
-	}
+  /** @return apiBase */
+  default String getApiBase() {
+    return ClientConstants.LIVE_API_BASE;
+  }
 
-	/**
-	 * @return apiBasePilot
-	 */
-	default String getApiBaseTest() {
-		return ClientConstants.TEST_API_BASE;
-	}
+  /** @return apiBasePilot */
+  default String getApiBaseTest() {
+    return ClientConstants.TEST_API_BASE;
+  }
 
-	/**
-	 * @return apiVersion
-	 */
-	String getApiVersion();
+  /** @return apiVersion */
+  String getApiVersion();
 
-	/**
-	 * @param apiVersion A non-optional String, the api version
-	 */
-	void setApiVersion(final String apiVersion);
+  /** @param apiVersion A non-optional String, the api version */
+  void setApiVersion(final String apiVersion);
 }

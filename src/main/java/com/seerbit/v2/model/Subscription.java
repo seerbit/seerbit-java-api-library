@@ -25,9 +25,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 @Data
 @Builder
 @AllArgsConstructor
@@ -36,29 +34,29 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Subscription implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private String publicKey;
-	private String paymentReference;
-	private String planId;
-	private String cardNumber;
-	private String expiryMonth;
-	private String callbackUrl;
-	private String expiryYear;
-	private String cvv;
-	private String amount;
-	private String currency;
-	private String productDescription;
-	private String productId;
-	private String country;
-	private String startDate;
-	private String cardName;
-	private String billingCycle;
-	private String email;
-	private String mobileNumber;
-	private String customerId;
-	private String billingPeriod;
-	private String billingId;
-	private String status;
-	private boolean subscriptionAmount;
+  private String publicKey;
+  private String paymentReference;
+  private String planId;
+  private String cardNumber;
+  private String expiryMonth;
+  private String callbackUrl;
+  private String expiryYear;
+  private String cvv;
+  private String amount;
+  private String currency;
+  private String productDescription;
+  private String productId;
+  private String country;
+  private String startDate;
+  private String cardName;
+  private String billingCycle;
+  private String email;
+  private String mobileNumber;
+  private String customerId;
+  private String billingPeriod;
+  private String billingId;
+  private String status;
+  private boolean subscriptionAmount;
 }

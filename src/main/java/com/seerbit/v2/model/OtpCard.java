@@ -23,16 +23,14 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class OtpCard implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	@NotNull(message = "\"transactions\" cannot be null")
-	private OtpTransactionsDetails transactions;
+  @NotNull(message = "\"transactions\" cannot be null")
+  private OtpTransactionsDetails transactions;
 }

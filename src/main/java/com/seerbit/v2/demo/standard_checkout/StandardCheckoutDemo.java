@@ -32,180 +32,148 @@ import org.apache.commons.codec.binary.Hex;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public class StandardCheckoutDemo {
 
-	private static Client client;
+  private static Client client;
 
-	/**
-	 * @return token (java.lang.String)
-	 */
-	private static String doAuthenticate() {
-		Seerbit seerbit;
-		String token;
-		AuthenticationService authService;
-		JsonObject json;
-		String jsonString;
+  /** @return token (java.lang.String) */
+  private static String doAuthenticate() {
+    System.out.println("================== start authentication ==================");
+    Seerbit seerbit = new SeerbitImpl();
+    client = new Client();
+    client.setApiBase(seerbit.getApiBase());
+    client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
+    client.setPublicKey("public_key");
+    client.setPrivateKey("private_key");
+    client.setTimeout(20);
+    AuthenticationService authService = new AuthenticationServiceImpl(client);
+    JsonObject json = authService.doAuth();
+    String jsonString = String.format("auth response: \n%s", json.toString());
+    System.out.println(jsonString);
+    System.out.println("================== end authentication ==================");
+    System.out.println("\n");
+    System.out.println("\n");
+    return authService.getToken();
+  }
 
-		System.out.println("================== start authentication ==================");
-		seerbit = new SeerbitImpl();
-		client = new Client();
-		client.setApiBase(seerbit.getApiBase());
-		client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
-		client.setPublicKey("public_key");
-		client.setPrivateKey("private_key");
-		client.setTimeout(20);
-		authService = new AuthenticationServiceImpl(client);
-		json = authService.doAuth();
-		jsonString = String.format("auth response: \n%s", json.toString());
-		System.out.println(jsonString);
-		System.out.println("================== end authentication ==================");
-		System.out.println("\n");
-		System.out.println("\n");
-		token = authService.getToken();
+  /**
+   * @param token (java.lang.String)
+   * @return response
+   */
+  private static JsonObject doInitializeTransaction(String token) {
+    System.out.println("================== start initialize transaction ==================");
+    StandardCheckoutService standardCheckoutService =
+        new StandardCheckoutServiceImpl(client, token);
+    // build hash payload
+    StandardCheckout standardCheckoutHash =
+        StandardCheckout.builder()
+            .amount("100.00")
+            .callbackUrl("http://yourwebsite.com")
+            .country("NG")
+            .currency("NGN")
+            .email("okechukwu.diei2@gmail.com")
+            .paymentReference("643108207792124616573324Q145A")
+            .productId("227271")
+            .productDescription("Fish Products")
+            .publicKey(client.getPublicKey())
+            .build();
+    // get hash
+    String hash = standardCheckoutService.getHash(standardCheckoutHash);
+    // build checkout payload
+    StandardCheckout standardCheckout =
+        StandardCheckout.builder()
+            .amount("100.00")
+            .callbackUrl("http://yourwebsite.com")
+            .country("NG")
+            .currency("NGN")
+            .email("okechukwu.diei2@gmail.com")
+            .hash(hash)
+            .hashType("sha256")
+            .paymentReference("643108207792124616573324Q145A")
+            .productDescription("Fish Products")
+            .productId("227271")
+            .publicKey(client.getPublicKey())
+            .build();
+    JsonObject response = standardCheckoutService.doInitializeTransaction(standardCheckout);
+    System.out.println("================== stop initialize transaction ==================");
+    return response;
+  }
 
-		return token;
-	}
+  private static String doSha256(String rawKey) throws Exception {
+    try {
+      MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+      byte[] encrypted = messageDigest.digest(rawKey.getBytes());
+      return new String(Hex.encodeHex(encrypted));
+    } catch (NoSuchAlgorithmException ex) {
+      String errorMessage = "Unable to hash this string";
+      throw new Exception(errorMessage);
+    }
+  }
 
-	/**
-	 * @param token (java.lang.String)
-	 *
-	 * @return response
-	 */
-	private static JsonObject doInitializeTransaction(String token) {
-		StandardCheckoutService standardCheckoutService;
-		StandardCheckout standardCheckout;
-		StandardCheckout standardCheckoutHash;
-		String hash;
-		JsonObject response;
+  private static JsonObject doInitializeTransactionWithManualHash(String token) {
+    System.out.println(
+        "================== start initialize transaction with manual hash ==================");
+    StandardCheckoutService standardCheckoutService =
+        new StandardCheckoutServiceImpl(client, token);
+    // build hash payload
+    String standardCheckoutHash =
+        "amount=100.00"
+            + "&"
+            + "callbackUrl=http://yourwebsite.com"
+            + "&"
+            + "country=NG"
+            + "&"
+            + "currency=NGN"
+            + "&"
+            + "email=okechukwu.diei2@gmail.com"
+            + "&"
+            + "paymentReference=643108207792124616573324Q145B"
+            + "&"
+            + "productDescription=Fish Products"
+            + "&"
+            + "productId=227271"
+            + "&"
+            + "publicKey="
+            + client.getPublicKey()
+            + client.getPrivateKey();
 
-		System.out.println("================== start initialize transaction ==================");
-		standardCheckoutService = new StandardCheckoutServiceImpl(client, token);
-		// build hash payload
-		standardCheckoutHash = StandardCheckout
-			.builder()
-			.amount("100.00")
-			.callbackUrl("http://yourwebsite.com")
-			.country("NG")
-			.currency("NGN")
-			.email("okechukwu.diei2@gmail.com")
-			.paymentReference("643108207792124616573324Q145A")
-			.productId("227271")
-			.productDescription("Fish Products")
-			.publicKey(client.getPublicKey())
-			.build();
-		// get hash
-		hash = standardCheckoutService.getHash(standardCheckoutHash);
-		// build checkout payload
-		standardCheckout = StandardCheckout
-			.builder()
-			.amount("100.00")
-			.callbackUrl("http://yourwebsite.com")
-			.country("NG")
-			.currency("NGN")
-			.email("okechukwu.diei2@gmail.com")
-			.hash(hash)
-			.hashType("sha256")
-			.paymentReference("643108207792124616573324Q145A")
-			.productDescription("Fish Products")
-			.productId("227271")
-			.publicKey(client.getPublicKey())
-			.build();
-		response = standardCheckoutService.doInitializeTransaction(standardCheckout);
-		System.out.println("================== stop initialize transaction ==================");
+    String hash;
+    try {
+      // get hash
+      hash = StandardCheckoutDemo.doSha256(standardCheckoutHash);
+    } catch (Exception exception) {
+      throw new SeerbitException(exception.getMessage());
+    }
 
-		return response;
-	}
+    // build checkout payload
+    StandardCheckout standardCheckout =
+        StandardCheckout.builder()
+            .amount("100.00")
+            .callbackUrl("http://yourwebsite.com")
+            .country("NG")
+            .currency("NGN")
+            .email("okechukwu.diei2@gmail.com")
+            .hash(hash)
+            .hashType("sha256")
+            .paymentReference("643108207792124616573324Q145B")
+            .productDescription("Fish Products")
+            .productId("227271")
+            .publicKey(client.getPublicKey())
+            .build();
+    JsonObject response = standardCheckoutService.doInitializeTransaction(standardCheckout);
+    System.out.println(
+        "================== stop initialize transaction with manual hash ==================");
 
-	private static String doSha256(String rawKey) throws Exception {
-		MessageDigest messageDigest;
-		String errorMessage;
-		byte[] encrypted;
+    return response;
+  }
 
-		try {
-			messageDigest = MessageDigest.getInstance("SHA-256");
-			encrypted = messageDigest.digest(rawKey.getBytes());
-			return new String(Hex.encodeHex(encrypted));
-		} catch (NoSuchAlgorithmException ex) {
-			errorMessage = "Unable to hash this string";
-			throw new Exception(errorMessage);
-		}
-
-	}
-
-	private static JsonObject doInitializeTransactionWithManualHash(String token) {
-		StandardCheckoutService standardCheckoutService;
-		StandardCheckout standardCheckout;
-		String hash;
-		JsonObject response;
-		String standardCheckoutHash;
-
-		System.out.println("================== start initialize transaction with manual hash ==================");
-		standardCheckoutService = new StandardCheckoutServiceImpl(client, token);
-		// build hash payload
-		standardCheckoutHash = new StringBuilder()
-			.append("amount=100.00")
-			.append("&")
-			.append("callbackUrl=http://yourwebsite.com")
-			.append("&")
-			.append("country=NG")
-			.append("&")
-			.append("currency=NGN")
-			.append("&")
-			.append("email=okechukwu.diei2@gmail.com")
-			.append("&")
-			.append("paymentReference=643108207792124616573324Q145B")
-			.append("&")
-			.append("productDescription=Fish Products")
-			.append("&")
-			.append("productId=227271")
-			.append("&")
-			.append("publicKey=")
-			.append(client.getPublicKey())
-			.append(client.getPrivateKey())
-			.toString();
-
-		try {
-			// get hash
-			hash = StandardCheckoutDemo.doSha256(standardCheckoutHash);
-		} catch (Exception exception) {
-			throw new SeerbitException(exception.getMessage());
-		}
-
-		// build checkout payload
-		standardCheckout = StandardCheckout
-			.builder()
-			.amount("100.00")
-			.callbackUrl("http://yourwebsite.com")
-			.country("NG")
-			.currency("NGN")
-			.email("okechukwu.diei2@gmail.com")
-			.hash(hash)
-			.hashType("sha256")
-			.paymentReference("643108207792124616573324Q145B")
-			.productDescription("Fish Products")
-			.productId("227271")
-			.publicKey(client.getPublicKey())
-			.build();
-		response = standardCheckoutService.doInitializeTransaction(standardCheckout);
-		System.out.println("================== stop initialize transaction with manual hash ==================");
-
-		return response;
-	}
-
-	/**
-	 * @param args String arguments array for main function
-	 */
-	public static void main(String... args) {
-		String token;
-		JsonObject response;
-
-		token = StandardCheckoutDemo.doAuthenticate();
-		response = StandardCheckoutDemo.doInitializeTransaction(token);
-		System.out.println("standard checkout response: " + response.toString());
-		response = StandardCheckoutDemo.doInitializeTransactionWithManualHash(token);
-		System.out.println("standard checkout response (manual hash): " + response.toString());
-	}
+  /** @param args String arguments array for main function */
+  public static void main(String... args) {
+    String token = StandardCheckoutDemo.doAuthenticate();
+    JsonObject response = StandardCheckoutDemo.doInitializeTransaction(token);
+    System.out.println("standard checkout response: " + response.toString());
+    response = StandardCheckoutDemo.doInitializeTransactionWithManualHash(token);
+    System.out.println("standard checkout response (manual hash): " + response.toString());
+  }
 }

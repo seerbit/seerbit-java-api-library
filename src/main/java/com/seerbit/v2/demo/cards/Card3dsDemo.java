@@ -27,96 +27,74 @@ import com.seerbit.v2.service.CardService;
 import com.seerbit.v2.service.impl.AuthenticationServiceImpl;
 import com.seerbit.v2.service.impl.CardServiceImpl;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public class Card3dsDemo {
 
-	private static Client client;
+  private static Client client;
 
-	/**
-	 * @return token (java.lang.String)
-	 */
-	private static String doAuthenticate() {
-		Seerbit seerbit;
-		String token;
-		AuthenticationService authService;
-		JsonObject json;
-		String jsonString;
+  /** @return token (java.lang.String) */
+  private static String doAuthenticate() {
+    System.out.println("================== start authentication ==================");
+    Seerbit seerbit = new SeerbitImpl();
+    client = new Client();
+    client.setApiBase(seerbit.getApiBase());
+    client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
+    client.setPublicKey("public_key");
+    client.setPrivateKey("private_key");
+    client.setTimeout(20);
+    AuthenticationService authService = new AuthenticationServiceImpl(client);
+    JsonObject json = authService.doAuth();
+    String jsonString = String.format("auth response: \n%s", json.toString());
+    System.out.println(jsonString);
+    System.out.println("================== end authentication ==================");
+    System.out.println("\n");
+    System.out.println("\n");
+    return authService.getToken();
+  }
 
-		System.out.println("================== start authentication ==================");
-		seerbit = new SeerbitImpl();
-		client = new Client();
-		client.setApiBase(seerbit.getApiBase());
-		client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
-		client.setPublicKey("public_key");
-		client.setPrivateKey("private_key");
-		client.setTimeout(20);
-		authService = new AuthenticationServiceImpl(client);
-		json = authService.doAuth();
-		jsonString = String.format("auth response: \n%s", json.toString());
-		System.out.println(jsonString);
-		System.out.println("================== end authentication ==================");
-		System.out.println("\n");
-		System.out.println("\n");
-		token = authService.getToken();
-		return token;
-	}
+  /**
+   * @param token token (java.lang.String)
+   * @return response
+   */
+  private static JsonObject doCard3dsCharge(String token) {
+    System.out.println("================== start card 3ds charge ==================");
+    CardPayment cardPayment =
+        CardPayment.builder()
+            .publicKey(client.getPublicKey())
+            .amount("1000.00")
+            .fee("10.00")
+            .fullName("Victor Ighalo")
+            .mobileNumber("08032000033")
+            .currency("KES")
+            .country("KE")
+            .paymentReference("SBT1237473728")
+            .email("johndoe@gmail.com")
+            .productId("Foods")
+            .productDescription("Test Description")
+            .clientAppCode("kpp64")
+            .redirectUrl("www.ser1.com")
+            .channelType("Mastercard")
+            .deviceType("Apple Laptop")
+            .sourceIP("127.0.0.1:3456")
+            .cardNumber("5123450000000008")
+            .cvv("100")
+            .expiryMonth("05")
+            .expiryYear("21")
+            .pin("1234")
+            .retry("false")
+            .paymentType("CARD")
+            .invoiceNumber("1234567890abc123ac")
+            .build();
+    CardService cardService = new CardServiceImpl(client, token);
+    JsonObject response = cardService.doPaymentCharge3DS(cardPayment);
+    System.out.println("================== end card 3ds charge ==================");
+    return response;
+  }
 
-	/**
-	 * @param token token (java.lang.String)
-	 *
-	 * @return response
-	 */
-	private static JsonObject doCard3dsCharge(String token) {
-		JsonObject response;
-		CardService cardService;
-		CardPayment cardPayment;
-
-		System.out.println("================== start card 3ds charge ==================");
-		cardPayment = CardPayment
-			.builder()
-			.publicKey(client.getPublicKey())
-			.amount("1000.00")
-			.fee("10.00")
-			.fullName("Victor Ighalo")
-			.mobileNumber("08032000033")
-			.currency("KES")
-			.country("KE")
-			.paymentReference("SBT1237473728")
-			.email("johndoe@gmail.com")
-			.productId("Foods")
-			.productDescription("Test Description")
-			.clientAppCode("kpp64")
-			.redirectUrl("www.ser1.com")
-			.channelType("Mastercard")
-			.deviceType("Apple Laptop")
-			.sourceIP("127.0.0.1:3456")
-			.cardNumber("5123450000000008")
-			.cvv("100")
-			.expiryMonth("05")
-			.expiryYear("21")
-			.pin("1234")
-			.retry("false")
-			.paymentType("CARD")
-			.invoiceNumber("1234567890abc123ac")
-			.build();
-		cardService = new CardServiceImpl(client, token);
-		response = cardService.doPaymentCharge3DS(cardPayment);
-		System.out.println("================== end card 3ds charge ==================");
-
-		return response;
-	}
-
-	/**
-	 * @param args String arguments array for main function
-	 */
-	public static void main(String... args) {
-		String token;
-		JsonObject response;
-
-		token = Card3dsDemo.doAuthenticate();
-		response = Card3dsDemo.doCard3dsCharge(token);
-		System.out.println("card 3ds response: " + response.toString());
-	}
+  /** @param args String arguments array for main function */
+  public static void main(String... args) {
+    String token = Card3dsDemo.doAuthenticate();
+    JsonObject response = Card3dsDemo.doCard3dsCharge(token);
+    System.out.println("card 3ds response: " + response.toString());
+  }
 }

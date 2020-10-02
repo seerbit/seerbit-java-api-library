@@ -31,89 +31,64 @@ import com.seerbit.v2.service.impl.OrderServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public class OrdersDemo {
 
-	private static Client client;
+  private static Client client;
 
-	/**
-	 * @return token (java.lang.String)
-	 */
-	private static String doAuthenticate() {
-		Seerbit seerbit;
-		String token;
-		AuthenticationService authService;
-		JsonObject json;
-		String jsonString;
+  /** @return token (java.lang.String) */
+  private static String doAuthenticate() {
+    System.out.println("================== start authentication ==================");
+    Seerbit seerbit = new SeerbitImpl();
+    client = new Client();
+    client.setApiBase(seerbit.getApiBase());
+    client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
+    client.setPublicKey("public_key");
+    client.setPrivateKey("private_key");
+    client.setTimeout(20);
+    AuthenticationService authService = new AuthenticationServiceImpl(client);
+    JsonObject json = authService.doAuth();
+    String jsonString = String.format("auth response: \n%s", json.toString());
+    System.out.println(jsonString);
+    System.out.println("================== end authentication ==================");
+    System.out.println("\n");
+    System.out.println("\n");
+    return authService.getToken();
+  }
 
-		System.out.println("================== start authentication ==================");
-		seerbit = new SeerbitImpl();
-		client = new Client();
-		client.setApiBase(seerbit.getApiBase());
-		client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
-		client.setPublicKey("public_key");
-		client.setPrivateKey("private_key");
-		client.setTimeout(20);
-		authService = new AuthenticationServiceImpl(client);
-		json = authService.doAuth();
-		jsonString = String.format("auth response: \n%s", json.toString());
-		System.out.println(jsonString);
-		System.out.println("================== end authentication ==================");
-		System.out.println("\n");
-		System.out.println("\n");
-		token = authService.getToken();
-		return token;
-	}
+  /**
+   * @param token token (java.lang.String)
+   * @return response
+   */
+  private static JsonObject doOrders(String token) {
+    Order order = new Order();
+    List<OrderDetails> orders = new ArrayList<>(1);
+    OrderDetails orderDetails = new OrderDetails();
+    OrderService orderService = new OrderServiceImpl(client, token);
+    order.setEmail("okechukwu.diei2@gmail.com");
+    order.setPublicKey(client.getPublicKey());
+    order.setPaymentReference("SBT327273672728");
+    order.setFullName("Diei Okechukwu Peter");
+    order.setOrderType("BULK_BULK");
+    order.setMobileNumber("08000000001");
+    order.setCallbackUrl("https://yourdomain.com");
+    order.setCountry("NG");
+    order.setCurrency("NGN");
+    order.setAmount("100.00");
+    orderDetails.setOrderId("22S789420214623");
+    orderDetails.setCurrency("NGN");
+    orderDetails.setAmount("1.00");
+    orderDetails.setProductDescription("mango");
+    orderDetails.setProductId("fruits");
+    orders.add(orderDetails);
+    order.setOrders(orders);
+    return orderService.doAuthorize(order);
+  }
 
-	/**
-	 * @param token token (java.lang.String)
-	 *
-	 * @return response
-	 */
-	private static JsonObject doOrders(String token) {
-		OrderService orderService;
-		JsonObject response;
-		Order order;
-		List<OrderDetails> orders;
-		OrderDetails orderDetails;
-
-		order = new Order();
-		orders = new ArrayList<>(1);
-		orderDetails = new OrderDetails();
-		orderService = new OrderServiceImpl(client, token);
-		order.setEmail("okechukwu.diei2@gmail.com");
-		order.setPublicKey(client.getPublicKey());
-		order.setPaymentReference("SBT327273672728");
-		order.setFullName("Diei Okechukwu Peter");
-		order.setOrderType("BULK_BULK");
-		order.setMobileNumber("08000000001");
-		order.setCallbackUrl("https://yourdomain.com");
-		order.setCountry("NG");
-		order.setCurrency("NGN");
-		order.setAmount("100.00");
-		orderDetails.setOrderId("22S789420214623");
-		orderDetails.setCurrency("NGN");
-		orderDetails.setAmount("1.00");
-		orderDetails.setProductDescription("mango");
-		orderDetails.setProductId("fruits");
-		orders.add(orderDetails);
-		order.setOrders(orders);
-		response = orderService.doAuthorize(order);
-
-		return response;
-	}
-
-	/**
-	 * @param args String arguments array for main function
-	 */
-	public static void main(String... args) {
-		String token;
-		JsonObject response;
-
-		token = OrdersDemo.doAuthenticate();
-		response = OrdersDemo.doOrders(token);
-		System.out.println("orders demo response: " + response.toString());
-	}
+  /** @param args String arguments array for main function */
+  public static void main(String... args) {
+    String token = OrdersDemo.doAuthenticate();
+    JsonObject response = OrdersDemo.doOrders(token);
+    System.out.println("orders demo response: " + response.toString());
+  }
 }

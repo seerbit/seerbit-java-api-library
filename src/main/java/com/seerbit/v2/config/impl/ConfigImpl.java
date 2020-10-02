@@ -22,84 +22,66 @@ import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 @NoArgsConstructor
 public class ConfigImpl implements Config, NumericConstants {
 
-	/**
-	 * @return publicKey
-	 */
-	@Override
-	public String getPublicKey() {
-		String publicKey;
+  /** @return publicKey */
+  @Override
+  public String getPublicKey() {
+    String publicKey = null;
 
-		publicKey = null;
+    if (!ConfigImpl.data.isEmpty()) {
+      if (Objects.nonNull(ConfigImpl.data.get("publicKey"))) {
+        publicKey = String.valueOf(ConfigImpl.data.get("publicKey"));
+      }
+    }
 
-		if (!ConfigImpl.data.isEmpty()) {
+    return publicKey;
+  }
 
-			if (Objects.nonNull(ConfigImpl.data.get("publicKey"))) {
-				publicKey = String.valueOf(ConfigImpl.data.get("publicKey"));
-			}
+  /** @return privateKey */
+  @Override
+  public String getPrivateKey() {
+    String privateKey = null;
 
-		}
+    if (!ConfigImpl.data.isEmpty()) {
+      if (Objects.nonNull(ConfigImpl.data.get("privateKey"))) {
+        privateKey = String.valueOf(ConfigImpl.data.get("privateKey"));
+      }
+    }
 
-		return publicKey;
-	}
+    return privateKey;
+  }
 
-	/**
-	 * @return privateKey
-	 */
-	@Override
-	public String getPrivateKey() {
-		String privateKey;
+  /**
+   * @param key
+   * @return java.lang.Object
+   */
+  @Override
+  public Object get(String key) {
+    return (Objects.nonNull(ConfigImpl.data.get(key))) ? ConfigImpl.data.get(key) : null;
+  }
 
-		privateKey = null;
+  /**
+   * @param key A non-optional String, the key
+   * @param value A non-optional String, the key value
+   */
+  @Override
+  public void put(String key, Object value) {
+    ConfigImpl.data.put(key, value);
+  }
 
-		if (!ConfigImpl.data.isEmpty()) {
+  /** @return timeout */
+  @Override
+  public int getTimeout() {
+    String timeout;
 
-			if (Objects.nonNull(ConfigImpl.data.get("privateKey"))) {
-				privateKey = String.valueOf(ConfigImpl.data.get("privateKey"));
-			}
+    if (Objects.nonNull(ConfigImpl.data.get("timeout"))) {
+      timeout = String.valueOf(ConfigImpl.data.get("timeout"));
+      return Integer.parseInt(timeout);
+    }
 
-		}
-
-		return privateKey;
-	}
-
-	/**
-	 * @param key
-	 *
-	 * @return java.lang.Object
-	 */
-	@Override
-	public Object get(String key) {
-		return (Objects.nonNull(ConfigImpl.data.get(key))) ? ConfigImpl.data.get(key) : null;
-	}
-
-	/**
-	 * @param key   A non-optional String, the key
-	 * @param value A non-optional String, the key value
-	 */
-	@Override
-	public void put(String key, Object value) {
-		ConfigImpl.data.put(key, value);
-	}
-
-
-	/**
-	 * @return timeout
-	 */
-	@Override
-	public int getTimeout() {
-		String timeout;
-
-		if (Objects.nonNull(ConfigImpl.data.get("timeout"))) {
-			timeout = String.valueOf(ConfigImpl.data.get("timeout"));
-			return Integer.parseInt(timeout);
-		}
-
-		return NIL;
-	}
+    return NIL;
+  }
 }

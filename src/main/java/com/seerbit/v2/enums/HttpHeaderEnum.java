@@ -16,36 +16,29 @@
  */
 package com.seerbit.v2.enums;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public enum HttpHeaderEnum {
+  CONTENT_TYPE("Content-Type", "application/json");
 
-	CONTENT_TYPE("Content-Type", "application/json");
+  private final String param;
+  private final String value;
 
-	private final String param;
-	private final String value;
+  /**
+   * @param param A non-optional String, the http header param
+   * @param value A non-optional String, the http header param value
+   */
+  HttpHeaderEnum(final String param, final String value) {
+    this.param = param;
+    this.value = value;
+  }
 
-	/**
-	 * @param param A non-optional String, the http header param
-	 * @param value A non-optional String, the http header param value
-	 */
-	HttpHeaderEnum(final String param, final String value) {
-		this.param = param;
-		this.value = value;
-	}
+  /** @return param */
+  public String getParam() {
+    return param;
+  }
 
-	/**
-	 * @return param
-	 */
-	public String getParam() {
-		return param;
-	}
-
-	/**
-	 * @return value
-	 */
-	public String getValue() {
-		return value;
-	}
+  /** @return value */
+  public String getValue() {
+    return value;
+  }
 }

@@ -19,33 +19,28 @@ package com.seerbit.v2.service;
 import com.google.gson.JsonObject;
 import com.seerbit.v2.model.Refund;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public interface RefundService {
 
-	/**
-	 * @param businessId A non-optional String, the business Id
-	 * @param page       A non-optional int, the initial page
-	 * @param size       A non-optional int, the page size
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject getAllRefund(String businessId, int page, int size);
+  /**
+   * @param businessId A non-optional String, the business Id
+   * @param page A non-optional int, the initial page
+   * @param size A non-optional int, the page size
+   * @return JsonObject
+   */
+  JsonObject getAllRefund(String businessId, int page, int size);
 
-	/**
-	 * @param businessId A non-optional String, the business Id
-	 * @param refundId   A non-optional String, the refund Id
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject getRefund(String businessId, String refundId);
+  /**
+   * @param businessId A non-optional String, the business Id
+   * @param refundId A non-optional String, the refund Id
+   * @return JsonObject
+   */
+  JsonObject getRefund(String businessId, String refundId);
 
-	/**
-	 * @param businessId A non-optional String, the business Id
-	 * @param payload    A non-optional class, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject doRefund(String businessId, Refund payload);
+  /**
+   * @param businessId A non-optional String, the business Id
+   * @param payload A non-optional class, the payload
+   * @return JsonObject
+   */
+  JsonObject doRefund(String businessId, Refund payload);
 }

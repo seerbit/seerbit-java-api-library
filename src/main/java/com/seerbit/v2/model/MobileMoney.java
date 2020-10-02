@@ -25,63 +25,61 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class MobileMoney implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private String fullName;
+  private String fullName;
 
-	@NotBlank(message = "\"email\" cannot be blank")
-	@NotNull(message = "\"email\" cannot be null")
-	@Email(message = "\"email\" must be a valid email")
-	private String email;
+  @NotBlank(message = "\"email\" cannot be blank")
+  @NotNull(message = "\"email\" cannot be null")
+  @Email(message = "\"email\" must be a valid email")
+  private String email;
 
-	@NotBlank(message = "\"mobileNumber\" cannot be blank")
-	@NotNull(message = "\"mobileNumber\" cannot be null")
-	private String mobileNumber;
+  @NotBlank(message = "\"mobileNumber\" cannot be blank")
+  @NotNull(message = "\"mobileNumber\" cannot be null")
+  private String mobileNumber;
 
-	@NotBlank(message = "\"publicKey\" cannot be blank")
-	@NotNull(message = "\"publicKey\" cannot be null")
-	private String publicKey;
+  @NotBlank(message = "\"publicKey\" cannot be blank")
+  @NotNull(message = "\"publicKey\" cannot be null")
+  private String publicKey;
 
-	@NotBlank(message = "\"paymentReference\" cannot be blank")
-	@NotNull(message = "\"paymentReference\" cannot be null")
-	private String paymentReference;
+  @NotBlank(message = "\"paymentReference\" cannot be blank")
+  @NotNull(message = "\"paymentReference\" cannot be null")
+  private String paymentReference;
 
-	private String deviceType;
-	private String sourceIP;
+  private String deviceType;
+  private String sourceIP;
 
-	@NotBlank(message = "\"currency\" cannot be blank")
-	@NotNull(message = "\"currency\" cannot be null")
-	private String currency;
+  @NotBlank(message = "\"currency\" cannot be blank")
+  @NotNull(message = "\"currency\" cannot be null")
+  private String currency;
 
-	private String productDescription;
+  private String productDescription;
 
-	@NotBlank(message = "\"country\" cannot be blank")
-	@NotNull(message = "\"country\" cannot be null")
-	private String country;
+  @NotBlank(message = "\"country\" cannot be blank")
+  @NotNull(message = "\"country\" cannot be null")
+  private String country;
 
-	private String fee;
+  private String fee;
 
-	@NotBlank(message = "\"network\" cannot be blank")
-	@NotNull(message = "\"network\" cannot be null")
-	private String network;
+  @NotBlank(message = "\"network\" cannot be blank")
+  @NotNull(message = "\"network\" cannot be null")
+  private String network;
 
-	private String voucherCode;
+  private String voucherCode;
 
-	@NotBlank(message = "\"amount\" cannot be blank")
-	@NotNull(message = "\"amount\" cannot be null")
-	private String amount;
+  @NotBlank(message = "\"amount\" cannot be blank")
+  @NotNull(message = "\"amount\" cannot be null")
+  private String amount;
 
-	private String productId;
+  private String productId;
 
-	@NotBlank(message = "\"paymentType\" cannot be blank")
-	@NotNull(message = "\"paymentType\" cannot be null")
-	private String paymentType;
+  @NotBlank(message = "\"paymentType\" cannot be blank")
+  @NotNull(message = "\"paymentType\" cannot be null")
+  private String paymentType;
 }

@@ -25,41 +25,32 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.util.Set;
 
-/**
- * @author centricgateway
- */
+/** @author centricgateway */
 public class RequestValidator {
 
-	/**
-	 * @param bean A non-optional generic object, the bean class
-	 */
-	public static <T> void doValidate(T bean) {
-		Validator validator;
-		ValidatorFactory factory;
-		StringBuilder errorMessageBuilder;
-		Set<ConstraintViolation<T>> violations;
-		ParameterMessageInterpolator parameterMessageInterpolator;
+  /** @param bean A non-optional generic object, the bean class */
+  public static <T> void doValidate(T bean) {
+    ParameterMessageInterpolator parameterMessageInterpolator = new ParameterMessageInterpolator();
+    ValidatorFactory factory =
+        Validation.byDefaultProvider()
+            .configure()
+            .messageInterpolator(parameterMessageInterpolator)
+            .buildValidatorFactory();
+    Validator validator = factory.getValidator();
+    Set<ConstraintViolation<T>> violations = validator.validate(bean);
 
-		parameterMessageInterpolator = new ParameterMessageInterpolator();
-		factory = Validation
-			.byDefaultProvider()
-			.configure()
-			.messageInterpolator(parameterMessageInterpolator)
-			.buildValidatorFactory();
-		validator = factory.getValidator();
-		violations = validator.validate(bean);
+    StringBuilder errorMessageBuilder;
+    if (violations.size() != 0) {
+      errorMessageBuilder = new StringBuilder();
 
-		if (violations.size() != 0) {
-			errorMessageBuilder = new StringBuilder();
+      for (ConstraintViolation<T> violation : violations) {
+        errorMessageBuilder
+            .append("Constraint Violation Found: ")
+            .append(violation.getMessage())
+            .append(System.lineSeparator());
+      }
 
-			for (ConstraintViolation<T> violation : violations) {
-				errorMessageBuilder
-					.append("Constraint Violation Found: ")
-					.append(violation.getMessage())
-					.append(System.lineSeparator());
-			}
-
-			throw new SeerbitException(errorMessageBuilder.toString());
-		}
-	}
+      throw new SeerbitException(errorMessageBuilder.toString());
+    }
+  }
 }

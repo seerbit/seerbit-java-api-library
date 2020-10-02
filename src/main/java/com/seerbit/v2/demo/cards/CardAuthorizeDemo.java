@@ -28,98 +28,76 @@ import com.seerbit.v2.service.CardService;
 import com.seerbit.v2.service.impl.AuthenticationServiceImpl;
 import com.seerbit.v2.service.impl.CardServiceImpl;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public class CardAuthorizeDemo {
 
-	private static Client client;
+  private static Client client;
 
-	/**
-	 * @return token (java.lang.String)
-	 */
-	private static String doAuthenticate() {
-		Seerbit seerbit;
-		String token;
-		AuthenticationService authService;
-		JsonObject json;
-		String jsonString;
+  /** @return token (java.lang.String) */
+  private static String doAuthenticate() {
+    System.out.println("================== start authentication ==================");
+    Seerbit seerbit = new SeerbitImpl();
+    client = new Client();
+    client.setApiBase(seerbit.getApiBase());
+    client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
+    client.setPublicKey("public_key");
+    client.setPrivateKey("private_key");
+    client.setTimeout(20);
+    AuthenticationService authService = new AuthenticationServiceImpl(client);
+    JsonObject json = authService.doAuth();
+    String jsonString = String.format("auth response: \n%s", json.toString());
+    System.out.println(jsonString);
+    System.out.println("================== end authentication ==================");
+    System.out.println("\n");
+    System.out.println("\n");
+    return authService.getToken();
+  }
 
-		System.out.println("================== start authentication ==================");
-		seerbit = new SeerbitImpl();
-		client = new Client();
-		client.setApiBase(seerbit.getApiBase());
-		client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
-		client.setPublicKey("public_key");
-		client.setPrivateKey("private_key");
-		client.setTimeout(20);
-		authService = new AuthenticationServiceImpl(client);
-		json = authService.doAuth();
-		jsonString = String.format("auth response: \n%s", json.toString());
-		System.out.println(jsonString);
-		System.out.println("================== end authentication ==================");
-		System.out.println("\n");
-		System.out.println("\n");
-		token = authService.getToken();
-		return token;
-	}
+  /**
+   * @param token token (java.lang.String)
+   * @return response
+   */
+  private static JsonObject doCardAuthorize(final String token) {
+    System.out.println("================== start card authorize ==================");
+    CardService cardService = new CardServiceImpl(client, token);
+    CardPayment cardPayment =
+        CardPayment.builder()
+            .publicKey(client.getPublicKey())
+            .amount("100.00")
+            .fee("10")
+            .fullName("John Doe")
+            .mobileNumber("08032000001")
+            .currency("KES")
+            .country("KE")
+            .paymentReference("LKJHGFDR123UI23992JN23R3")
+            .email("jd@gmail.com")
+            .productId("Food")
+            .productDescription("Rasberry")
+            .clientAppCode("kpp2")
+            .redirectUrl("http://checkout.com")
+            .channelType("Mastercard")
+            .deviceType("Laptop")
+            .sourceIP("127.0.0.1")
+            .cardNumber("5123450000000008")
+            .cvv("100")
+            .expiryMonth("05")
+            .expiryYear("21")
+            .pin("1234")
+            .retry("false")
+            .invoiceNumber("1234567890abc123ac")
+            .type("3DSECURE")
+            .paymentType("CARD")
+            .build();
+    System.out.println("request: " + new Gson().toJson(cardPayment));
+    JsonObject response = cardService.doAuthorize(cardPayment);
+    System.out.println("================== end card authorize ==================");
+    return response;
+  }
 
-	/**
-	 * @param token token (java.lang.String)
-	 *
-	 * @return response
-	 */
-	private static JsonObject doCardAuthorize(final String token) {
-		CardService cardService;
-		CardPayment cardPayment;
-		JsonObject response;
-
-		System.out.println("================== start card authorize ==================");
-		cardService = new CardServiceImpl(client, token);
-		cardPayment = CardPayment
-			.builder()
-			.publicKey(client.getPublicKey())
-			.amount("100.00")
-			.fee("10")
-			.fullName("John Doe")
-			.mobileNumber("08032000001")
-			.currency("KES")
-			.country("KE")
-			.paymentReference("LKJHGFDR123UI23992JN23R3")
-			.email("jd@gmail.com")
-			.productId("Food")
-			.productDescription("Rasberry")
-			.clientAppCode("kpp2")
-			.redirectUrl("http://checkout.com")
-			.channelType("Mastercard")
-			.deviceType("Laptop")
-			.sourceIP("127.0.0.1")
-			.cardNumber("5123450000000008")
-			.cvv("100")
-			.expiryMonth("05")
-			.expiryYear("21")
-			.pin("1234")
-			.retry("false")
-			.invoiceNumber("1234567890abc123ac")
-			.type("3DSECURE")
-			.paymentType("CARD")
-			.build();
-		System.out.println("request: " + new Gson().toJson(cardPayment));
-		response = cardService.doAuthorize(cardPayment);
-		System.out.println("================== end card authorize ==================");
-
-		return response;
-	}
-
-	/**
-	 * @param args String arguments array for main function
-	 */
-	public static void main(String... args) {
-		String token;
-		JsonObject response;
-
-		token = CardAuthorizeDemo.doAuthenticate();
-		response = CardAuthorizeDemo.doCardAuthorize(token);
-		System.out.println("card authorize response: " + response.toString());
-	}
+  /** @param args String arguments array for main function */
+  public static void main(String... args) {
+    String token = CardAuthorizeDemo.doAuthenticate();
+    JsonObject response = CardAuthorizeDemo.doCardAuthorize(token);
+    System.out.println("card authorize response: " + response.toString());
+  }
 }

@@ -19,22 +19,18 @@ package com.seerbit.v2.service;
 import com.google.gson.JsonObject;
 import com.seerbit.v2.model.StandardCheckout;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public interface StandardCheckoutService {
 
-	/**
-	 * @param standardCheckout A non-optional class, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject doInitializeTransaction(StandardCheckout standardCheckout);
+  /**
+   * @param standardCheckout A non-optional class, the payload
+   * @return JsonObject
+   */
+  JsonObject doInitializeTransaction(StandardCheckout standardCheckout);
 
-	/**
-	 * @param standardCheckout A non-optional class, the payload
-	 *
-	 * @return java.lang.String
-	 */
-	String getHash(StandardCheckout standardCheckout);
+  /**
+   * @param standardCheckout A non-optional class, the payload
+   * @return java.lang.String
+   */
+  String getHash(StandardCheckout standardCheckout);
 }

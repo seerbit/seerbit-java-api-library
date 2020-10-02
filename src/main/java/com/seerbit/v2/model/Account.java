@@ -24,81 +24,79 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Account implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	@NotBlank(message = "\"publicKey\" cannot be blank")
-	@NotNull(message = "\"publicKey\" cannot be null")
-	private String publicKey;
+  @NotBlank(message = "\"publicKey\" cannot be blank")
+  @NotNull(message = "\"publicKey\" cannot be null")
+  private String publicKey;
 
-	@NotBlank(message = "\"amount\" cannot be blank")
-	@NotNull(message = "\"amount\" cannot be null")
-	private String amount;
+  @NotBlank(message = "\"amount\" cannot be blank")
+  @NotNull(message = "\"amount\" cannot be null")
+  private String amount;
 
-	private String fee;
-	private String fullName;
-	private String mobileNumber;
+  private String fee;
+  private String fullName;
+  private String mobileNumber;
 
-	@NotBlank(message = "\"currency\" cannot be blank")
-	@NotNull(message = "\"currency\" cannot be null")
-	private String currency;
+  @NotBlank(message = "\"currency\" cannot be blank")
+  @NotNull(message = "\"currency\" cannot be null")
+  private String currency;
 
-	@NotBlank(message = "\"country\" cannot be blank")
-	@NotNull(message = "\"country\" cannot be null")
-	private String country;
+  @NotBlank(message = "\"country\" cannot be blank")
+  @NotNull(message = "\"country\" cannot be null")
+  private String country;
 
-	@NotBlank(message = "\"paymentReference\" cannot be blank")
-	@NotNull(message = "\"paymentReference\" cannot be null")
-	private String paymentReference;
+  @NotBlank(message = "\"paymentReference\" cannot be blank")
+  @NotNull(message = "\"paymentReference\" cannot be null")
+  private String paymentReference;
 
-	@NotBlank(message = "\"email\" cannot be blank")
-	@NotNull(message = "\"email\" cannot be null")
-	private String email;
+  @NotBlank(message = "\"email\" cannot be blank")
+  @NotNull(message = "\"email\" cannot be null")
+  private String email;
 
-	private String productId;
-	private String productDescription;
-	private String clientAppCode;
+  private String productId;
+  private String productDescription;
+  private String clientAppCode;
 
-	@NotBlank(message = "\"channelType\" cannot be blank")
-	@NotNull(message = "\"channelType\" cannot be null")
-	private String channelType;
+  @NotBlank(message = "\"channelType\" cannot be blank")
+  @NotNull(message = "\"channelType\" cannot be null")
+  private String channelType;
 
-	@NotBlank(message = "\"redirectUrl\" cannot be blank")
-	@NotNull(message = "\"redirectUrl\" cannot be null")
-	private String redirectUrl;
+  @NotBlank(message = "\"redirectUrl\" cannot be blank")
+  @NotNull(message = "\"redirectUrl\" cannot be null")
+  private String redirectUrl;
 
-	@NotBlank(message = "\"paymentType\" cannot be blank")
-	@NotNull(message = "\"paymentType\" cannot be null")
-	private String paymentType;
+  @NotBlank(message = "\"paymentType\" cannot be blank")
+  @NotNull(message = "\"paymentType\" cannot be null")
+  private String paymentType;
 
-	private String deviceType;
-	private String sourceIP;
+  private String deviceType;
+  private String sourceIP;
 
-	@NotBlank(message = "\"accountName\" cannot be blank")
-	@NotNull(message = "\"accountName\" cannot be null")
-	private String accountName;
+  @NotBlank(message = "\"accountName\" cannot be blank")
+  @NotNull(message = "\"accountName\" cannot be null")
+  private String accountName;
 
-	@NotBlank(message = "\"accountNumber\" cannot be blank")
-	@NotNull(message = "\"accountNumber\" cannot be null")
-	private String accountNumber;
+  @NotBlank(message = "\"accountNumber\" cannot be blank")
+  @NotNull(message = "\"accountNumber\" cannot be null")
+  private String accountNumber;
 
-	@NotBlank(message = "\"bankCode\" cannot be blank")
-	@NotNull(message = "\"bankCode\" cannot be null")
-	private String bankCode;
+  @NotBlank(message = "\"bankCode\" cannot be blank")
+  @NotNull(message = "\"bankCode\" cannot be null")
+  private String bankCode;
 
-	private String bvn;
-	private String dateOfBirth;
+  private String bvn;
+  private String dateOfBirth;
 
-	@NotBlank(message = "\"retry\" cannot be blank")
-	@NotNull(message = "\"retry\" cannot be null")
-	private String retry;
+  @NotBlank(message = "\"retry\" cannot be blank")
+  @NotNull(message = "\"retry\" cannot be null")
+  private String retry;
 
-	private String invoiceNumber;
+  private String invoiceNumber;
 }

@@ -20,34 +20,29 @@ import com.google.gson.JsonObject;
 
 import java.util.Map;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public interface Request {
 
-	/**
-	 * @param endpoint A non-optional String, the endpoint url
-	 * @param token    A non-optional String, the auth token
-	 * @param payload  A non-optional Map, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject postRequest(String endpoint, Map<String, Object> payload, String token);
+  /**
+   * @param endpoint A non-optional String, the endpoint url
+   * @param token A non-optional String, the auth token
+   * @param payload A non-optional Map, the payload
+   * @return JsonObject
+   */
+  JsonObject postRequest(String endpoint, Map<String, Object> payload, String token);
 
-	/**
-	 * @param endpoint A non-optional String, the endpoint url
-	 * @param token    A non-optional String, the auth token
-	 * @param payload  A non-optional Map, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject putRequest(String endpoint, Map<String, Object> payload, String token);
+  /**
+   * @param endpoint A non-optional String, the endpoint url
+   * @param token A non-optional String, the auth token
+   * @param payload A non-optional Map, the payload
+   * @return JsonObject
+   */
+  JsonObject putRequest(String endpoint, Map<String, Object> payload, String token);
 
-	/**
-	 * @param endpoint A non-optional String, the endpoint url
-	 * @param token    A non-optional String, the auth token
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject getRequest(String endpoint, String token);
+  /**
+   * @param endpoint A non-optional String, the endpoint url
+   * @param token A non-optional String, the auth token
+   * @return JsonObject
+   */
+  JsonObject getRequest(String endpoint, String token);
 }

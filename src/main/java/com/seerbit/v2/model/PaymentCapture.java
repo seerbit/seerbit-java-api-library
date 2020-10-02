@@ -24,37 +24,35 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class PaymentCapture implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	@NotBlank(message = "\"paymentReference\" cannot be blank")
-	@NotNull(message = "\"paymentReference\" cannot be null")
-	private String paymentReference;
+  @NotBlank(message = "\"paymentReference\" cannot be blank")
+  @NotNull(message = "\"paymentReference\" cannot be null")
+  private String paymentReference;
 
-	@NotBlank(message = "\"publicKey\" cannot be blank")
-	@NotNull(message = "\"publicKey\" cannot be null")
-	private String publicKey;
+  @NotBlank(message = "\"publicKey\" cannot be blank")
+  @NotNull(message = "\"publicKey\" cannot be null")
+  private String publicKey;
 
-	@NotBlank(message = "\"currency\" cannot be blank")
-	@NotNull(message = "\"currency\" cannot be null")
-	private String currency;
+  @NotBlank(message = "\"currency\" cannot be blank")
+  @NotNull(message = "\"currency\" cannot be null")
+  private String currency;
 
-	@NotBlank(message = "\"country\" cannot be blank")
-	@NotNull(message = "\"country\" cannot be null")
-	private String country;
+  @NotBlank(message = "\"country\" cannot be blank")
+  @NotNull(message = "\"country\" cannot be null")
+  private String country;
 
-	@NotBlank(message = "\"productDescription\" cannot be blank")
-	@NotNull(message = "\"productDescription\" cannot be null")
-	private String productDescription;
+  @NotBlank(message = "\"productDescription\" cannot be blank")
+  @NotNull(message = "\"productDescription\" cannot be null")
+  private String productDescription;
 
-	@NotBlank(message = "\"amount\" cannot be blank")
-	@NotNull(message = "\"amount\" cannot be null")
-	private String amount;
+  @NotBlank(message = "\"amount\" cannot be blank")
+  @NotNull(message = "\"amount\" cannot be null")
+  private String amount;
 }

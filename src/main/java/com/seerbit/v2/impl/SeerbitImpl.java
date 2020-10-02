@@ -21,30 +21,22 @@ import com.seerbit.v2.Seerbit;
 
 import java.util.Objects;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public class SeerbitImpl implements Seerbit {
 
-	private static String apiVersion = null;
+  private static String apiVersion = null;
 
-	/**
-	 * @return apiVersion
-	 */
-	@Override
-	public String getApiVersion() {
-		String message;
+  /** @return apiVersion */
+  @Override
+  public String getApiVersion() {
+    String message = "API version is null. Please set the API Version";
+    Objects.requireNonNull(SeerbitImpl.apiVersion, message);
+    return SeerbitImpl.apiVersion;
+  }
 
-		message = "API version is null. Please set the API Version";
-		Objects.requireNonNull(SeerbitImpl.apiVersion, message);
-		return SeerbitImpl.apiVersion;
-	}
-
-	/**
-	 * @param apiVersion A non-optional String, the api version
-	 */
-	@Override
-	public void setApiVersion(final String apiVersion) {
-		SeerbitImpl.apiVersion = apiVersion;
-	}
+  /** @param apiVersion A non-optional String, the api version */
+  @Override
+  public void setApiVersion(final String apiVersion) {
+    SeerbitImpl.apiVersion = apiVersion;
+  }
 }

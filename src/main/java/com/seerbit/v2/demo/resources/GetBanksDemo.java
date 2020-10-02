@@ -26,69 +26,47 @@ import com.seerbit.v2.service.ResourceService;
 import com.seerbit.v2.service.impl.AuthenticationServiceImpl;
 import com.seerbit.v2.service.impl.ResourceServiceImpl;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public class GetBanksDemo {
 
-	private static Client client;
+  private static Client client;
 
-	/**
-	 * @return token (java.lang.String)
-	 */
-	private static String doAuthenticate() {
-		Seerbit seerbit;
-		String token;
-		AuthenticationService authService;
-		JsonObject json;
-		String jsonString;
+  /** @return token (java.lang.String) */
+  private static String doAuthenticate() {
+    System.out.println("================== start authentication ==================");
+    Seerbit seerbit = new SeerbitImpl();
+    client = new Client();
+    client.setApiBase(seerbit.getApiBase());
+    client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
+    client.setPublicKey("public_key");
+    client.setPrivateKey("private_key");
+    client.setTimeout(20);
+    AuthenticationService authService = new AuthenticationServiceImpl(client);
+    JsonObject json = authService.doAuth();
+    String jsonString = String.format("auth response: \n%s", json.toString());
+    System.out.println(jsonString);
+    System.out.println("================== end authentication ==================");
+    System.out.println("\n");
+    System.out.println("\n");
+    return authService.getToken();
+  }
 
-		System.out.println("================== start authentication ==================");
-		seerbit = new SeerbitImpl();
-		client = new Client();
-		client.setApiBase(seerbit.getApiBase());
-		client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
-		client.setPublicKey("public_key");
-		client.setPrivateKey("private_key");
-		client.setTimeout(20);
-		authService = new AuthenticationServiceImpl(client);
-		json = authService.doAuth();
-		jsonString = String.format("auth response: \n%s", json.toString());
-		System.out.println(jsonString);
-		System.out.println("================== end authentication ==================");
-		System.out.println("\n");
-		System.out.println("\n");
-		token = authService.getToken();
+  /**
+   * @param token (java.lang.String)
+   * @return response
+   */
+  private static JsonObject doGetBanks(String token) {
+    System.out.println("================== start get banks ==================");
+    ResourceService resourceService = new ResourceServiceImpl(client, token);
+    JsonObject response = resourceService.getBankList(client.getPublicKey());
+    System.out.println("================== stop get banks ==================");
+    return response;
+  }
 
-		return token;
-	}
-
-	/**
-	 * @param token (java.lang.String)
-	 *
-	 * @return response
-	 */
-	private static JsonObject doGetBanks(String token) {
-		ResourceService resourceService;
-		JsonObject response;
-
-		System.out.println("================== start get banks ==================");
-		resourceService = new ResourceServiceImpl(client, token);
-		response = resourceService.getBankList(client.getPublicKey());
-		System.out.println("================== stop get banks ==================");
-
-		return response;
-	}
-
-	/**
-	 * @param args String arguments array for main function
-	 */
-	public static void main(String... args) {
-		String token;
-		JsonObject response;
-
-		token = GetBanksDemo.doAuthenticate();
-		response = GetBanksDemo.doGetBanks(token);
-		System.out.println("get bank list response: " + response.toString());
-	}
+  /** @param args String arguments array for main function */
+  public static void main(String... args) {
+    String token = GetBanksDemo.doAuthenticate();
+    JsonObject response = GetBanksDemo.doGetBanks(token);
+    System.out.println("get bank list response: " + response.toString());
+  }
 }

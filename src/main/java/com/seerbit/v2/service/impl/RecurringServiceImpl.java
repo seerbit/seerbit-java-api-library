@@ -28,112 +28,92 @@ import com.seerbit.v2.util.Utility;
 
 import java.util.Map;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 @SuppressWarnings("unchecked")
 public class RecurringServiceImpl extends ServiceImpl implements RecurringService, ClientConstants {
 
-	/**
-	 * @param client A non-optional class, the client
-	 * @param token  A non-optional String, the auth token
-	 */
-	public RecurringServiceImpl(Client client, String token) {
-		super(client);
-		Utility.nonNull(client);
-		this.token = token;
-	}
+  /**
+   * @param client A non-optional class, the client
+   * @param token A non-optional String, the auth token
+   */
+  public RecurringServiceImpl(Client client, String token) {
+    super(client);
+    Utility.nonNull(client);
+    this.token = token;
+  }
 
-	/**
-	 * POST /api/v2/recurring/subscribes
-	 *
-	 * @param subscriptionPayload A non-optional class, the payload
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject doCreateSubscription(Subscription subscriptionPayload) {
-		ObjectMapper mapper;
-		Map<String, Object> payload;
+  /**
+   * POST /api/v2/recurring/subscribes
+   *
+   * @param subscriptionPayload A non-optional class, the payload
+   * @return response
+   */
+  @Override
+  public JsonObject doCreateSubscription(Subscription subscriptionPayload) {
+    this.requiresToken = true;
+    ObjectMapper mapper = new ObjectMapper();
+    Map<String, Object> payload = mapper.convertValue(subscriptionPayload, Map.class);
+    response = this.postRequest(SUBSCRIPTION_ENDPOINT, payload, token);
+    return response;
+  }
 
-		this.requiresToken = true;
-		mapper = new ObjectMapper();
-		payload = mapper.convertValue(subscriptionPayload, Map.class);
-		response = this.postRequest(SUBSCRIPTION_ENDPOINT, payload, token);
-		return response;
-	}
+  /**
+   * GET /api/v2/recurring/{publicKey}/customerId/{customerId}
+   *
+   * @param publicKey A non-optional String, the merchant public key
+   * @param customerId A non-optional String, the customer Id
+   * @return response
+   */
+  @Override
+  public JsonObject getCustomerSubscriptions(String publicKey, String customerId) {
+    this.requiresToken = true;
+    String endpointURL = String.format(CUSTOMER_SUBSCRIPTION_ENDPOINT, publicKey, customerId);
+    response = this.getRequest(endpointURL, token);
+    return response;
+  }
 
-	/**
-	 * GET /api/v2/recurring/{publicKey}/customerId/{customerId}
-	 *
-	 * @param publicKey  A non-optional String, the merchant public key
-	 * @param customerId A non-optional String, the customer Id
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject getCustomerSubscriptions(String publicKey, String customerId) {
-		String endpointURL;
+  /**
+   * PUT /api/v2/recurring/updates
+   *
+   * @param subscriptionPayload A non-optional class, the payload
+   * @return response
+   */
+  @Override
+  public JsonObject doUpdateSubscription(Subscription subscriptionPayload) {
+    this.requiresToken = true;
+    ObjectMapper mapper = new ObjectMapper();
+    Map<String, Object> payload = mapper.convertValue(subscriptionPayload, Map.class);
+    response = this.putRequest(UPDATE_SUBSCRIPTION_ENDPOINT, payload, token);
+    return response;
+  }
 
-		this.requiresToken = true;
-		endpointURL = String.format(CUSTOMER_SUBSCRIPTION_ENDPOINT, publicKey, customerId);
-		response = this.getRequest(endpointURL, token);
-		return response;
-	}
+  /**
+   * GET /api/v2/recurring/publicKey/{publicKey}
+   *
+   * @param publicKey A non-optional String, the merchant public key
+   * @return response
+   */
+  @Override
+  public JsonObject getMerchantSubscriptions(String publicKey) {
+    this.requiresToken = true;
+    String endpointURL = String.format(MERCHANT_SUBSCRIPTIONS_ENDPOINT, publicKey);
+    response = this.getRequest(endpointURL, token);
+    return response;
+  }
 
-	/**
-	 * PUT /api/v2/recurring/updates
-	 *
-	 * @param subscriptionPayload A non-optional class, the payload
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject doUpdateSubscription(Subscription subscriptionPayload) {
-		ObjectMapper mapper;
-		Map<String, Object> payload;
-
-		this.requiresToken = true;
-		mapper = new ObjectMapper();
-		payload = mapper.convertValue(subscriptionPayload, Map.class);
-		response = this.putRequest(UPDATE_SUBSCRIPTION_ENDPOINT, payload, token);
-		return response;
-	}
-
-	/**
-	 * GET /api/v2/recurring/publicKey/{publicKey}
-	 *
-	 * @param publicKey A non-optional String, the merchant public key
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject getMerchantSubscriptions(String publicKey) {
-		String endpointURL;
-
-		this.requiresToken = true;
-		endpointURL = String.format(MERCHANT_SUBSCRIPTIONS_ENDPOINT, publicKey);
-		response = this.getRequest(endpointURL, token);
-		return response;
-	}
-
-	/**
-	 * POST /api/v2/recurring/charge
-	 *
-	 * @param recurringDebitPayload A non-optional class, the payload
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject doRecurringDebit(RecurringDebit recurringDebitPayload) {
-		ObjectMapper mapper;
-		Map<String, Object> payload;
-
-		this.requiresToken = true;
-		RequestValidator.doValidate(recurringDebitPayload);
-		mapper = new ObjectMapper();
-		payload = mapper.convertValue(recurringDebitPayload, Map.class);
-		response = this.postRequest(CHARGE_ENDPOINT, payload, token);
-		return response;
-	}
+  /**
+   * POST /api/v2/recurring/charge
+   *
+   * @param recurringDebitPayload A non-optional class, the payload
+   * @return response
+   */
+  @Override
+  public JsonObject doRecurringDebit(RecurringDebit recurringDebitPayload) {
+    this.requiresToken = true;
+    RequestValidator.doValidate(recurringDebitPayload);
+    ObjectMapper mapper = new ObjectMapper();
+    Map<String, Object> payload = mapper.convertValue(recurringDebitPayload, Map.class);
+    response = this.postRequest(CHARGE_ENDPOINT, payload, token);
+    return response;
+  }
 }

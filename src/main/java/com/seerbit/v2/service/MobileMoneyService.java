@@ -16,24 +16,18 @@
  */
 package com.seerbit.v2.service;
 
-
 import com.google.gson.JsonObject;
 import com.seerbit.v2.model.MobileMoney;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public interface MobileMoneyService {
 
-	/**
-	 * @param mobileMoney A non-optional class, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject doAuthorize(MobileMoney mobileMoney);
+  /**
+   * @param mobileMoney A non-optional class, the payload
+   * @return JsonObject
+   */
+  JsonObject doAuthorize(MobileMoney mobileMoney);
 
-	/**
-	 * @return JsonObject
-	 */
-	JsonObject getAvailableNetworks();
+  /** @return JsonObject */
+  JsonObject getAvailableNetworks();
 }

@@ -42,279 +42,244 @@ import java.util.Objects;
 
 import static com.seerbit.v2.enums.HttpHeaderEnum.CONTENT_TYPE;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public class HttpClientImpl implements HttpClient, NumericConstants {
 
-	private static final CloseableHttpClient HTTP_CLIENT = HttpClients.createDefault();
+  private static final CloseableHttpClient HTTP_CLIENT = HttpClients.createDefault();
 
-	private final Gson GSON;
+  private Gson gson;
+  private CloseableHttpResponse response;
+  private JsonObject json;
+  private int statusCode;
 
-	private CloseableHttpResponse response;
-	private JsonObject json;
-	private int statusCode;
+  /** default constructor */
+  public HttpClientImpl() {
+    statusCode = -20;
+    gson = new Gson();
+    json = new JsonObject();
+  }
 
-	/**
-	 * default constructor
-	 */
-	public HttpClientImpl() {
-		statusCode = -20;
-		GSON = new Gson();
-		json = new JsonObject();
-	}
+  /**
+   * @param service A non-optional class, the Service
+   * @param url A non-optional String, the request url
+   * @param params A non-optional Map, the payload
+   * @param token A nullable String, the auth token
+   * @return json
+   */
+  @Override
+  public JsonObject post(Service service, String url, Map<String, Object> params, String token) {
+    HttpPost postRequest;
 
-	/**
-	 * @param service A non-optional class, the Service
-	 * @param url     A non-optional String, the request url
-	 * @param params  A non-optional Map, the payload
-	 * @param token   A nullable String, the auth token
-	 *
-	 * @return json
-	 */
-	@Override
-	public JsonObject post(Service service, String url, Map<String, Object> params, String token) {
-		HttpPost postRequest;
-		String contentTypeParam;
-		String contentTypeValue;
-		Client client;
-		Config config;
-		String requestBody;
-		StringEntity entity;
-		String authenticationScheme;
-		String authenticationString;
-		String responseBody;
-		Object[] result;
+    try {
+      String contentTypeParam = CONTENT_TYPE.getParam();
+      String contentTypeValue = CONTENT_TYPE.getValue();
+      Client client = service.getClient();
+      Config config = client.getConfig();
+      String requestBody = gson.toJson(params);
+      postRequest = new HttpPost(url);
+      postRequest.setHeader(contentTypeParam, contentTypeValue);
+      postRequest.setHeader("Request-Timeout", String.valueOf(config.getTimeout()));
+      StringEntity entity = new StringEntity(requestBody);
+      postRequest.setEntity(entity);
 
-		try {
-			contentTypeParam = CONTENT_TYPE.getParam();
-			contentTypeValue = CONTENT_TYPE.getValue();
-			client = service.getClient();
-			config = client.getConfig();
-			requestBody = GSON.toJson(params);
-			postRequest = new HttpPost(url);
-			postRequest.setHeader(contentTypeParam, contentTypeValue);
-			postRequest.setHeader("Request-Timeout", String.valueOf(config.getTimeout()));
-			entity = new StringEntity(requestBody);
-			postRequest.setEntity(entity);
+      if (service.isTokenRequired()) {
 
-			if (service.isTokenRequired()) {
+        if (Objects.isNull(token) || token.length() < MIN_SIZE) {
+          throw new ConnectionException("Please provide an authentication token.");
+        } else {
+          String authenticationScheme = service.getClient().getAuthenticationScheme();
 
-				if (Objects.isNull(token) || token.length() < MIN_SIZE) {
-					throw new ConnectionException("Please provide an authentication token.");
-				} else {
-					authenticationScheme = service.getClient().getAuthenticationScheme();
+          String authenticationString;
+          if (authenticationScheme.equalsIgnoreCase("basic ")) {
+            authenticationString = String.format("Basic %s", token);
+          } else if (authenticationScheme.equalsIgnoreCase("bearer ")) {
+            authenticationString = String.format("Bearer %s", token);
+          } else {
+            throw new SeerbitException("Invalid Authentication Scheme");
+          }
 
-					if (authenticationScheme.equalsIgnoreCase("basic ")) {
-						authenticationString = String.format("Basic %s", token);
-					} else if (authenticationScheme.equalsIgnoreCase("bearer ")) {
-						authenticationString = String.format("Bearer %s", token);
-					} else {
-						throw new SeerbitException("Invalid Authentication Scheme");
-					}
+          postRequest.setHeader("Authorization", authenticationString);
+        }
+      }
 
-					postRequest.setHeader("Authorization", authenticationString);
-				}
+      Object[] result = this.request(postRequest);
+      response = (CloseableHttpResponse) result[0];
+      statusCode = Integer.parseInt(String.valueOf(result[1]));
+      String responseBody = EntityUtils.toString(response.getEntity());
+      json = JsonParser.parseString(responseBody).getAsJsonObject();
 
-			}
+      if (statusCode < HTTP_STATUS_200
+          || statusCode > HTTP_STATUS_299
+          || Objects.isNull(response)) {
+        SeerbitException.handleException(json);
+      }
 
-			result = this.request(postRequest);
-			response = (CloseableHttpResponse) result[0];
-			statusCode = Integer.parseInt(String.valueOf(result[1]));
-			responseBody = EntityUtils.toString(response.getEntity());
-			json = JsonParser.parseString(responseBody).getAsJsonObject();
+    } catch (IOException | ParseException exception) {
+      System.out.println(exception.getMessage());
+    }
 
-			if (statusCode < HTTP_STATUS_200 || statusCode > HTTP_STATUS_299 || Objects.isNull(response)) {
-				SeerbitException.handleException(json);
-			}
+    return json;
+  }
 
-		} catch (IOException | ParseException exception) {
-			System.out.println(exception.getMessage());
-		}
+  /**
+   * @param service A non-optional class, the Service
+   * @param url A non-optional String, the request url
+   * @param params A non-optional Map, the payload
+   * @param token A nullable String, the auth token
+   * @return json
+   */
+  @Override
+  public JsonObject put(Service service, String url, Map<String, Object> params, String token) {
+    HttpPut putRequest;
 
-		return json;
-	}
+    try {
+      String contentTypeParam = CONTENT_TYPE.getParam();
+      String contentTypeValue = CONTENT_TYPE.getValue();
+      Client client = service.getClient();
+      Config config = client.getConfig();
+      String requestBody = gson.toJson(params);
+      putRequest = new HttpPut(url);
+      putRequest.setHeader(contentTypeParam, contentTypeValue);
+      putRequest.setHeader("Request-Timeout", String.valueOf(config.getTimeout()));
+      StringEntity entity = new StringEntity(requestBody);
+      putRequest.setEntity(entity);
 
-	/**
-	 * @param service A non-optional class, the Service
-	 * @param url     A non-optional String, the request url
-	 * @param params  A non-optional Map, the payload
-	 * @param token   A nullable String, the auth token
-	 *
-	 * @return json
-	 */
-	@Override
-	public JsonObject put(Service service, String url, Map<String, Object> params, String token) {
-		HttpPut putRequest;
-		String contentTypeParam;
-		String contentTypeValue;
-		Client client;
-		Config config;
-		String requestBody;
-		StringEntity entity;
-		String authenticationScheme;
-		String authenticationString;
-		Object[] result;
-		String responseBody;
+      if (service.isTokenRequired()) {
 
-		try {
-			contentTypeParam = CONTENT_TYPE.getParam();
-			contentTypeValue = CONTENT_TYPE.getValue();
-			client = service.getClient();
-			config = client.getConfig();
-			requestBody = GSON.toJson(params);
-			putRequest = new HttpPut(url);
-			putRequest.setHeader(contentTypeParam, contentTypeValue);
-			putRequest.setHeader("Request-Timeout", String.valueOf(config.getTimeout()));
-			entity = new StringEntity(requestBody);
-			putRequest.setEntity(entity);
+        String authenticationString;
+        if (Objects.isNull(token) || token.length() < MIN_SIZE) {
+          throw new ConnectionException("Please provide an authentication token.");
+        } else {
+          String authenticationScheme = service.getClient().getAuthenticationScheme();
 
-			if (service.isTokenRequired()) {
+          if (authenticationScheme.equalsIgnoreCase("basic ")) {
+            authenticationString = String.format("Basic %s", token);
+          } else if (authenticationScheme.equalsIgnoreCase("bearer ")) {
+            authenticationString = String.format("Bearer %s", token);
+          } else {
+            throw new SeerbitException("Invalid Authentication Scheme");
+          }
 
-				if (Objects.isNull(token) || token.length() < MIN_SIZE) {
-					throw new ConnectionException("Please provide an authentication token.");
-				} else {
-					authenticationScheme = service.getClient().getAuthenticationScheme();
+          putRequest.setHeader("Authorization", authenticationString);
+        }
+      }
 
-					if (authenticationScheme.equalsIgnoreCase("basic ")) {
-						authenticationString = String.format("Basic %s", token);
-					} else if (authenticationScheme.equalsIgnoreCase("bearer ")) {
-						authenticationString = String.format("Bearer %s", token);
-					} else {
-						throw new SeerbitException("Invalid Authentication Scheme");
-					}
+      Object[] result = this.request(putRequest);
+      response = (CloseableHttpResponse) result[0];
+      statusCode = Integer.parseInt(String.valueOf(result[1]));
+      String responseBody = EntityUtils.toString(response.getEntity());
+      json = JsonParser.parseString(responseBody).getAsJsonObject();
 
-					putRequest.setHeader("Authorization", authenticationString);
-				}
+      if (statusCode < HTTP_STATUS_200
+          || statusCode > HTTP_STATUS_299
+          || Objects.nonNull(response)) {
+        SeerbitException.handleException(json);
+      }
 
-			}
+    } catch (IOException | ParseException exception) {
+      System.out.println(exception.getMessage());
+    }
 
-			result = this.request(putRequest);
-			response = (CloseableHttpResponse) result[0];
-			statusCode = Integer.parseInt(String.valueOf(result[1]));
-			responseBody = EntityUtils.toString(response.getEntity());
-			json = JsonParser.parseString(responseBody).getAsJsonObject();
+    return json;
+  }
 
-			if (statusCode < HTTP_STATUS_200 || statusCode > HTTP_STATUS_299 || Objects.nonNull(response)) {
-				SeerbitException.handleException(json);
-			}
+  /**
+   * @param service A non-optional class, the Service
+   * @param url A non-optional String, the request url
+   * @param token A nullable String, the auth token
+   * @return json
+   */
+  @Override
+  public JsonObject get(Service service, String url, String token) {
+    HttpGet getRequest;
 
-		} catch (IOException | ParseException exception) {
-			System.out.println(exception.getMessage());
-		}
+    try {
+      Client client = service.getClient();
+      Config config = client.getConfig();
+      getRequest = new HttpGet(url);
+      getRequest.setHeader("Request-Timeout", String.valueOf(config.getTimeout()));
 
-		return json;
-	}
+      if (service.isTokenRequired()) {
 
-	/**
-	 * @param service A non-optional class, the Service
-	 * @param url     A non-optional String, the request url
-	 * @param token   A nullable String, the auth token
-	 *
-	 * @return json
-	 */
-	@Override
-	public JsonObject get(Service service, String url, String token) {
-		HttpGet getRequest;
-		Client client;
-		Config config;
-		Object[] result;
-		String authenticationString;
-		String responseBody;
-		String authenticationScheme;
+        if (Objects.isNull(token) || token.length() < MIN_SIZE) {
+          throw new ConnectionException("Please provide an authentication token.");
+        } else {
+          String authenticationScheme = service.getClient().getAuthenticationScheme();
 
-		try {
-			client = service.getClient();
-			config = client.getConfig();
-			getRequest = new HttpGet(url);
-			getRequest.setHeader("Request-Timeout", String.valueOf(config.getTimeout()));
+          String authenticationString;
+          if (authenticationScheme.equalsIgnoreCase("basic ")) {
+            authenticationString = String.format("Basic %s", token);
+          } else if (authenticationScheme.equalsIgnoreCase("bearer ")) {
+            authenticationString = String.format("Bearer %s", token);
+          } else {
+            throw new SeerbitException("Invalid Authentication Scheme");
+          }
 
-			if (service.isTokenRequired()) {
+          getRequest.setHeader("Authorization", authenticationString);
+        }
+      }
 
-				if (Objects.isNull(token) || token.length() < MIN_SIZE) {
-					throw new ConnectionException("Please provide an authentication token.");
-				} else {
-					authenticationScheme = service.getClient().getAuthenticationScheme();
+      Object[] result = this.request(getRequest);
+      response = (CloseableHttpResponse) result[0];
+      statusCode = Integer.parseInt(String.valueOf(result[1]));
+      String responseBody = EntityUtils.toString(response.getEntity());
+      json = JsonParser.parseString(responseBody).getAsJsonObject();
 
-					if (authenticationScheme.equalsIgnoreCase("basic ")) {
-						authenticationString = String.format("Basic %s", token);
-					} else if (authenticationScheme.equalsIgnoreCase("bearer ")) {
-						authenticationString = String.format("Bearer %s", token);
-					} else {
-						throw new SeerbitException("Invalid Authentication Scheme");
-					}
+      if (statusCode < HTTP_STATUS_200
+          || statusCode > HTTP_STATUS_299
+          || Objects.nonNull(response)) {
+        SeerbitException.handleException(json);
+      }
 
-					getRequest.setHeader("Authorization", authenticationString);
-				}
+    } catch (IOException | ParseException exception) {
+      System.out.println(exception.getMessage());
+    }
 
-			}
+    return json;
+  }
 
-			result = this.request(getRequest);
-			response = (CloseableHttpResponse) result[0];
-			statusCode = Integer.parseInt(String.valueOf(result[1]));
-			responseBody = EntityUtils.toString(response.getEntity());
-			json = JsonParser.parseString(responseBody).getAsJsonObject();
+  /**
+   * @param postRequest A non-optional class, the HttpPost request
+   * @return json
+   */
+  private Object[] request(final HttpPost postRequest) {
+    try {
+      response = HTTP_CLIENT.execute(postRequest);
+      statusCode = response.getStatusLine().getStatusCode();
+    } catch (IOException exception) {
+      System.out.println(exception.getMessage());
+    }
 
-			if (statusCode < HTTP_STATUS_200 || statusCode > HTTP_STATUS_299 || Objects.nonNull(response)) {
-				SeerbitException.handleException(json);
-			}
+    return new Object[] {response, statusCode};
+  }
 
-		} catch (IOException | ParseException exception) {
-			System.out.println(exception.getMessage());
-		}
+  /**
+   * @param putRequest A non-optional class, the HttpPut request
+   * @return json
+   */
+  private Object[] request(final HttpPut putRequest) {
+    try {
+      response = HTTP_CLIENT.execute(putRequest);
+      statusCode = response.getStatusLine().getStatusCode();
+    } catch (IOException exception) {
+      System.out.println(exception.getMessage());
+    }
 
-		return json;
-	}
+    return new Object[] {response, statusCode};
+  }
 
-	/**
-	 * @param postRequest A non-optional class, the HttpPost request
-	 *
-	 * @return json
-	 */
-	private Object[] request(final HttpPost postRequest) {
+  /**
+   * @param getRequest A non-optional class, the HttpGet request
+   * @return json
+   */
+  private Object[] request(final HttpGet getRequest) {
+    try {
+      response = HTTP_CLIENT.execute(getRequest);
+      statusCode = response.getStatusLine().getStatusCode();
+    } catch (IOException exception) {
+      System.out.println(exception.getMessage());
+    }
 
-		try {
-			response = HTTP_CLIENT.execute(postRequest);
-			statusCode = response.getStatusLine().getStatusCode();
-		} catch (IOException exception) {
-			System.out.println(exception.getMessage());
-		}
-
-		return new Object[]{response, statusCode};
-	}
-
-	/**
-	 * @param putRequest A non-optional class, the HttpPut request
-	 *
-	 * @return json
-	 */
-	private Object[] request(final HttpPut putRequest) {
-
-		try {
-			response = HTTP_CLIENT.execute(putRequest);
-			statusCode = response.getStatusLine().getStatusCode();
-		} catch (IOException exception) {
-			System.out.println(exception.getMessage());
-		}
-
-		return new Object[]{response, statusCode};
-	}
-
-	/**
-	 * @param getRequest A non-optional class, the HttpGet request
-	 *
-	 * @return json
-	 */
-	private Object[] request(final HttpGet getRequest) {
-
-		try {
-			response = HTTP_CLIENT.execute(getRequest);
-			statusCode = response.getStatusLine().getStatusCode();
-		} catch (IOException exception) {
-			System.out.println(exception.getMessage());
-		}
-
-		return new Object[]{response, statusCode};
-	}
-
+    return new Object[] {response, statusCode};
+  }
 }

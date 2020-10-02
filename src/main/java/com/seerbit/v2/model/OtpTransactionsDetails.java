@@ -24,21 +24,19 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-/**
- * @author centricgateway
- */
+/** @author centricgateway */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class OtpTransactionsDetails implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	@NotBlank(message = "\"linkingreference\" cannot be blank")
-	@NotNull(message = "\"linkingreference\" cannot be null")
-	private String linkingreference;
+  @NotBlank(message = "\"linkingreference\" cannot be blank")
+  @NotNull(message = "\"linkingreference\" cannot be null")
+  private String linkingreference;
 
-	@NotBlank(message = "\"otp\" cannot be blank")
-	@NotNull(message = "\"otp\" cannot be null")
-	private String otp;
+  @NotBlank(message = "\"otp\" cannot be blank")
+  @NotNull(message = "\"otp\" cannot be null")
+  private String otp;
 }

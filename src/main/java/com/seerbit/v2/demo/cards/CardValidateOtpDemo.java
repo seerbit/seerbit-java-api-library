@@ -29,57 +29,41 @@ import com.seerbit.v2.service.CardService;
 import com.seerbit.v2.service.impl.AuthenticationServiceImpl;
 import com.seerbit.v2.service.impl.CardServiceImpl;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public class CardValidateOtpDemo {
 
-	private static Client client;
+  private static Client client;
 
-	/**
-	 * @param token token (java.lang.String)
-	 *
-	 * @return response
-	 */
-	private static JsonObject doValidateOtp(final String token) {
-		CardService cardService;
-		OtpCard otpCard;
-		OtpTransactionsDetails otpTransactionsDetails;
-		JsonObject response;
+  /**
+   * @param token token (java.lang.String)
+   * @return response
+   */
+  private static JsonObject doValidateOtp(final String token) {
+    System.out.println("================== start card validate 2FA ==================");
+    CardService cardService = new CardServiceImpl(client, token);
+    OtpCard otpCard = new OtpCard();
+    OtpTransactionsDetails otpTransactionsDetails = new OtpTransactionsDetails();
+    otpTransactionsDetails.setLinkingreference("F2372727771772882727");
+    otpTransactionsDetails.setOtp("273736");
+    otpCard.setTransactions(otpTransactionsDetails);
+    JsonObject response = cardService.doValidate(otpCard);
+    System.out.println("================== start card validate 2FA ==================");
+    return response;
+  }
 
-		System.out.println("================== start card validate 2FA ==================");
-		cardService = new CardServiceImpl(client, token);
-		otpCard = new OtpCard();
-		otpTransactionsDetails = new OtpTransactionsDetails();
-		otpTransactionsDetails.setLinkingreference("F2372727771772882727");
-		otpTransactionsDetails.setOtp("273736");
-		otpCard.setTransactions(otpTransactionsDetails);
-		response = cardService.doValidate(otpCard);
-		System.out.println("================== start card validate 2FA ==================");
-
-		return response;
-	}
-
-	/**
-	 * @param args String arguments array for main function
-	 */
-	public static void main(String... args) {
-		String token;
-		Seerbit seerbit;
-		AuthenticationService authService;
-		JsonObject response;
-
-		seerbit = new SeerbitImpl();
-		client = new Client();
-		client.setApiBase(seerbit.getApiBase());
-		client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
-		client.setPublicKey("public_key");
-		client.setPrivateKey("private_key");
-		client.setTimeout(20);
-		client.setAuthenticationScheme(AuthType.BASIC.getType());
-		authService = new AuthenticationServiceImpl(client);
-		token = authService.getBasicAuthorizationEncodedString();
-		response = CardValidateOtpDemo.doValidateOtp(token);
-		System.out.println("card validate 2FA response: " + response.toString());
-	}
+  /** @param args String arguments array for main function */
+  public static void main(String... args) {
+    Seerbit seerbit = new SeerbitImpl();
+    client = new Client();
+    client.setApiBase(seerbit.getApiBase());
+    client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
+    client.setPublicKey("public_key");
+    client.setPrivateKey("private_key");
+    client.setTimeout(20);
+    client.setAuthenticationScheme(AuthType.BASIC.getType());
+    AuthenticationService authService = new AuthenticationServiceImpl(client);
+    String token = authService.getBasicAuthorizationEncodedString();
+    JsonObject response = CardValidateOtpDemo.doValidateOtp(token);
+    System.out.println("card validate 2FA response: " + response.toString());
+  }
 }

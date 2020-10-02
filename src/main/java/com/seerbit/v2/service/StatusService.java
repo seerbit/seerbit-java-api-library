@@ -18,22 +18,18 @@ package com.seerbit.v2.service;
 
 import com.google.gson.JsonObject;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public interface StatusService {
 
-	/**
-	 * @param paymentReference A non-optional String, the payment reference
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject getTransactionStatus(String paymentReference);
+  /**
+   * @param paymentReference A non-optional String, the payment reference
+   * @return JsonObject
+   */
+  JsonObject getTransactionStatus(String paymentReference);
 
-	/**
-	 * @param billingId A non-optional String, the billing Id
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject getSubscriptionStatus(String billingId);
+  /**
+   * @param billingId A non-optional String, the billing Id
+   * @return JsonObject
+   */
+  JsonObject getSubscriptionStatus(String billingId);
 }

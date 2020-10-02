@@ -26,39 +26,37 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class RecurringDebit implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	@NotBlank(message = "\"publicKey\" cannot be blank")
-	@NotNull(message = "\"publicKey\" cannot be null")
-	private String publicKey;
+  @NotBlank(message = "\"publicKey\" cannot be blank")
+  @NotNull(message = "\"publicKey\" cannot be null")
+  private String publicKey;
 
-	@NotBlank(message = "\"paymentReference\" cannot be blank")
-	@NotNull(message = "\"paymentReference\" cannot be null")
-	private String paymentReference;
+  @NotBlank(message = "\"paymentReference\" cannot be blank")
+  @NotNull(message = "\"paymentReference\" cannot be null")
+  private String paymentReference;
 
-	@NotBlank(message = "\"amount\" cannot be blank")
-	@NotNull(message = "\"amount\" cannot be null")
-	private String amount;
+  @NotBlank(message = "\"amount\" cannot be blank")
+  @NotNull(message = "\"amount\" cannot be null")
+  private String amount;
 
-	@NotBlank(message = "\"currency\" cannot be blank")
-	@NotNull(message = "\"currency\" cannot be null")
-	private String currency;
+  @NotBlank(message = "\"currency\" cannot be blank")
+  @NotNull(message = "\"currency\" cannot be null")
+  private String currency;
 
-	@NotBlank(message = "\"email\" cannot be blank")
-	@NotNull(message = "\"email\" cannot be null")
-	@Email(message = "\"email\" must be a valid email")
-	private String email;
+  @NotBlank(message = "\"email\" cannot be blank")
+  @NotNull(message = "\"email\" cannot be null")
+  @Email(message = "\"email\" must be a valid email")
+  private String email;
 
-	@NotBlank(message = "\"authorizationCode\" cannot be blank")
-	@NotNull(message = "\"authorizationCode\" cannot be null")
-	private String authorizationCode;
+  @NotBlank(message = "\"authorizationCode\" cannot be blank")
+  @NotNull(message = "\"authorizationCode\" cannot be null")
+  private String authorizationCode;
 }

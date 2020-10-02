@@ -67,26 +67,17 @@ You can also check the [src/main/java/com/seerbit/demo](https://github.com/seerb
 Instantiate a client and set the parameters. Then perform service authentication by instantiating the authentication service object and passing the client to it in its constructor. Retrieve your token by calling the <code>getToken()</code> method.
 
 ```java
-   // declare variables
-   Seerbit seerbit;
-   String token;
-   AuthenticationService authService;
-   JsonObject json;
-   String jsonString;
-   Client client;
-    
-   seerbit = new SeerbitImpl();
+   Seerbit seerbit = new SeerbitImpl();
    client = new Client();
    client.setApiBase(seerbit.getApiBase());
    client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
    client.setPublicKey("public_key");
    client.setPrivateKey("private_key");
    client.setTimeout(20);
-   authService = new AuthenticationServiceImpl(client);
-   json = authService.doAuth();
-   jsonString = String.format("auth response: \n%s", json.toString());
-    		
-   token = authService.getToken();
+   AuthenticationService authService = new AuthenticationServiceImpl(client);
+   JsonObject json = authService.doAuth();
+   String jsonString = String.format("auth response: \n%s", json.toString());
+   String token = authService.getToken();
    
 ```
 
@@ -94,13 +85,9 @@ After retrieving your token following authentication proceed to pass it to the A
 
 
 ```java
-   AccountService accountService;
-   Account account;
-   JsonObject response;
-   		
-   System.out.println("================== start account authorization ==================");
-   accountService = new AccountServiceImpl(client, token); // pass the client and token in the constructor
-   account = new Account();
+ 
+   AccountService accountService = new AccountServiceImpl(client, token); // pass the client and token in the constructor
+   Account account = new Account();
    account.setFullName("Musa Chukwuma Adetutu");
    account.setEmail("musa@example.com");
    account.setMobileNumber("08012345678");
@@ -125,8 +112,8 @@ After retrieving your token following authentication proceed to pass it to the A
    account.setInvoiceNumber("1234567891abc123ac");
    account.setDateOfBirth("01-01-2020");
    account.setPaymentType("ACCOUNT");
-   response = accountService.doAuthorize(account);
-   System.out.println("================== stop account authorization ==================");
+   JsonObject response = accountService.doAuthorize(account);
+  
 ``` 
 
 Find more examples [here](https://github.com/seerbit/seerbit-java-api-library/tree/v2/src/main/java/com/seerbit/v2/demo).

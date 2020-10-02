@@ -22,33 +22,29 @@ import com.seerbit.v2.ClientConstants;
 import com.seerbit.v2.service.ResourceService;
 import com.seerbit.v2.util.Utility;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public class ResourceServiceImpl extends ServiceImpl implements ResourceService, ClientConstants {
 
-	/**
-	 * @param client A non-optional class, the client
-	 * @param token  A non-optional String, the auth token
-	 */
-	public ResourceServiceImpl(Client client, String token) {
-		super(client);
-		Utility.nonNull(client);
-		this.token = token;
-	}
+  /**
+   * @param client A non-optional class, the client
+   * @param token A non-optional String, the auth token
+   */
+  public ResourceServiceImpl(Client client, String token) {
+    super(client);
+    Utility.nonNull(client);
+    this.token = token;
+  }
 
-	/**
-	 * GET /api/v2/banks/merchant/{publicKey} API call
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject getBankList(String publicKey) {
-		String endpointURL;
-
-		this.requiresToken = true;
-		endpointURL = String.format(BANK_LIST_ENDPOINT, publicKey);
-		response = this.getRequest(endpointURL, token);
-		return response;
-	}
+  /**
+   * GET /api/v2/banks/merchant/{publicKey} API call
+   *
+   * @return response
+   */
+  @Override
+  public JsonObject getBankList(String publicKey) {
+    this.requiresToken = true;
+    String endpointURL = String.format(BANK_LIST_ENDPOINT, publicKey);
+    response = this.getRequest(endpointURL, token);
+    return response;
+  }
 }

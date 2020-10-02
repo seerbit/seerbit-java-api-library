@@ -21,46 +21,41 @@ import com.google.gson.JsonObject;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 @Getter
 @Log4j2
 public class SeerbitException extends RuntimeException {
 
-	private SeerbitException() {
-		super();
-	}
+  private SeerbitException() {
+    super();
+  }
 
-	/**
-	 * @param message A non-optional String, the error message
-	 */
-	public SeerbitException(final String message) {
-		super(message);
-	}
+  /** @param message A non-optional String, the error message */
+  public SeerbitException(final String message) {
+    super(message);
+  }
 
-	/**
-	 * @param response A non-optional CloseableHttpResponse, the http response object
-	 */
-	public static void handleException(final JsonObject response) {
-		String errorMessage;
-		String status;
+  /** @param response A non-optional CloseableHttpResponse, the http response object */
+  public static void handleException(final JsonObject response) {
+    String errorMessage;
+    String status;
 
-		if (response.has("status") && response.has("data")) {
-			status = response.get("status").getAsString();
+    if (response.has("status") && response.has("data")) {
+      status = response.get("status").getAsString();
+      if (status.equalsIgnoreCase("error")) {
+        throw new SeerbitException(
+            response.get("data").getAsJsonObject().get("message").getAsString());
+      }
+    }
 
-			if (status.equalsIgnoreCase("error")) {
-				throw new SeerbitException(response.get("data").getAsJsonObject().get("message").getAsString());
-			}
-
-		}
-
-		if (response.has("message") && response.has("error")) {
-			errorMessage = String.format("%s: %s", response.get("message").toString(), response.get("error").toString());
-			log.error(errorMessage);
-			throw new SeerbitException(response.get("message").getAsString());
-		} else if (response.has("message")) {
-			throw new SeerbitException(response.get("message").getAsString());
-		}
-	}
+    if (response.has("message") && response.has("error")) {
+      errorMessage =
+          String.format(
+              "%s: %s", response.get("message").toString(), response.get("error").toString());
+      log.error(errorMessage);
+      throw new SeerbitException(response.get("message").getAsString());
+    } else if (response.has("message")) {
+      throw new SeerbitException(response.get("message").getAsString());
+    }
+  }
 }

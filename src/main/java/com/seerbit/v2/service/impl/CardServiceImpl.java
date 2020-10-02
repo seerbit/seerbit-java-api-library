@@ -32,187 +32,175 @@ import com.seerbit.v2.util.Utility;
 
 import java.util.Map;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 @SuppressWarnings("unchecked")
 public class CardServiceImpl extends ServiceImpl implements CardService, ClientConstants {
 
-	private ObjectMapper mapper;
-	private Map<String, Object> payload;
+  private ObjectMapper mapper;
+  private Map<String, Object> payload;
 
-	/**
-	 * @param client A non-optional class, the client
-	 * @param token  A non-optional String, the auth token
-	 */
-	public CardServiceImpl(Client client, String token) {
-		super(client);
-		this.token = token;
-		Utility.nonNull(client);
-	}
+  /**
+   * @param client A non-optional class, the client
+   * @param token A non-optional String, the auth token
+   */
+  public CardServiceImpl(Client client, String token) {
+    super(client);
+    this.token = token;
+    Utility.nonNull(client);
+  }
 
-	/**
-	 * POST /api/v2/payments/initiates
-	 *
-	 * @param cardPayload A non-optional class, the payload
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject doAuthorize(CardPayment cardPayload) {
-		this.requiresToken = true;
-		mapper = new ObjectMapper();
-		payload = mapper.convertValue(cardPayload, Map.class);
-		response = this.postRequest(INITIATE_PAYMENT_ENDPOINT, payload, token);
-		return response;
-	}
+  /**
+   * POST /api/v2/payments/initiates
+   *
+   * @param cardPayload A non-optional class, the payload
+   * @return response
+   */
+  @Override
+  public JsonObject doAuthorize(CardPayment cardPayload) {
+    this.requiresToken = true;
+    mapper = new ObjectMapper();
+    payload = mapper.convertValue(cardPayload, Map.class);
+    response = this.postRequest(INITIATE_PAYMENT_ENDPOINT, payload, token);
+    return response;
+  }
 
-	/**
-	 * POST /api/v2/payments/otp
-	 *
-	 * @param otpCard A non-optional class, the payload
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject doValidate(OtpCard otpCard) {
-		this.requiresToken = true;
-		RequestValidator.doValidate(otpCard);
-		mapper = new ObjectMapper();
-		payload = mapper.convertValue(otpCard, Map.class);
-		response = this.postRequest(VALIDATE_CARD_PAYMENT_ENDPOINT, payload, token);
-		return response;
-	}
+  /**
+   * POST /api/v2/payments/otp
+   *
+   * @param otpCard A non-optional class, the payload
+   * @return response
+   */
+  @Override
+  public JsonObject doValidate(OtpCard otpCard) {
+    this.requiresToken = true;
+    RequestValidator.doValidate(otpCard);
+    mapper = new ObjectMapper();
+    payload = mapper.convertValue(otpCard, Map.class);
+    response = this.postRequest(VALIDATE_CARD_PAYMENT_ENDPOINT, payload, token);
+    return response;
+  }
 
-	/**
-	 * POST /api/v2/payments/authorise
-	 *
-	 * @param cardPreAuthPayload A non-optional class, the payload
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject doPreauthAuthorization(CardPreAuth cardPreAuthPayload) {
-		this.requiresToken = true;
-		RequestValidator.doValidate(cardPreAuthPayload);
-		mapper = new ObjectMapper();
-		payload = mapper.convertValue(cardPreAuthPayload, Map.class);
-		response = this.postRequest(PREAUTH_AUTHORIZE_ENDPOINT, payload, token);
-		return response;
-	}
+  /**
+   * POST /api/v2/payments/authorise
+   *
+   * @param cardPreAuthPayload A non-optional class, the payload
+   * @return response
+   */
+  @Override
+  public JsonObject doPreauthAuthorization(CardPreAuth cardPreAuthPayload) {
+    this.requiresToken = true;
+    RequestValidator.doValidate(cardPreAuthPayload);
+    mapper = new ObjectMapper();
+    payload = mapper.convertValue(cardPreAuthPayload, Map.class);
+    response = this.postRequest(PREAUTH_AUTHORIZE_ENDPOINT, payload, token);
+    return response;
+  }
 
-	/**
-	 * POST /api/v2/payments/capture
-	 *
-	 * @param paymentCapturePayload A non-optional class, the payload
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject doPaymentCapture(PaymentCapture paymentCapturePayload) {
-		this.requiresToken = true;
-		RequestValidator.doValidate(paymentCapturePayload);
-		mapper = new ObjectMapper();
-		payload = mapper.convertValue(paymentCapturePayload, Map.class);
-		response = this.postRequest(PAYMENT_CAPTURE_ENDPOINT, payload, token);
-		return response;
-	}
+  /**
+   * POST /api/v2/payments/capture
+   *
+   * @param paymentCapturePayload A non-optional class, the payload
+   * @return response
+   */
+  @Override
+  public JsonObject doPaymentCapture(PaymentCapture paymentCapturePayload) {
+    this.requiresToken = true;
+    RequestValidator.doValidate(paymentCapturePayload);
+    mapper = new ObjectMapper();
+    payload = mapper.convertValue(paymentCapturePayload, Map.class);
+    response = this.postRequest(PAYMENT_CAPTURE_ENDPOINT, payload, token);
+    return response;
+  }
 
-	/**
-	 * POST /api/v2/payments/refund
-	 *
-	 * @param paymentRefundPayload A non-optional class, the payload
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject doPaymentRefund(PaymentRefund paymentRefundPayload) {
-		this.requiresToken = true;
-		RequestValidator.doValidate(paymentRefundPayload);
-		mapper = new ObjectMapper();
-		payload = mapper.convertValue(paymentRefundPayload, Map.class);
-		response = this.postRequest(PAYMENT_REFUND_ENDPOINT, payload, token);
-		return response;
-	}
+  /**
+   * POST /api/v2/payments/refund
+   *
+   * @param paymentRefundPayload A non-optional class, the payload
+   * @return response
+   */
+  @Override
+  public JsonObject doPaymentRefund(PaymentRefund paymentRefundPayload) {
+    this.requiresToken = true;
+    RequestValidator.doValidate(paymentRefundPayload);
+    mapper = new ObjectMapper();
+    payload = mapper.convertValue(paymentRefundPayload, Map.class);
+    response = this.postRequest(PAYMENT_REFUND_ENDPOINT, payload, token);
+    return response;
+  }
 
-	/**
-	 * POST /api/v2/payments/cancel
-	 *
-	 * @param paymentCancelPayload A non-optional class, the payload
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject doPaymentCancel(PaymentCancel paymentCancelPayload) {
-		this.requiresToken = true;
-		RequestValidator.doValidate(paymentCancelPayload);
-		mapper = new ObjectMapper();
-		payload = mapper.convertValue(paymentCancelPayload, Map.class);
-		response = this.postRequest(PAYMENT_CANCEL_ENDPOINT, payload, token);
-		return response;
-	}
+  /**
+   * POST /api/v2/payments/cancel
+   *
+   * @param paymentCancelPayload A non-optional class, the payload
+   * @return response
+   */
+  @Override
+  public JsonObject doPaymentCancel(PaymentCancel paymentCancelPayload) {
+    this.requiresToken = true;
+    RequestValidator.doValidate(paymentCancelPayload);
+    mapper = new ObjectMapper();
+    payload = mapper.convertValue(paymentCancelPayload, Map.class);
+    response = this.postRequest(PAYMENT_CANCEL_ENDPOINT, payload, token);
+    return response;
+  }
 
-	/**
-	 * POST /api/v2/payments/charge
-	 *
-	 * @param cardPaymentPayload A non-optional class, the payload
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject doPaymentChargeNon3D(CardPayment cardPaymentPayload) {
-		this.requiresToken = true;
-		mapper = new ObjectMapper();
-		payload = mapper.convertValue(cardPaymentPayload, Map.class);
-		response = this.postRequest(PAYMENT_CHARGE_ENDPOINT, payload, token);
-		return response;
-	}
+  /**
+   * POST /api/v2/payments/charge
+   *
+   * @param cardPaymentPayload A non-optional class, the payload
+   * @return response
+   */
+  @Override
+  public JsonObject doPaymentChargeNon3D(CardPayment cardPaymentPayload) {
+    this.requiresToken = true;
+    mapper = new ObjectMapper();
+    payload = mapper.convertValue(cardPaymentPayload, Map.class);
+    response = this.postRequest(PAYMENT_CHARGE_ENDPOINT, payload, token);
+    return response;
+  }
 
-	/**
-	 * POST /api/v2/payments/tokenize
-	 *
-	 * @param cardPaymentPayload A non-optional class, the payload
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject doTokenize(CardPayment cardPaymentPayload) {
-		this.requiresToken = true;
-		mapper = new ObjectMapper();
-		payload = mapper.convertValue(cardPaymentPayload, Map.class);
-		response = this.postRequest(TOKENIZATION_ENDPOINT, payload, token);
-		return response;
-	}
+  /**
+   * POST /api/v2/payments/tokenize
+   *
+   * @param cardPaymentPayload A non-optional class, the payload
+   * @return response
+   */
+  @Override
+  public JsonObject doTokenize(CardPayment cardPaymentPayload) {
+    this.requiresToken = true;
+    mapper = new ObjectMapper();
+    payload = mapper.convertValue(cardPaymentPayload, Map.class);
+    response = this.postRequest(TOKENIZATION_ENDPOINT, payload, token);
+    return response;
+  }
 
-	/**
-	 * POST /api/v2/payments/initiates
-	 *
-	 * @param cardPaymentPayload A non-optional class, the payload
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject doPaymentCharge3DS(CardPayment cardPaymentPayload) {
-		this.requiresToken = true;
-		mapper = new ObjectMapper();
-		payload = mapper.convertValue(cardPaymentPayload, Map.class);
-		response = this.postRequest(INITIATE_PAYMENT_ENDPOINT, payload, token);
-		return response;
-	}
+  /**
+   * POST /api/v2/payments/initiates
+   *
+   * @param cardPaymentPayload A non-optional class, the payload
+   * @return response
+   */
+  @Override
+  public JsonObject doPaymentCharge3DS(CardPayment cardPaymentPayload) {
+    this.requiresToken = true;
+    mapper = new ObjectMapper();
+    payload = mapper.convertValue(cardPaymentPayload, Map.class);
+    response = this.postRequest(INITIATE_PAYMENT_ENDPOINT, payload, token);
+    return response;
+  }
 
-	/**
-	 * POST /api/v2/payments/initiates
-	 *
-	 * @param cardPaymentPayload A non-optional class, the payload
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject doPaymentCharge3D(CardPayment cardPaymentPayload) {
-		this.requiresToken = true;
-		mapper = new ObjectMapper();
-		payload = mapper.convertValue(cardPaymentPayload, Map.class);
-		response = this.postRequest(INITIATE_PAYMENT_ENDPOINT, payload, token);
-		return response;
-	}
+  /**
+   * POST /api/v2/payments/initiates
+   *
+   * @param cardPaymentPayload A non-optional class, the payload
+   * @return response
+   */
+  @Override
+  public JsonObject doPaymentCharge3D(CardPayment cardPaymentPayload) {
+    this.requiresToken = true;
+    mapper = new ObjectMapper();
+    payload = mapper.convertValue(cardPaymentPayload, Map.class);
+    response = this.postRequest(INITIATE_PAYMENT_ENDPOINT, payload, token);
+    return response;
+  }
 }

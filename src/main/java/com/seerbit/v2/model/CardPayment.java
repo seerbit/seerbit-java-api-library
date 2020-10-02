@@ -25,9 +25,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-/**
- * @author centricgateway
- */
+/** @author centricgateway */
 @Data
 @Builder
 @AllArgsConstructor
@@ -36,33 +34,33 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CardPayment implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private String publicKey;
-	private String paymentType;
-	private String amount;
-	private String fee;
-	private String fullName;
-	private String mobileNumber;
-	private String currency;
-	private String country;
-	private String paymentReference;
-	private String email;
-	private String cardToken;
-	private String productId;
-	private String productDescription;
-	private String clientAppCode;
-	private String redirectUrl;
-	private String channelType;
-	private String deviceType;
-	private String sourceIP;
-	private String cardNumber;
-	private String cvv;
-	private String expiryMonth;
-	private String expiryYear;
-	private String pin;
-	private String retry;
-	private String invoiceNumber;
-	private String type;
-	private String scheduleId;
+  private String publicKey;
+  private String paymentType;
+  private String amount;
+  private String fee;
+  private String fullName;
+  private String mobileNumber;
+  private String currency;
+  private String country;
+  private String paymentReference;
+  private String email;
+  private String cardToken;
+  private String productId;
+  private String productDescription;
+  private String clientAppCode;
+  private String redirectUrl;
+  private String channelType;
+  private String deviceType;
+  private String sourceIP;
+  private String cardNumber;
+  private String cvv;
+  private String expiryMonth;
+  private String expiryYear;
+  private String pin;
+  private String retry;
+  private String invoiceNumber;
+  private String type;
+  private String scheduleId;
 }

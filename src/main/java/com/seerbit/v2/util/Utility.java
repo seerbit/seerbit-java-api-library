@@ -21,19 +21,13 @@ import com.seerbit.v2.exception.SeerbitException;
 
 import java.util.Objects;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public class Utility {
 
-	/**
-	 * @param client A non-optional class, the client
-	 */
-	public static void nonNull(Client client) {
-
-		if (Objects.isNull(client)) {
-			throw new SeerbitException("Client class cannot be null");
-		}
-
-	}
+  /** @param client A non-optional class, the client */
+  public static void nonNull(Client client) {
+    if (Objects.isNull(client)) {
+      throw new SeerbitException("Client class cannot be null");
+    }
+  }
 }

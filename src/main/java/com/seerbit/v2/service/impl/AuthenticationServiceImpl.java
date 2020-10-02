@@ -30,85 +30,64 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-/**
- * @author Seerbit
- */
-public class AuthenticationServiceImpl extends ServiceImpl implements AuthenticationService, ClientConstants, NumericConstants {
+/** @author Seerbit */
+public class AuthenticationServiceImpl extends ServiceImpl
+    implements AuthenticationService, ClientConstants, NumericConstants {
 
-	/**
-	 * @param client A non-optional class, the client
-	 */
-	public AuthenticationServiceImpl(Client client) {
-		super(client);
-		Utility.nonNull(client);
-	}
+  /** @param client A non-optional class, the client */
+  public AuthenticationServiceImpl(Client client) {
+    super(client);
+    Utility.nonNull(client);
+  }
 
-	/**
-	 * POST /api/v2/encrypt/keys
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject doAuth() {
-		String key;
-		Config config;
-		Map<String, Object> payload;
+  /**
+   * POST /api/v2/encrypt/keys
+   *
+   * @return response
+   */
+  @Override
+  public JsonObject doAuth() {
+    client = this.getClient();
+    Config config = client.getConfig();
+    String key = config.getPrivateKey() + "." + config.getPublicKey();
+    Map<String, Object> payload = new HashMap<>(MIN_SIZE);
+    payload.put("key", key);
+    response = this.postRequest(AUTHENTICATION_ENDPOINT, payload, null);
+    return response;
+  }
 
-		client = this.getClient();
-		config = client.getConfig();
-		key = config.getPrivateKey() + "." + config.getPublicKey();
-		payload = new HashMap<>(MIN_SIZE);
-		payload.put("key", key);
+  /** @return basic authentication String */
+  public String getBasicAuthorizationEncodedString() {
+    client = this.getClient();
+    String authenticationScheme = client.getAuthenticationScheme();
 
-		response = this.postRequest(AUTHENTICATION_ENDPOINT, payload, null);
-		return response;
-	}
+    switch (authenticationScheme.toLowerCase()) {
+      case "basic ":
+      case "bearer ":
+        break;
+      default:
+        throw new SeerbitException("Set authentication scheme to basic before calling this method");
+    }
 
-	/**
-	 * @return basic authentication String
-	 */
-	public String getBasicAuthorizationEncodedString() {
-		String authorizationString;
-		String authenticationScheme;
+    String authorizationString = client.getPublicKey() + ":" + client.getPrivateKey();
+    return Base64.getEncoder().encodeToString(authorizationString.getBytes());
+  }
 
-		client = this.getClient();
-		authenticationScheme = client.getAuthenticationScheme();
+  /** @return token */
+  @Override
+  public String getToken() {
+    String encryptedKey = "";
 
-		switch (authenticationScheme.toLowerCase()) {
-			case "basic ":
-			case "bearer ":
-				break;
-			default:
-				throw new SeerbitException("Set authentication scheme to basic before calling this method");
-		}
+    if (Objects.nonNull(response)) {
+      if (response.has("data")) {
+        JsonObject encryptedSecKey = response.get("data").getAsJsonObject();
+        if (encryptedSecKey.has("EncryptedSecKey")) {
+          encryptedSecKey = encryptedSecKey.get("EncryptedSecKey").getAsJsonObject();
+          encryptedKey = encryptedSecKey.get("encryptedKey").getAsString();
+        }
+      }
+    }
 
-		authorizationString = client.getPublicKey() + ":" + client.getPrivateKey();
-		return Base64.getEncoder().encodeToString(authorizationString.getBytes());
-	}
-
-	/**
-	 * @return token
-	 */
-	@Override
-	public String getToken() {
-		JsonObject encryptedSecKey;
-		String encryptedKey;
-		encryptedKey = "";
-
-		if (Objects.nonNull(response)) {
-
-			if (response.has("data")) {
-				encryptedSecKey = response.get("data").getAsJsonObject();
-
-				if (encryptedSecKey.has("EncryptedSecKey")) {
-					encryptedSecKey = encryptedSecKey.get("EncryptedSecKey").getAsJsonObject();
-					encryptedKey = encryptedSecKey.get("encryptedKey").getAsString();
-				}
-
-			}
-
-		}
-
-		return encryptedKey;
-	}
+    return encryptedKey;
+  }
 }

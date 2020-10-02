@@ -28,57 +28,53 @@ import com.seerbit.v2.util.Utility;
 
 import java.util.Map;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 @SuppressWarnings("unchecked")
 public class AccountServiceImpl extends ServiceImpl implements AccountService, ClientConstants {
 
-	private Map<String, Object> payload;
-	private ObjectMapper mapper;
+  private Map<String, Object> payload;
+  private ObjectMapper mapper;
 
-	/**
-	 * @param client A non-optional class, the client
-	 * @param token  A nonA non-optional String, the auth token
-	 */
-	public AccountServiceImpl(Client client, String token) {
-		super(client);
-		this.token = token;
-		Utility.nonNull(client);
-	}
+  /**
+   * @param client A non-optional class, the client
+   * @param token A nonA non-optional String, the auth token
+   */
+  public AccountServiceImpl(Client client, String token) {
+    super(client);
+    this.token = token;
+    Utility.nonNull(client);
+  }
 
-	/**
-	 * POST /api/v2/payments/initiates
-	 *
-	 * @param accountPayload A non-optional class, the payload
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject doAuthorize(Account accountPayload) {
-		this.requiresToken = true;
-		RequestValidator.doValidate(accountPayload);
-		mapper = new ObjectMapper();
-		payload = mapper.convertValue(accountPayload, Map.class);
-		payload.put("publicKey", this.getClient().getPublicKey());
-		response = this.postRequest(INITIATE_PAYMENT_ENDPOINT, payload, token);
-		return response;
-	}
+  /**
+   * POST /api/v2/payments/initiates
+   *
+   * @param accountPayload A non-optional class, the payload
+   * @return response
+   */
+  @Override
+  public JsonObject doAuthorize(Account accountPayload) {
+    this.requiresToken = true;
+    RequestValidator.doValidate(accountPayload);
+    mapper = new ObjectMapper();
+    payload = mapper.convertValue(accountPayload, Map.class);
+    payload.put("publicKey", this.getClient().getPublicKey());
+    response = this.postRequest(INITIATE_PAYMENT_ENDPOINT, payload, token);
+    return response;
+  }
 
-	/**
-	 * POST /api/v2/payments/validate
-	 *
-	 * @param otpPayload A non-optional class, the payload
-	 *
-	 * @return response
-	 */
-	@Override
-	public JsonObject doValidate(Otp otpPayload) {
-		this.requiresToken = true;
-		RequestValidator.doValidate(otpPayload);
-		mapper = new ObjectMapper();
-		payload = mapper.convertValue(otpPayload, Map.class);
-		response = this.postRequest(VALIDATE_PAYMENT_ENDPOINT, payload, token);
-		return response;
-	}
+  /**
+   * POST /api/v2/payments/validate
+   *
+   * @param otpPayload A non-optional class, the payload
+   * @return response
+   */
+  @Override
+  public JsonObject doValidate(Otp otpPayload) {
+    this.requiresToken = true;
+    RequestValidator.doValidate(otpPayload);
+    mapper = new ObjectMapper();
+    payload = mapper.convertValue(otpPayload, Map.class);
+    response = this.postRequest(VALIDATE_PAYMENT_ENDPOINT, payload, token);
+    return response;
+  }
 }

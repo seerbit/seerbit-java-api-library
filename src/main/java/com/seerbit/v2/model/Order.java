@@ -16,7 +16,6 @@
  */
 package com.seerbit.v2.model;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,50 +26,48 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Order implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	@NotBlank(message = "\"email\" cannot be blank")
-	@NotNull(message = "\"email\" cannot be null")
-	@Email(message = "\"email\" must be a valid email")
-	private String email;
+  @NotBlank(message = "\"email\" cannot be blank")
+  @NotNull(message = "\"email\" cannot be null")
+  @Email(message = "\"email\" must be a valid email")
+  private String email;
 
-	@NotBlank(message = "\"publicKey\" cannot be blank")
-	@NotNull(message = "\"publicKey\" cannot be null")
-	private String publicKey;
+  @NotBlank(message = "\"publicKey\" cannot be blank")
+  @NotNull(message = "\"publicKey\" cannot be null")
+  private String publicKey;
 
-	@NotBlank(message = "\"paymentReference\" cannot be blank")
-	@NotNull(message = "\"paymentReference\" cannot be null")
-	private String paymentReference;
+  @NotBlank(message = "\"paymentReference\" cannot be blank")
+  @NotNull(message = "\"paymentReference\" cannot be null")
+  private String paymentReference;
 
-	private String fullName;
+  private String fullName;
 
-	@NotBlank(message = "\"orderType\" cannot be blank")
-	@NotNull(message = "\"orderType\" cannot be null")
-	private String orderType;
+  @NotBlank(message = "\"orderType\" cannot be blank")
+  @NotNull(message = "\"orderType\" cannot be null")
+  private String orderType;
 
-	private String mobileNumber;
-	private String callbackUrl;
+  private String mobileNumber;
+  private String callbackUrl;
 
-	@NotBlank(message = "\"country\" cannot be blank")
-	@NotNull(message = "\"country\" cannot be null")
-	private String country;
+  @NotBlank(message = "\"country\" cannot be blank")
+  @NotNull(message = "\"country\" cannot be null")
+  private String country;
 
-	@NotBlank(message = "\"currency\" cannot be blank")
-	@NotNull(message = "\"currency\" cannot be null")
-	private String currency;
+  @NotBlank(message = "\"currency\" cannot be blank")
+  @NotNull(message = "\"currency\" cannot be null")
+  private String currency;
 
-	@NotBlank(message = "\"amount\" cannot be blank")
-	@NotNull(message = "\"amount\" cannot be null")
-	private String amount;
+  @NotBlank(message = "\"amount\" cannot be blank")
+  @NotNull(message = "\"amount\" cannot be null")
+  private String amount;
 
-	@NotNull(message = "\"orders\" cannot be null")
-	private List<OrderDetails> orders;
+  @NotNull(message = "\"orders\" cannot be null")
+  private List<OrderDetails> orders;
 }

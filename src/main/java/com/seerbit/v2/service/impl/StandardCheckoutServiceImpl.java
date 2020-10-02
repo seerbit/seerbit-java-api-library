@@ -18,67 +18,59 @@ import static com.seerbit.v2.ClientConstants.INITIALIZE_TRANSACTIONS;
 @SuppressWarnings("unchecked")
 public class StandardCheckoutServiceImpl extends ServiceImpl implements StandardCheckoutService {
 
-	/**
-	 * @param client A non-optional class, the client
-	 * @param token  A non-optional String, the auth token
-	 */
-	public StandardCheckoutServiceImpl(Client client, String token) {
-		super(client);
-		Utility.nonNull(client);
-		this.token = token;
-	}
+  /**
+   * @param client A non-optional class, the client
+   * @param token A non-optional String, the auth token
+   */
+  public StandardCheckoutServiceImpl(Client client, String token) {
+    super(client);
+    Utility.nonNull(client);
+    this.token = token;
+  }
 
-	/**
-	 * POST /api/v2/payments
-	 *
-	 * @param standardCheckoutPayload A non-optional class, the payload
-	 *
-	 * @return
-	 */
-	@Override
-	public JsonObject doInitializeTransaction(StandardCheckout standardCheckoutPayload) {
-		ObjectMapper mapper;
-		Map<String, Object> payload;
+  /**
+   * POST /api/v2/payments
+   *
+   * @param standardCheckoutPayload A non-optional class, the payload
+   * @return JsonObject response
+   */
+  @Override
+  public JsonObject doInitializeTransaction(StandardCheckout standardCheckoutPayload) {
+    RequestValidator.doValidate(standardCheckoutPayload);
+    this.requiresToken = true;
+    ObjectMapper mapper = new ObjectMapper();
+    Map<String, Object> payload = mapper.convertValue(standardCheckoutPayload, Map.class);
+    response = this.postRequest(INITIALIZE_TRANSACTIONS, payload, token);
+    return response;
+  }
 
-		RequestValidator.doValidate(standardCheckoutPayload);
-		this.requiresToken = true;
-		mapper = new ObjectMapper();
-		payload = mapper.convertValue(standardCheckoutPayload, Map.class);
-		response = this.postRequest(INITIALIZE_TRANSACTIONS, payload, token);
-		return response;
-	}
+  /**
+   * @param standardCheckoutPayload A non-optional class, the payload
+   * @return String hash
+   */
+  @Override
+  public String getHash(StandardCheckout standardCheckoutPayload) {
+    RequestValidator.doValidate(standardCheckoutPayload);
+    this.requiresToken = true;
+    ObjectMapper mapper = new ObjectMapper();
+    Map<String, Object> payload = mapper.convertValue(standardCheckoutPayload, Map.class);
+    System.out.println("request: " + new Gson().toJson(standardCheckoutPayload));
+    response = this.postRequest(HASH_REQUEST, payload, token);
 
-	/**
-	 * @param standardCheckoutPayload A non-optional class, the payload
-	 *
-	 * @return
-	 */
-	@Override
-	public String getHash(StandardCheckout standardCheckoutPayload) {
-		ObjectMapper mapper;
-		Map<String, Object> payload;
-		String hash;
+    String hash;
+    if (response.has("data")) {
+      response = response.get("data").getAsJsonObject();
 
-		RequestValidator.doValidate(standardCheckoutPayload);
-		this.requiresToken = true;
-		mapper = new ObjectMapper();
-		payload = mapper.convertValue(standardCheckoutPayload, Map.class);
-		System.out.println("request: " + new Gson().toJson(standardCheckoutPayload));
-		response = this.postRequest(HASH_REQUEST, payload, token);
+      if (response.has("hash")) {
+        hash = response.get("hash").getAsJsonObject().get("hash").getAsString();
+      } else {
+        throw new SeerbitException("Unable to obtain hash");
+      }
 
-		if (response.has("data")) {
-			response = response.get("data").getAsJsonObject();
+    } else {
+      throw new SeerbitException("Unable to obtain hash");
+    }
 
-			if (response.has("hash")) {
-				hash = response.get("hash").getAsJsonObject().get("hash").getAsString();
-			} else {
-				throw new SeerbitException("Unable to obtain hash");
-			}
-
-		} else {
-			throw new SeerbitException("Unable to obtain hash");
-		}
-
-		return hash;
-	}
+    return hash;
+  }
 }

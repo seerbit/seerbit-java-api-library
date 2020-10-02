@@ -16,10 +16,8 @@
  */
 package com.seerbit.v2.enums;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public enum RefundTypeEnum {
-
-	FULL_REFUND, PARTIAL_REFUND
+  FULL_REFUND,
+  PARTIAL_REFUND
 }

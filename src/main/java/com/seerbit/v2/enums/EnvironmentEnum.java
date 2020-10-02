@@ -16,26 +16,20 @@
  */
 package com.seerbit.v2.enums;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public enum EnvironmentEnum {
+  TEST("test"),
+  LIVE("live");
 
-	TEST("test"), LIVE("live");
+  private final String environment;
 
-	private final String environment;
+  /** @param environment A non-optional String, the client environment */
+  EnvironmentEnum(final String environment) {
+    this.environment = environment;
+  }
 
-	/**
-	 * @param environment A non-optional String, the client environment
-	 */
-	EnvironmentEnum(final String environment) {
-		this.environment = environment;
-	}
-
-	/**
-	 * @return environment
-	 */
-	public String getEnvironment() {
-		return this.environment;
-	}
+  /** @return environment */
+  public String getEnvironment() {
+    return this.environment;
+  }
 }

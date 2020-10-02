@@ -18,24 +18,15 @@ package com.seerbit.v2.service;
 
 import com.google.gson.JsonObject;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public interface AuthenticationService extends Service {
 
-	/**
-	 * @return JsonObject
-	 */
-	JsonObject doAuth();
+  /** @return JsonObject */
+  JsonObject doAuth();
 
-	/**
-	 * @return String
-	 */
-	String getToken();
+  /** @return String */
+  String getToken();
 
-	/**
-	 *
-	 * @return String
-	 */
-	String getBasicAuthorizationEncodedString();
+  /** @return String */
+  String getBasicAuthorizationEncodedString();
 }

@@ -28,69 +28,54 @@ import com.seerbit.v2.service.CardService;
 import com.seerbit.v2.service.impl.AuthenticationServiceImpl;
 import com.seerbit.v2.service.impl.CardServiceImpl;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public class CardNon3dDemo {
 
-	private static Client client;
+  private static Client client;
 
-	/**
-	 * @param token token (java.lang.String)
-	 *
-	 * @return response
-	 */
-	private static JsonObject doCardNon3dCharge(String token) {
-		JsonObject response;
-		CardService cardService;
-		CardPayment cardPayment;
+  /**
+   * @param token token (java.lang.String)
+   * @return response
+   */
+  private static JsonObject doCardNon3dCharge(String token) {
+    System.out.println("================== start card non-3d charge ==================");
+    CardPayment cardPayment =
+        CardPayment.builder()
+            .publicKey(client.getPublicKey())
+            .amount("1000.00")
+            .fullName("Victor Ighalo")
+            .mobileNumber("08032000033")
+            .currency("KES")
+            .country("KE")
+            .paymentReference("SBT1237473728")
+            .email("johndoe@gmail.com")
+            .pin("1234")
+            .cardNumber("5123450000000008")
+            .cvv("100")
+            .expiryMonth("05")
+            .expiryYear("21")
+            .productId("Foods")
+            .productDescription("Test Description")
+            .build();
+    CardService cardService = new CardServiceImpl(client, token);
+    JsonObject response = cardService.doPaymentChargeNon3D(cardPayment);
+    System.out.println("================== end card non-3d charge ==================");
+    return response;
+  }
 
-		System.out.println("================== start card non-3d charge ==================");
-		cardPayment = CardPayment
-			.builder()
-			.publicKey(client.getPublicKey())
-			.amount("1000.00")
-			.fullName("Victor Ighalo")
-			.mobileNumber("08032000033")
-			.currency("KES")
-			.country("KE")
-			.paymentReference("SBT1237473728")
-			.email("johndoe@gmail.com")
-			.pin("1234")
-			.cardNumber("5123450000000008")
-			.cvv("100")
-			.expiryMonth("05")
-			.expiryYear("21")
-			.productId("Foods")
-			.productDescription("Test Description")
-			.build();
-		cardService = new CardServiceImpl(client, token);
-		response = cardService.doPaymentChargeNon3D(cardPayment);
-		System.out.println("================== end card non-3d charge ==================");
-
-		return response;
-	}
-
-	/**
-	 * @param args String arguments array for main function
-	 */
-	public static void main(String... args) {
-		String token;
-		JsonObject response;
-		Seerbit seerbit;
-		AuthenticationService authService;
-
-		seerbit = new SeerbitImpl();
-		client = new Client();
-		client.setApiBase(seerbit.getApiBase());
-		client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
-		client.setPublicKey("public_key");
-		client.setPrivateKey("private_key");
-		client.setTimeout(20);
-		client.setAuthenticationScheme(AuthType.BASIC.getType());
-		authService = new AuthenticationServiceImpl(client);
-		token = authService.getBasicAuthorizationEncodedString();
-		response = CardNon3dDemo.doCardNon3dCharge(token);
-		System.out.println("card non-3d response: " + response.toString());
-	}
+  /** @param args String arguments array for main function */
+  public static void main(String... args) {
+    Seerbit seerbit = new SeerbitImpl();
+    client = new Client();
+    client.setApiBase(seerbit.getApiBase());
+    client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
+    client.setPublicKey("public_key");
+    client.setPrivateKey("private_key");
+    client.setTimeout(20);
+    client.setAuthenticationScheme(AuthType.BASIC.getType());
+    AuthenticationService authService = new AuthenticationServiceImpl(client);
+    String token = authService.getBasicAuthorizationEncodedString();
+    JsonObject response = CardNon3dDemo.doCardNon3dCharge(token);
+    System.out.println("card non-3d response: " + response.toString());
+  }
 }

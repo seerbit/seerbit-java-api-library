@@ -18,15 +18,12 @@ package com.seerbit.v2.service;
 
 import com.google.gson.JsonObject;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public interface ResourceService {
 
-	/**
-	 * @param publicKey A non-optional String, the merchant public key
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject getBankList(String publicKey);
+  /**
+   * @param publicKey A non-optional String, the merchant public key
+   * @return JsonObject
+   */
+  JsonObject getBankList(String publicKey);
 }

@@ -24,21 +24,19 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Otp implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	@NotBlank(message = "\"linkingReference\" cannot be blank")
-	@NotNull(message = "\"linkingReference\" cannot be null")
-	private String linkingReference;
+  @NotBlank(message = "\"linkingReference\" cannot be blank")
+  @NotNull(message = "\"linkingReference\" cannot be null")
+  private String linkingReference;
 
-	@NotBlank(message = "\"otp\" cannot be blank")
-	@NotNull(message = "\"otp\" cannot be null")
-	private String otp;
+  @NotBlank(message = "\"otp\" cannot be blank")
+  @NotNull(message = "\"otp\" cannot be null")
+  private String otp;
 }

@@ -24,78 +24,66 @@ import com.seerbit.v2.model.PaymentCancel;
 import com.seerbit.v2.model.PaymentCapture;
 import com.seerbit.v2.model.PaymentRefund;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public interface CardService {
 
-	/**
-	 * @param card A non-optional class, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject doAuthorize(CardPayment card);
+  /**
+   * @param card A non-optional class, the payload
+   * @return JsonObject
+   */
+  JsonObject doAuthorize(CardPayment card);
 
-	/**
-	 * @param otpCard A non-optional class, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject doValidate(OtpCard otpCard);
+  /**
+   * @param otpCard A non-optional class, the payload
+   * @return JsonObject
+   */
+  JsonObject doValidate(OtpCard otpCard);
 
-	/**
-	 * @param cardPreAuth A non-optional class, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject doPreauthAuthorization(CardPreAuth cardPreAuth);
+  /**
+   * @param cardPreAuth A non-optional class, the payload
+   * @return JsonObject
+   */
+  JsonObject doPreauthAuthorization(CardPreAuth cardPreAuth);
 
-	/**
-	 * @param paymentCapture A non-optional class, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject doPaymentCapture(PaymentCapture paymentCapture);
+  /**
+   * @param paymentCapture A non-optional class, the payload
+   * @return JsonObject
+   */
+  JsonObject doPaymentCapture(PaymentCapture paymentCapture);
 
-	/**
-	 * @param paymentRefund A non-optional class, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject doPaymentRefund(PaymentRefund paymentRefund);
+  /**
+   * @param paymentRefund A non-optional class, the payload
+   * @return JsonObject
+   */
+  JsonObject doPaymentRefund(PaymentRefund paymentRefund);
 
-	/**
-	 * @param paymentCancel A non-optional class, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject doPaymentCancel(PaymentCancel paymentCancel);
+  /**
+   * @param paymentCancel A non-optional class, the payload
+   * @return JsonObject
+   */
+  JsonObject doPaymentCancel(PaymentCancel paymentCancel);
 
-	/**
-	 * @param paymentCharge A non-optional class, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject doPaymentChargeNon3D(CardPayment paymentCharge);
+  /**
+   * @param paymentCharge A non-optional class, the payload
+   * @return JsonObject
+   */
+  JsonObject doPaymentChargeNon3D(CardPayment paymentCharge);
 
-	/**
-	 * @param paymentCharge A non-optional class, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject doTokenize(CardPayment paymentCharge);
+  /**
+   * @param paymentCharge A non-optional class, the payload
+   * @return JsonObject
+   */
+  JsonObject doTokenize(CardPayment paymentCharge);
 
-	/**
-	 * @param paymentCharge A non-optional class, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject doPaymentCharge3DS(CardPayment paymentCharge);
+  /**
+   * @param paymentCharge A non-optional class, the payload
+   * @return JsonObject
+   */
+  JsonObject doPaymentCharge3DS(CardPayment paymentCharge);
 
-	/**
-	 * @param paymentCharge A non-optional class, the payload
-	 *
-	 * @return JsonObject
-	 */
-	JsonObject doPaymentCharge3D(CardPayment paymentCharge);
+  /**
+   * @param paymentCharge A non-optional class, the payload
+   * @return JsonObject
+   */
+  JsonObject doPaymentCharge3D(CardPayment paymentCharge);
 }

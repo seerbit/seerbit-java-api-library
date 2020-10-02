@@ -28,58 +28,43 @@ import com.seerbit.v2.service.CardService;
 import com.seerbit.v2.service.impl.AuthenticationServiceImpl;
 import com.seerbit.v2.service.impl.CardServiceImpl;
 
-/**
- * @author Seerbit
- */
+/** @author Seerbit */
 public class CardCaptureDemo {
 
-	private static Client client;
+  private static Client client;
 
-	/**
-	 * @param token token (java.lang.String)
-	 *
-	 * @return response
-	 */
-	private static JsonObject doCardCapturePayment(final String token) {
-		CardService cardService;
-		PaymentCapture paymentCapture;
-		JsonObject response;
+  /**
+   * @param token token (java.lang.String)
+   * @return response
+   */
+  private static JsonObject doCardCapturePayment(final String token) {
+    System.out.println("================== start card capture ==================");
+    CardService cardService = new CardServiceImpl(client, token);
+    PaymentCapture paymentCapture = new PaymentCapture();
+    paymentCapture.setPublicKey(client.getPublicKey());
+    paymentCapture.setPaymentReference("trx0001");
+    paymentCapture.setCountry("NG");
+    paymentCapture.setCurrency("NGN");
+    paymentCapture.setProductDescription("Foods");
+    paymentCapture.setAmount("1.00");
+    JsonObject response = cardService.doPaymentCapture(paymentCapture);
+    System.out.println("================== start card capture ==================");
+    return response;
+  }
 
-		System.out.println("================== start card capture ==================");
-		cardService = new CardServiceImpl(client, token);
-		paymentCapture = new PaymentCapture();
-		paymentCapture.setPublicKey(client.getPublicKey());
-		paymentCapture.setPaymentReference("trx0001");
-		paymentCapture.setCountry("NG");
-		paymentCapture.setCurrency("NGN");
-		paymentCapture.setProductDescription("Foods");
-		paymentCapture.setAmount("1.00");
-		response = cardService.doPaymentCapture(paymentCapture);
-		System.out.println("================== start card capture ==================");
-
-		return response;
-	}
-
-	/**
-	 * @param args String arguments array for main function
-	 */
-	public static void main(String... args) {
-		String token;
-		Seerbit seerbit;
-		AuthenticationService authService;
-		JsonObject response;
-
-		seerbit = new SeerbitImpl();
-		client = new Client();
-		client.setApiBase(seerbit.getApiBase());
-		client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
-		client.setPublicKey("public_key");
-		client.setPrivateKey("private_key");
-		client.setTimeout(20);
-		client.setAuthenticationScheme(AuthType.BASIC.getType());
-		authService = new AuthenticationServiceImpl(client);
-		token = authService.getBasicAuthorizationEncodedString();
-		response = CardCaptureDemo.doCardCapturePayment(token);
-		System.out.println("card capture response: " + response.toString());
-	}
+  /** @param args String arguments array for main function */
+  public static void main(String... args) {
+    Seerbit seerbit = new SeerbitImpl();
+    client = new Client();
+    client.setApiBase(seerbit.getApiBase());
+    client.setEnvironment(EnvironmentEnum.LIVE.getEnvironment());
+    client.setPublicKey("public_key");
+    client.setPrivateKey("private_key");
+    client.setTimeout(20);
+    client.setAuthenticationScheme(AuthType.BASIC.getType());
+    AuthenticationService authService = new AuthenticationServiceImpl(client);
+    String token = authService.getBasicAuthorizationEncodedString();
+    JsonObject response = CardCaptureDemo.doCardCapturePayment(token);
+    System.out.println("card capture response: " + response.toString());
+  }
 }
