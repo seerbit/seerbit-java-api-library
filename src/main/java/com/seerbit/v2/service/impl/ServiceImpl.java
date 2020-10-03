@@ -43,11 +43,10 @@ public class ServiceImpl implements Service, Request {
 
   /** @param client A non-optional class, the client */
   ServiceImpl(Client client) {
-    String message;
     Utility.nonNull(client);
 
     if (Objects.isNull(client.getConfig().get("environment"))) {
-      message =
+      String message =
           String.format(
               "Client does not have correct environment. Use %s or %s",
               LIVE.getEnvironment(), TEST.getEnvironment());
@@ -55,12 +54,14 @@ public class ServiceImpl implements Service, Request {
     }
 
     if (Objects.isNull(client.getConfig().get("publicKey"))) {
-      message = "Client doesn\'t have a merchant public key. Set a public key using the client";
+      String message =
+          "Client doesn\'t have a merchant public key. Set a public key using the client";
       throw new SeerbitException(message);
     }
 
     if (Objects.isNull(client.getConfig().get("privateKey"))) {
-      message = "Client doesn\'t have a merchant private key. Set a private key using the client";
+      String message =
+          "Client doesn\'t have a merchant private key. Set a private key using the client";
       throw new SeerbitException(message);
     }
 
