@@ -32,9 +32,9 @@ public class ConfigImpl implements Config {
   public String getPublicKey() {
     String publicKey = null;
 
-    if (!ConfigImpl.data.isEmpty()) {
-      if (Objects.nonNull(ConfigImpl.data.get("publicKey"))) {
-        publicKey = String.valueOf(ConfigImpl.data.get("publicKey"));
+    if (!data.isEmpty()) {
+      if (Objects.nonNull(data.get("publicKey"))) {
+        publicKey = String.valueOf(data.get("publicKey"));
       }
     }
 
@@ -46,9 +46,9 @@ public class ConfigImpl implements Config {
   public String getPrivateKey() {
     String privateKey = null;
 
-    if (!ConfigImpl.data.isEmpty()) {
-      if (Objects.nonNull(ConfigImpl.data.get("privateKey"))) {
-        privateKey = String.valueOf(ConfigImpl.data.get("privateKey"));
+    if (!data.isEmpty()) {
+      if (Objects.nonNull(data.get("privateKey"))) {
+        privateKey = String.valueOf(data.get("privateKey"));
       }
     }
 
@@ -61,7 +61,7 @@ public class ConfigImpl implements Config {
    */
   @Override
   public Object get(String key) {
-    return (Objects.nonNull(ConfigImpl.data.get(key))) ? ConfigImpl.data.get(key) : null;
+    return (Objects.nonNull(data.get(key))) ? data.get(key) : null;
   }
 
   /**
@@ -70,7 +70,7 @@ public class ConfigImpl implements Config {
    */
   @Override
   public void put(String key, Object value) {
-    ConfigImpl.data.put(key, value);
+    data.put(key, value);
   }
 
   /** @return timeout */
@@ -78,8 +78,8 @@ public class ConfigImpl implements Config {
   public int getTimeout() {
     String timeout;
 
-    if (Objects.nonNull(ConfigImpl.data.get("timeout"))) {
-      timeout = String.valueOf(ConfigImpl.data.get("timeout"));
+    if (Objects.nonNull(data.get("timeout"))) {
+      timeout = String.valueOf(data.get("timeout"));
       return Integer.parseInt(timeout);
     }
 
