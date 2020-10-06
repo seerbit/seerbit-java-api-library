@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.seerbit</groupId>
     <artifactId>seerbit-java-api-v2</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
     <name>Seerbit Java API Library</name>
     <description>Seerbit API Client Library for Java (Version 2)</description>
@@ -83,7 +82,7 @@
         <developerConnection>scm:git:peterdiei@bitbucket.org:centricgatewayteam/seerbit-java-library.git
         </developerConnection>
         <url>peterdiei@gbitbucket.org:centricgatewayteam/seerbit-java-library.git</url>
-        <tag>seerbit-java-api-v2</tag>
+        <tag>seerbit-java-api-v2-1.0.1</tag>
     </scm>
     <profiles>
         <profile>
