@@ -87,8 +87,6 @@ public class Client {
 
   /** @param environment A non-optional String, the client environment */
   public void setEnvironment(String environment) {
-    String errorMessage;
-
     if (environment.equalsIgnoreCase(EnvironmentEnum.LIVE.getEnvironment())) {
       config.put("environment", EnvironmentEnum.LIVE.getEnvironment());
       config.put("apiBase", ClientConstants.LIVE_API_BASE);
@@ -96,6 +94,7 @@ public class Client {
       config.put("environment", TEST.getEnvironment());
       config.put("apiBase", ClientConstants.TEST_API_BASE);
     } else {
+      String errorMessage;
       errorMessage =
           String.format(
               "This environment does not exist, use \"%s\" or \"%s\"",
