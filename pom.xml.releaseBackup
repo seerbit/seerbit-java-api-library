@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.seerbit</groupId>
     <artifactId>seerbit-java-api-v2</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Seerbit Java API Library</name>
-    <description>Seerbit API Client Library for Java (Version 2)</description>
-    <url>https://github.com/seerbit/seerbit-java-api-library/tree/v2</url>
+    <description>Seerbit API Client Library for Java</description>
+    <url>https://github.com/seerbit/seerbit-java-api-library</url>
     <licenses>
         <license>
             <name>GNU General Public License v3.0</name>
