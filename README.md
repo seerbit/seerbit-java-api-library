@@ -38,17 +38,11 @@ The documentation, installation guide, detailed description of the SeerBit API a
 
 ## Installation
 
-### Maven
+Download Seerbit Java SDK
 
-Add this dependency to your project's POM:
-
-```xml
-<dependency>
-  <groupId>com.seerbit</groupId>
-  <artifactId>seerbit-java-api</artifactId>
-  <version>1.0.1</version>
-</dependency>
-```
+* Add jar file as a Module to your Java project:
+* On Intellij IDEA: File -> Project Structure -> Modules -> Dependencies Tab -> Add -> JARs or Directories -> Attach jar
+* On Netbeans: Project properties -> Libraries -> Compile -> ADD JAR/folder -> Add Jar
 
 ## Contributing
 
@@ -78,7 +72,6 @@ Instantiate a client and set the parameters. Then perform service authentication
    JsonObject json = authService.doAuth();
    String jsonString = String.format("auth response: \n%s", json.toString());
    String token = authService.getToken();
-   
 ```
 
 After retrieving your token following authentication proceed to pass it to the AccountServiceImpl constructor along with your client object. You can then construct your payload and call the <code>doAuthorize()</code> method of the AccountServiceImpl class.

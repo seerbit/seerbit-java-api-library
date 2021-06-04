@@ -45,7 +45,7 @@ public class CardValidateOtpDemo {
     OtpTransactionsDetails otpTransactionsDetails = new OtpTransactionsDetails();
     otpTransactionsDetails.setLinkingreference("F2372727771772882727");
     otpTransactionsDetails.setOtp("273736");
-    otpCard.setTransactions(otpTransactionsDetails);
+    otpCard.setTransaction(otpTransactionsDetails);
     JsonObject response = cardService.doValidate(otpCard);
     System.out.println("================== stop card validate 2FA ==================");
     return response;
