@@ -1,6 +1,6 @@
 
 <div align="center">
- <img width="400" valign="top" src="https://res.cloudinary.com/dpejkbof5/image/upload/v1620323718/Seerbit_logo_png_ddcor4.png">
+ <img width="400" valign="top" src="https://assets.seerbitapi.com/images/icon.png">
 </div>
 
 
